@@ -1,7 +1,7 @@
-module _402465.batalhanaval {
+module bn.batalhaNaval {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens _402465.batalhanaval to javafx.fxml;
-    exports _402465.batalhanaval.app;
+    opens bn.batalhaNaval.ui.controllers.windowsControllers to javafx.fxml;
+    exports bn.batalhaNaval.app;
 }
