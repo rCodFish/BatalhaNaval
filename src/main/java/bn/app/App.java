@@ -1,6 +1,6 @@
-package bn.batalhaNaval.app;
+package bn.app;
 
-import bn.batalhaNaval.ui.supportingLogic.windows.WindowWrapper;
+import bn.ui.supportingLogic.windows.WindowWrapper;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -14,7 +14,7 @@ public class App extends Application {
   public void start(Stage unusedStage) {
     try {
 
-      String firstFxml = "/bn/batalhaNaval/primary.fxml";
+      String firstFxml = "/bn/fxml/primary.fxml";
       WindowWrapper primaryWindowWrapper = new WindowWrapper();
       primaryWindowWrapper.createWindow(firstFxml, 800, 400, "first");
       primaryWindowWrapper.getWindowAPI().show();

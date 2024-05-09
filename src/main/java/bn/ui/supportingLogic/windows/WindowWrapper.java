@@ -1,10 +1,10 @@
-package bn.batalhaNaval.ui.supportingLogic.windows;
+package bn.ui.supportingLogic.windows;
 
 import java.io.IOException;
 import java.util.HashMap;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import bn.batalhaNaval.exceptions.WarningException;
+import bn.exceptions.WarningException;
 
 /**
  *

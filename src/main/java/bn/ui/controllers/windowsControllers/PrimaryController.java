@@ -1,6 +1,6 @@
-package bn.batalhaNaval.ui.controllers.windowsControllers;
+package bn.ui.controllers.windowsControllers;
 
-import bn.batalhaNaval.ui.controllers.BaseController;
+import bn.ui.controllers.BaseController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;

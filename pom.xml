@@ -36,7 +36,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>bn.batalhaNaval.app.App</mainClass>
+                    <mainClass>bn.app.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>

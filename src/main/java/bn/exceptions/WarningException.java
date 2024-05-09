@@ -1,4 +1,4 @@
-package bn.batalhaNaval.exceptions;
+package bn.exceptions;
 
 /**
  *

@@ -1,4 +1,4 @@
-package bn.batalhaNaval.ui.controllers;
+package bn.ui.controllers;
 
 /**
  * Abstract base class for controllers.
