@@ -1,4 +1,6 @@
-package bn.gameModes;
+package bn.gameModes.Singleplayer;
+
+import bn.gameModes.GameMode;
 
 /** ======WIP======
  *
