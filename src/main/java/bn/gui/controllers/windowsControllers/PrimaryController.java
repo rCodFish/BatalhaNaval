@@ -1,6 +1,6 @@
-package bn.ui.controllers.windowsControllers;
+package bn.gui.controllers.windowsControllers;
 
-import bn.ui.controllers.BaseController;
+import bn.gui.controllers.BaseController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;

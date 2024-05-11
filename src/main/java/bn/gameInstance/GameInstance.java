@@ -1,13 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bn.gameInstance;
+
+import bn.gameModes.GameMode;
 
 /**
  *
  * @author Eduardo Santos
  */
 public class GameInstance {
+  private GameMode gameMode;
+  
+  public GameInstance(GameMode gameMode){
+    this.gameMode = gameMode;
+  }
+  
+  
+  
   
 }

@@ -1,4 +1,4 @@
-package bn.ui.controllers;
+package bn.gui.controllers;
 
 /**
  * Abstract base class for controllers.

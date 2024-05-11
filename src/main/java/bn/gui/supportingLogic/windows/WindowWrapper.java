@@ -1,4 +1,4 @@
-package bn.ui.supportingLogic.windows;
+package bn.gui.supportingLogic.windows;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package bn.ui.supportingLogic.windows;
+package bn.gui.supportingLogic.windows;
 
 import java.io.IOException;
 import javafx.application.Platform;
@@ -13,7 +13,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
-import bn.ui.controllers.BaseController;
+import bn.gui.controllers.BaseController;
 
 public class WindowAPI<T extends BaseController> {
 

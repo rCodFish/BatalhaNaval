@@ -1,6 +1,6 @@
 package bn.app;
 
-import bn.ui.supportingLogic.windows.WindowWrapper;
+import bn.gui.supportingLogic.windows.WindowWrapper;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
