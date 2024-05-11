@@ -6,6 +6,6 @@ package bn.gameModes.Multiplayer;
  * 
  * PVP game mode same computer
  */
-public class PVPSC extends MultiplayerGameMode{
+public class PVPSC {
   
 }

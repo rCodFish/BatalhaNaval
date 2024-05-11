@@ -1,13 +1,14 @@
 package bn.data.grid.status;
 
 import bn.data.grid.square.Square;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Eduardo Santos
  */
-public class StatusObj {
+public class StatusObj implements Serializable{
   private int rows;
   private int cols;
   private ArrayList<int[]> haveBeenHit; //List with lists containing the coordinates of the squares that have been hit

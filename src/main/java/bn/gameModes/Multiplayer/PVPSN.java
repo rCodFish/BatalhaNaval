@@ -11,24 +11,21 @@ import bn.data.grid.Grid;
  */
 public class PVPSN implements MultiplayerGameMode {
 
-  boolean host = false;
-  boolean client = !host;
-
-  public PVPSN(boolean host) {
-    
-    if (host) {
-      this.host = true;
-    }
-    
+  public PVPSN() {
   }
-
-  public void startGame() throws Exception {
+  
+  @Override
+  public void startGame(boolean isHost) throws Exception {
     boolean finished = false;
     
+    Grid player = new Grid(10, 10);
+    Grid enemyPlayer = new Grid(10, 10);
+    
+    if(isHost){
+    }
+    
     //main game loop
-    while (!finished) {
-      Grid player = new Grid(10, 10);
-      Grid enemyPlayer = new Grid(10, 10);
+    while (!gameOver()) { 
       
       setupPhase();
       
@@ -39,5 +36,11 @@ public class PVPSN implements MultiplayerGameMode {
   private void setupPhase() throws Exception {
     
   }
+  
+  private boolean gameOver() {
+        // Determine game over conditions
+        return false; // Modify as needed
+    }
+  
   
 }

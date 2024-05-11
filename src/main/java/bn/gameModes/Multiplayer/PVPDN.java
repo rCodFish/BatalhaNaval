@@ -6,6 +6,6 @@ package bn.gameModes.Multiplayer;
  * 
  * PVP game mode different networks
  */
-public class PVPDN extends MultiplayerGameMode{
+public class PVPDN {
   
 }
