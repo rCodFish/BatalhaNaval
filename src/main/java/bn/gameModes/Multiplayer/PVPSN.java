@@ -16,7 +16,6 @@ public class PVPSN implements MultiplayerGameMode {
   
   @Override
   public void startGame(boolean isHost) throws Exception {
-    boolean finished = false;
     
     Grid player = new Grid(10, 10);
     Grid enemyPlayer = new Grid(10, 10);
