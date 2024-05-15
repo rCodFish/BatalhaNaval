@@ -1,7 +1,5 @@
 package bn.gameInstance;
 
-import bn.connection.Connection;
-
 /**
  *
  * @author Eduardo Santos
@@ -32,8 +30,7 @@ public class GameInstance {
 
   private void multiplayerSetup() {
     connection = new Thread(connection);
-    incoming = new Thread(incoming);
-    outgoing = new Thread();
+    
   }
 
   private void singleplayerSetup() {
