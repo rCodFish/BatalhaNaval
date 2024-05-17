@@ -223,18 +223,27 @@ public class WindowAPI<T extends BaseController> {
 
 
   public void setFullScreen(BorderPane borderPane) {
-    try {
-    Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+      Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+      boolean fullscreen = true;
+      double height = screenBounds.getHeight();
+      if (height <= 1080) {
+        String imagePath = getClass().getResource("/bn/img/1080pBattleShip.png").toExternalForm();
+        borderPane.setStyle("-fx-background-image: url('" + imagePath + "');");
+      } else if (height > 1080 && height <= 1200) {
+        String imagePath = getClass().getResource("/bn/img/1200pBattleShip.png").toExternalForm();
+        borderPane.setStyle("-fx-background-image: url('" + imagePath + "');");
+      } else if (height > 1200 && height <= 1440) {
+        String imagePath = getClass().getResource("/bn/img/1440pBattleShip.png").toExternalForm();
+        borderPane.setStyle("-fx-background-image: url('" + imagePath + "');");
+      }else if (height > 1440 && height <= 1600) {
+        String imagePath = getClass().getResource("/bn/img/1600pBattleShip.png").toExternalForm();
+        borderPane.setStyle("-fx-background-image: url('" + imagePath + "');");
+      } else{
+          fullscreen=false;
 
-    double width = screenBounds.getWidth();
-
-      Image image = new Image(new FileInputStream("../resources/bn/img/midBackgroundMenu.png"));
-      borderPane.setStyle("-fx-background-image: url('" + image + "'); ");
-
-    stage.setFullScreen(true);
-    } catch (IOException e) {
-      System.out.println("[Error: Image loading FXML failed]");
-    }
+      }
+      if(fullscreen)
+        stage.setFullScreen(true);
   }
 
 

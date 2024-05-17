@@ -35,6 +35,17 @@ public class StartMenuFXMLController extends BaseController implements Initializ
       winAPI.setFullScreen(borderPane);
 
   }
+  @FXML
+  public void onButtonHover(ActionEvent event) {
+    Button hoverButton = (Button) event.getSource();
+    hoverButton.getStyleClass().add("btn-hover");
+  }
+
+  @FXML
+  public void onButtonExitHover(ActionEvent event) {
+    Button hoverButton = (Button) event.getSource();
+    hoverButton.getStyleClass().remove("btn-hover");
+  }
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     // TODO

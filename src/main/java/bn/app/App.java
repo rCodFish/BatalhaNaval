@@ -16,7 +16,7 @@ public class App extends Application {
 
       String firstFxml = "/bn/fxml/StartMenu.fxml";
       WindowWrapper primaryWindowWrapper = new WindowWrapper();
-      primaryWindowWrapper.createWindow(firstFxml, 920, 600, "first");
+      primaryWindowWrapper.createWindow(firstFxml, 1250, 900, "first");
       primaryWindowWrapper.getWindowAPI().show();
 
     } catch (Exception e) {
