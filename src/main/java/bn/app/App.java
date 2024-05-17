@@ -14,9 +14,9 @@ public class App extends Application {
   public void start(Stage unusedStage) {
     try {
 
-      String firstFxml = "/bn/fxml/primary.fxml";
+      String firstFxml = "/bn/fxml/StartMenu.fxml";
       WindowWrapper primaryWindowWrapper = new WindowWrapper();
-      primaryWindowWrapper.createWindow(firstFxml, 800, 400, "first");
+      primaryWindowWrapper.createWindow(firstFxml, 920, 600, "first");
       primaryWindowWrapper.getWindowAPI().show();
 
     } catch (Exception e) {

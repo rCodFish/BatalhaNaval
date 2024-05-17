@@ -3,6 +3,6 @@ module bn {
     requires javafx.fxml;
   requires java.base;
 
-    opens bn.ui.controllers.windowsControllers to javafx.fxml;
+    opens bn.gui.controllers to javafx.fxml;
     exports bn.app;
 }

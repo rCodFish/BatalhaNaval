@@ -2,6 +2,8 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-
-}
+    .mainFxmlClass {
+        -fx-background-size: contain;
+        -fx-background-position: center;
+        -fx-background-repeat: no-repeat;
+    }

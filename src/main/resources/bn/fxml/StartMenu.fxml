@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.StartMenuFXMLController">
-  <stylesheets>
-    <URL value="@/bn/css/startmenufxml.css" />
-  </stylesheets>
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../css/startmenufxml.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.StartMenuFXMLController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <bottom>
-            <ImageView fitHeight="398.0" fitWidth="663.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-               <image>
-                  <Image url="@../img/Captura%20de%20ecrã%202024-05-15%20144431.png" />
-               </image></ImageView>
-         </bottom>
-      </BorderPane>
+      <BorderPane fx:id="borderPane" prefHeight="800.0" prefWidth="1280.0" styleClass="mainFxmlClass" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <Button fx:id="btnTeste" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="25.0" prefWidth="160.0" text="Button" BorderPane.alignment="CENTER" />
+         </left></BorderPane>
    </children>
 </AnchorPane>

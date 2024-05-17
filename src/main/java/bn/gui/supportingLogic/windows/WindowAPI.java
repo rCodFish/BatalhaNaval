@@ -1,5 +1,6 @@
 package bn.gui.supportingLogic.windows;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -218,5 +220,22 @@ public class WindowAPI<T extends BaseController> {
         System.out.println("[Error: Loading FXML failed]");
     }
   }
+
+
+  public void setFullScreen(BorderPane borderPane) {
+    try {
+    Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+
+    double width = screenBounds.getWidth();
+
+      Image image = new Image(new FileInputStream("../resources/bn/img/midBackgroundMenu.png"));
+      borderPane.setStyle("-fx-background-image: url('" + image + "'); ");
+
+    stage.setFullScreen(true);
+    } catch (IOException e) {
+      System.out.println("[Error: Image loading FXML failed]");
+    }
+  }
+
 
 }
