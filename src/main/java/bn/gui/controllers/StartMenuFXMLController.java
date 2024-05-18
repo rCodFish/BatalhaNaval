@@ -8,10 +8,12 @@ import bn.gui.supportingLogic.windows.WindowWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -25,9 +27,14 @@ public class StartMenuFXMLController extends BaseController implements Initializ
    */
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
   private WinStateMachine winAPI = winWrap.getWindowAPI();
+  private Stage stage = winWrap.getStage();
 
   @FXML
   private BorderPane borderPane;
+  @FXML
+  private ImageView image;
+  @FXML
+  private ImageView icon;
 
   @FXML
   public void onButtonClick(ActionEvent event)  {
@@ -46,8 +53,9 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   }
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    // TODO
-
+    
+    image.fitWidthProperty().bind(stage.widthProperty());
+    //icon.fitWidthProperty().bind(stage.widthProperty());
 
   }
 

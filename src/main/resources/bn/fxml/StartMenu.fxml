@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/startmenufxml.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.StartMenuFXMLController">
+<AnchorPane fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/startmenufxml.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.StartMenuFXMLController">
    <children>
-      <BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" styleClass="borderPane" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <top>
-            <Pane prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="75.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
-                     <image>
-                        <Image url="@../img/iconMenu.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </top>
-         <center>
-            <Pane prefHeight="294.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="257.0" fitWidth="600.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/imgMenu.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
-         </center></BorderPane>
+      <VBox prefHeight="200.0" prefWidth="100.0" />
+      <VBox prefHeight="200.0" prefWidth="100.0" />
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="borderPane" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="logo" fitHeight="75.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" styleClass="icon" VBox.vgrow="ALWAYS">
+               <image>
+                  <Image url="@../img/iconMenu.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="image" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+               <image>
+                  <Image url="@../img/imgMenu.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
