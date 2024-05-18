@@ -5,9 +5,16 @@
 .borderPane {
     -fx-background-color: #22383d;
 }
+
 .icon{
     -fx-background-image: url('../img/iconMenu.png');
 }
+
+.image{
+    -fx-background-image: url("../img/imgMenu.png");
+    -fx-background-size: cover;
+}
+
 .btnSP:hover{
     -fx-font-family: 'Mokoto';
     -fx-background-color: radial-gradient(
@@ -22,6 +29,7 @@
     -fx-font-size: 26;
 
 }
+
 .btnSP {
     -fx-font-family: 'Mokoto';
     -fx-background-color: #22383d;

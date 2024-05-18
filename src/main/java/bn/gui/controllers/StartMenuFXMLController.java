@@ -30,13 +30,6 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   private Stage stage = winWrap.getStage();
 
   @FXML
-  private BorderPane borderPane;
-  @FXML
-  private ImageView image;
-  @FXML
-  private ImageView icon;
-
-  @FXML
   public void onButtonClick(ActionEvent event)  {
       winAPI.setFullScreen();
   }
@@ -53,9 +46,6 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   }
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    
-    image.fitWidthProperty().bind(stage.widthProperty());
-    //icon.fitWidthProperty().bind(stage.widthProperty());
 
   }
 

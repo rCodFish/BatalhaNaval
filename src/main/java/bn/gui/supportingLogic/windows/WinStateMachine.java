@@ -21,8 +21,8 @@ public class WinStateMachine<T extends BaseController> {
   private boolean minimized = false;  //same as iconified
   private boolean small = false;  //small form meaning not fullScreen or Maximized but still visible, this is the position to which every set defaults to
 
-  private final double xPercentage = 0.45;
-  private final double yPercentage = 0.65;
+  private final double xPercentage = 0.30;
+  private final double yPercentage = 0.40;
 
   private double xOffset = 0;
   private double yOffset = 0;
