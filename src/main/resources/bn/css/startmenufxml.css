@@ -2,18 +2,12 @@
  * Empty Stylesheet file.
  */
 
-@font-face {
-    font-family: 'Mokoto';
-    url('../fonts/mokoto.otf');
-}
-
 .borderPane {
-    -fx-background-image: url('../img/1080pBattleShip.png');
-    -fx-background-size: contain;
-    -fx-background-position: center;
-    -fx-background-repeat: no-repeat;
+    -fx-background-color: #22383d;
 }
-
+.icon{
+    -fx-background-image: url('../img/iconMenu.png');
+}
 .btnSP:hover{
     -fx-font-family: 'Mokoto';
     -fx-background-color: radial-gradient(
@@ -34,6 +28,6 @@
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
-    -fx-font-size: 26;
+    -fx-font-size: 10;
 
 }

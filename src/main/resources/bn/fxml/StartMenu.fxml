@@ -1,58 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="1080.0" prefWidth="1920.0" styleClass="mainFxmlClass" stylesheets="@../css/startmenufxml.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.StartMenuFXMLController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/startmenufxml.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.StartMenuFXMLController">
    <children>
-      <BorderPane id="borderPane" fx:id="borderPane" prefHeight="1080.0" prefWidth="1920.0" styleClass="borderPane" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <left>
-            <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="552.0" BorderPane.alignment="CENTER_LEFT">
-               <children>
-                  <Button fx:id="btnSP" mnemonicParsing="false" onAction="#onButtonClick" onMouseDragExited="#onButtonExitHover" onMouseDragOver="#onButtonHover" prefHeight="90.0" prefWidth="400.0" styleClass="btnSP" stylesheets="@../css/startmenufxml.css" text="SINGLEPLAYER" textFill="WHITE">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <VBox.margin>
-                        <Insets bottom="25.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="OPEN_HAND" />
-                     </cursor>
-                  </Button>
-                  <Button mnemonicParsing="false" onMouseDragExited="#onButtonExitHover" onMouseDragOver="#onButtonHover" prefHeight="90.0" prefWidth="400.0" styleClass="btnSP" text="MULTIPLAYER">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button mnemonicParsing="false" onMouseDragExited="#onButtonExitHover" prefHeight="90.0" prefWidth="400.0" styleClass="btnSP" text="OPTIONS">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="25.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <BorderPane.margin>
-                  <Insets left="25.0" top="50.0" />
-               </BorderPane.margin>
-            </VBox>
-         </left>
+      <BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" styleClass="borderPane" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <opaqueInsets>
             <Insets />
-         </opaqueInsets></BorderPane>
+         </opaqueInsets>
+         <top>
+            <Pane prefHeight="75.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="75.0" fitWidth="145.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
+                     <image>
+                        <Image url="@../img/iconMenu.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <Pane prefHeight="294.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="257.0" fitWidth="600.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/imgMenu.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </center></BorderPane>
    </children>
 </AnchorPane>
