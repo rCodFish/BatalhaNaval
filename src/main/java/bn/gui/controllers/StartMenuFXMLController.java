@@ -3,7 +3,7 @@ package bn.gui.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import bn.gui.supportingLogic.windows.WindowAPI;
+import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,16 +24,14 @@ public class StartMenuFXMLController extends BaseController implements Initializ
    * Initializes the controller class.
    */
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
-  private WindowAPI winAPI = winWrap.getWindowAPI();
+  private WinStateMachine winAPI = winWrap.getWindowAPI();
 
   @FXML
   private BorderPane borderPane;
 
   @FXML
   public void onButtonClick(ActionEvent event)  {
-
-      winAPI.setFullScreen(borderPane);
-
+      winAPI.setFullScreen();
   }
   @FXML
   public void onButtonHover(ActionEvent event) {

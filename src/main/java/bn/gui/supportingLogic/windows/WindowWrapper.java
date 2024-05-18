@@ -13,38 +13,26 @@ import bn.exceptions.WarningException;
 public class WindowWrapper {
 
   private static HashMap<String, WindowWrapper> windowWrappers = new HashMap<>();
-
   private static Object mutex = new Object();
-
   private static int idCounter = 1;
-
   private final int id;
 
   private Window window;
-  private WindowAPI windowAPI;
+  private WinStateMachine winSM;
 
-  public WindowWrapper() {
+  public WindowWrapper(String initialFXML, int initialWidth, int initialHeight, String hashKey) {
     synchronized (mutex) {
       this.id = idCounter++;
     }
-    this.window = null;
-    this.windowAPI = null;
-  }
-
-  public WindowWrapper(Stage stage) {
-    synchronized (mutex) {
-      this.id = idCounter++;
-    }
-    this.window = stage;
-    this.windowAPI = new WindowAPI(stage);
+    createWindow(initialFXML, initialWidth, initialHeight, hashKey);
   }
 
   public Window getWindow() {
     return window;
   }
 
-  public WindowAPI getWindowAPI() {
-    return windowAPI;
+  public WinStateMachine getWindowAPI() {
+    return winSM;
   }
 
   public int getID() {
@@ -64,12 +52,6 @@ public class WindowWrapper {
   }
 
   public static void addWrapper(String key, WindowWrapper windowWrapper) throws WarningException {
-    /*boolean keyExists = windowWrappers.containsKey(key);
-
-    if (keyExists) {
-      throw new WarningException("Key already created/assigned", WindowWrapper.class);
-    }*/
-
     windowWrappers.put(key, windowWrapper);
   }
 
@@ -86,18 +68,20 @@ public class WindowWrapper {
    * @param initialHeight The initial height of the window.
    * @param hashKey The key for the hashmap.
    */
-  public void createWindow(String initialFXML, int initialWidth, int initialHeight, String hashKey) {
+  private void createWindow(String initialFXML, int initialWidth, int initialHeight, String hashKey) {
+    
     try{
       addWrapper(hashKey, this);
     }catch(WarningException e){
       System.err.println("WarningException: " + e.getMessage());
       return;
     }
+    
     Stage stage = new Stage();
     this.window = stage;
-    this.windowAPI = new WindowAPI(stage);
+    this.winSM = new WinStateMachine(stage);
     try {
-      windowAPI.setRoot(initialFXML, initialWidth, initialHeight, stage);
+      winSM.setRoot(initialFXML, initialWidth, initialHeight, stage);
     } catch (IOException e) {
       System.out.println("[Error: loading fxml gone bad]");
     }
