@@ -222,16 +222,20 @@ public class WinStateMachine<T extends BaseController> {
     }
   }
 
-  public void setRoot(String fxml, double width, double height, Window window) throws IOException {
+  public void setRoot(String fxml, Window window) throws IOException {
+    Rectangle2D bounds = Screen.getPrimary().getBounds();
+    double y = bounds.getHeight();
+    double x = bounds.getWidth();
+    
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
       root = fxmlLoader.load();
       stage = (Stage) window;
-      Scene newScene = new Scene(root, width, height);
+      Scene newScene = new Scene(root, x * xPercentage, y * yPercentage);
       stage.setScene(newScene);
       setupEscKeyHandler(newScene);
       makeDraggable(true);
-      prepareWindowForSceneChange(width, height);
+      prepareWindowForSceneChange(x * xPercentage, y * yPercentage);
       activeController = fxmlLoader.getController();
     } catch (IOException e) {
       System.out.println("[Error: Loading FXML failed]");

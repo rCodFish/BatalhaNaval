@@ -20,11 +20,11 @@ public class WindowWrapper {
   private Window window;
   private WinStateMachine winSM;
 
-  public WindowWrapper(String initialFXML, int initialWidth, int initialHeight, String hashKey) {
+  public WindowWrapper(String initialFXML, String hashKey) {
     synchronized (mutex) {
       this.id = idCounter++;
     }
-    createWindow(initialFXML, initialWidth, initialHeight, hashKey);
+    createWindow(initialFXML, hashKey);
   }
 
   public Window getWindow() {
@@ -68,7 +68,7 @@ public class WindowWrapper {
    * @param initialHeight The initial height of the window.
    * @param hashKey The key for the hashmap.
    */
-  private void createWindow(String initialFXML, int initialWidth, int initialHeight, String hashKey) {
+  private void createWindow(String initialFXML, String hashKey) {
     
     try{
       addWrapper(hashKey, this);
@@ -81,7 +81,7 @@ public class WindowWrapper {
     this.window = stage;
     this.winSM = new WinStateMachine(stage);
     try {
-      winSM.setRoot(initialFXML, initialWidth, initialHeight, stage);
+      winSM.setRoot(initialFXML, stage);
     } catch (IOException e) {
       System.out.println("[Error: loading fxml gone bad]");
     }
