@@ -1,6 +1,8 @@
 package bn.gameInstance;
 
+import bn.batalhaNaval.ui.supportingLogic.windows.WindowWrapper;
 import bn.data.grid.Grid;
+//import bn.gui.supportingLogic.windows.WinStateMachine;
 
 /**
  *
@@ -9,6 +11,8 @@ import bn.data.grid.Grid;
 public class UXController {
   private boolean isPrep;
   private boolean isPrepFinished;
+  private WindowWrapper gameWinWrapper = WindowWrapper.getWindowWrapper("game");
+  //private WinStateMachine gameWinSM = gameWinWrapper.getWindowAPI();
   
   private Grid playerGrid;
   

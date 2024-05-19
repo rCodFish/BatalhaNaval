@@ -31,7 +31,7 @@ public class WindowWrapper {
     return window;
   }
 
-  public WinStateMachine getWindowAPI() {
+  public WinStateMachine getWindowSM() {
     return winSM;
   }
 

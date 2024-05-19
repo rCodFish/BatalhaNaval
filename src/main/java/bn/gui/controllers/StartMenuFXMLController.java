@@ -26,7 +26,7 @@ public class StartMenuFXMLController extends BaseController implements Initializ
    * Initializes the controller class.
    */
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
-  private WinStateMachine winAPI = winWrap.getWindowAPI();
+  private WinStateMachine winAPI = winWrap.getWindowSM();
   private Stage stage = winWrap.getStage();
 
   @FXML

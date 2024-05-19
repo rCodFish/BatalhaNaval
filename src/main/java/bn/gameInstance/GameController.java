@@ -24,7 +24,8 @@ public class GameController implements Runnable {
   public void run() {
     try {
       serverSocket = new ServerSocket(port);
-
+      
+      //Listeners////////////////////////////////////
       while (true) {
         Socket socket = serverSocket.accept();
 
@@ -57,8 +58,7 @@ public class GameController implements Runnable {
     }
   }
 
-  
-  
+  //Callers////////////////////////////////////
   public void myPlayFinished() {
     try {
 
