@@ -9,10 +9,12 @@
 .icon{
     -fx-background-image: url('../img/iconMenu.png');
 }
-
+.options{
+    -fx-background-color: #22383d;
+}
 .image{
     -fx-background-image: url("../img/imgMenu.png");
-    -fx-background-size: contain ;
+    -fx-background-size: cover;
 }
 
 .btnSP:hover{

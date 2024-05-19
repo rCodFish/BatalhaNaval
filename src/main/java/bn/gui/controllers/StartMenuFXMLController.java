@@ -28,7 +28,8 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
   private WinStateMachine winAPI = winWrap.getWindowSM();
   private Stage stage = winWrap.getStage();
-
+  @FXML
+  private ImageView iVimg;
   @FXML
   public void onButtonClick(ActionEvent event)  {
       winAPI.setFullScreen();
@@ -46,7 +47,7 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   }
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-
+    winAPI.teste(iVimg);
   }
 
 }
