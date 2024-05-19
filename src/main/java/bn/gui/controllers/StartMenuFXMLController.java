@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -35,18 +36,30 @@ public class StartMenuFXMLController extends BaseController implements Initializ
       winAPI.setFullScreen();
   }
   @FXML
-  public void onButtonHover(ActionEvent event) {
+  public void onButtonPlayHover(MouseEvent event) {
     Button hoverButton = (Button) event.getSource();
-    hoverButton.getStyleClass().add("btn-hover");
+    hoverButton.getStyleClass().add("btnPlay-hover");
   }
 
   @FXML
-  public void onButtonExitHover(ActionEvent event) {
+  public void onButtonPlayExitHover(MouseEvent event) {
     Button hoverButton = (Button) event.getSource();
-    hoverButton.getStyleClass().remove("btn-hover");
+    hoverButton.getStyleClass().remove("btnPlay-hover");
+  }
+  @FXML
+  public void onButtonPlayClick(MouseEvent event) {
+    Button hoverButton = (Button) event.getSource();
+    hoverButton.getStyleClass().add("btnPlay-click");
+  }
+
+  @FXML
+  public void onButtonPlayExitClick(MouseEvent event) {
+    Button hoverButton = (Button) event.getSource();
+    hoverButton.getStyleClass().remove("btnPlay-click");
   }
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+
     winAPI.teste(iVimg);
   }
 

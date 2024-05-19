@@ -1,7 +1,21 @@
 /*
  * Empty Stylesheet file.
  */
-
+.btnTab{
+    -fx-background-color: #22383d;
+}
+.btnPlay{
+    -fx-border-radius: 5px;
+    -fx-border-color:  #727e91;
+    -fx-background-color: #0f1a16;
+    -fx-background-radius: 5px;
+}
+.btnPlay-hover {
+    -fx-background-color: #384B45;
+}
+.btnPlay-click{
+    -fx-background-color: #21302B;
+}
 .borderPane {
     -fx-background-color: #22383d;
 }
@@ -9,35 +23,9 @@
 .icon{
     -fx-background-image: url('../img/iconMenu.png');
 }
-.options{
-    -fx-background-color: #22383d;
-}
+
 .image{
     -fx-background-image: url("../img/imgMenu.png");
     -fx-background-size: cover;
 }
 
-.btnSP:hover{
-    -fx-font-family: 'Mokoto';
-    -fx-background-color: radial-gradient(
-            center 50% 50%,
-            radius 50%,
-            #56925c 0%,
-            #1a2027 100%
-    );
-    -fx-background-radius: 30;
-    -fx-background-insets: 0;
-    -fx-text-fill: white;
-    -fx-font-size: 26;
-
-}
-
-.btnSP {
-    -fx-font-family: 'Mokoto';
-    -fx-background-color: #22383d;
-    -fx-background-radius: 30;
-    -fx-background-insets: 0;
-    -fx-text-fill: white;
-    -fx-font-size: 10;
-
-}
