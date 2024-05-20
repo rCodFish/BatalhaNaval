@@ -11,7 +11,7 @@
                     <Image url="@../img/imgMenu.png" />
                 </image>
             </ImageView>
-            <Button fx:id="btnMLT" layoutX="430.0" layoutY="330.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="44.0" prefWidth="133.0" styleClass="btnPlay" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="36.66666666666663">
+            <Button fx:id="btnMLT" layoutX="428.0" layoutY="339.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="44.0" prefWidth="133.0" styleClass="btnPlay" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="39.0">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,7 +21,7 @@
          </graphic></Button>
 
             <!-- Placeholder buttons without graphics or text -->
-            <Button fx:id="btnSP" layoutX="276.0" layoutY="331.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="40.0" prefWidth="133.0" styleClass="btnPlay" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="190.66666666666663">
+            <Button fx:id="btnSP" layoutX="274.0" layoutY="339.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="44.0" prefWidth="133.0" styleClass="btnPlay" stylesheets="@../css/startmenufxml.css" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="193.0">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,14 +44,14 @@
                     <Image url="@../img/iconMenu.png" />
                 </image>
             </ImageView>
-      <Button fx:id="btnX" layoutX="557.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="26.0" prefWidth="37.0" styleClass="btnTab" stylesheets="@../css/startmenufxml.css" AnchorPane.rightAnchor="1.6666666666666288" AnchorPane.topAnchor="5.0">
+      <Button fx:id="btnX" layoutX="557.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="26.0" prefWidth="25.0" styleClass="btnX" stylesheets="@../css/startmenufxml.css" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/xMenu.png" />
                </image></ImageView>
          </graphic></Button>
-      <Button fx:id="btnMini" layoutX="527.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="26.0" prefWidth="37.0" styleClass="btnTab" stylesheets="@../css/startmenufxml.css" AnchorPane.rightAnchor="35.66666666666663" AnchorPane.topAnchor="5.0">
+      <Button fx:id="btnMini" layoutX="522.0" layoutY="5.0" mnemonicParsing="false" onMouseEntered="#onButtonPlayHover" onMouseExited="#onButtonPlayExitHover" onMousePressed="#onButtonPlayClick" onMouseReleased="#onButtonPlayExitClick" prefHeight="26.0" prefWidth="9.0" styleClass="btnTab" stylesheets="@../css/startmenufxml.css" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="5.0">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                <image>

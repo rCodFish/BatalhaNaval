@@ -38,24 +38,38 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   @FXML
   public void onButtonPlayHover(MouseEvent event) {
     Button hoverButton = (Button) event.getSource();
-    hoverButton.getStyleClass().add("btnPlay-hover");
+    if(hoverButton.getId().equals("btnX"))
+      hoverButton.getStyleClass().add("btnX-hover");
+    else
+      hoverButton.getStyleClass().add("btnPlay-hover");
   }
 
   @FXML
   public void onButtonPlayExitHover(MouseEvent event) {
     Button hoverButton = (Button) event.getSource();
-    hoverButton.getStyleClass().remove("btnPlay-hover");
+    if(hoverButton.getId().equals("btnX"))
+      hoverButton.getStyleClass().remove("btnX-hover");
+    else
+      hoverButton.getStyleClass().remove("btnPlay-hover");
+
   }
   @FXML
   public void onButtonPlayClick(MouseEvent event) {
     Button hoverButton = (Button) event.getSource();
-    hoverButton.getStyleClass().add("btnPlay-click");
+    if(hoverButton.getId().equals("btnX"))
+      hoverButton.getStyleClass().add("btnX-click");
+    else
+      hoverButton.getStyleClass().add("btnPlay-click");
+
   }
 
   @FXML
   public void onButtonPlayExitClick(MouseEvent event) {
     Button hoverButton = (Button) event.getSource();
-    hoverButton.getStyleClass().remove("btnPlay-click");
+    if(hoverButton.getId().equals("btnX"))
+      hoverButton.getStyleClass().remove("btnX-click");
+    else
+      hoverButton.getStyleClass().remove("btnPlay-click");
   }
   @Override
   public void initialize(URL url, ResourceBundle rb) {

@@ -4,11 +4,20 @@
 .btnTab{
     -fx-background-color: #22383d;
 }
+.btnX{
+    -fx-background-color: #22383d;
+}
 .btnPlay{
     -fx-border-radius: 5px;
     -fx-border-color:  #727e91;
     -fx-background-color: #0f1a16;
     -fx-background-radius: 5px;
+}
+.btnX-hover {
+    -fx-background-color: #D81717;
+}
+.btnX-click{
+    -fx-background-color: #A41F1F;
 }
 .btnPlay-hover {
     -fx-background-color: #384B45;
