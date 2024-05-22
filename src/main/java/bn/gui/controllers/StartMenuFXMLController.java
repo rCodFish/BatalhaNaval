@@ -31,10 +31,28 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   private Stage stage = winWrap.getStage();
   @FXML
   private ImageView iVimg;
+  
   @FXML
   public void onButtonClick(ActionEvent event)  {
       winAPI.setFullScreen();
   }
+  
+  @FXML
+  public void beginGame()  {
+      String gameFxml = "/bn/fxml/Game.fxml";
+      try{
+
+        winAPI.setFullScreen();
+      }catch(Exception e){
+        e.printStackTrace();
+      }
+  }
+  
+  @FXML
+  public void close()  {
+      winAPI.exit();
+  }
+  
   @FXML
   public void onButtonPlayHover(MouseEvent event) {
     Button hoverButton = (Button) event.getSource();
@@ -71,6 +89,8 @@ public class StartMenuFXMLController extends BaseController implements Initializ
     else
       hoverButton.getStyleClass().remove("btnPlay-click");
   }
+  
+  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
 

@@ -4,27 +4,34 @@
 .btnTab{
     -fx-background-color: #22383d;
 }
+
 .btnX{
     -fx-background-color: #22383d;
 }
+
 .btnPlay{
     -fx-border-radius: 5px;
     -fx-border-color:  #727e91;
     -fx-background-color: #0f1a16;
     -fx-background-radius: 5px;
 }
-.btnX-hover {
+
+.btnX:hover {
     -fx-background-color: #D81717;
 }
-.btnX-click{
+
+.btnX:pressed{
     -fx-background-color: #A41F1F;
 }
-.btnPlay-hover {
+
+.btnPlay:hover {
     -fx-background-color: #384B45;
 }
-.btnPlay-click{
+
+.btnPlay:pressed{
     -fx-background-color: #21302B;
 }
+
 .borderPane {
     -fx-background-color: #22383d;
 }

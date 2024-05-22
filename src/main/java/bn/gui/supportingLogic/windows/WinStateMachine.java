@@ -241,6 +241,7 @@ public class WinStateMachine<T extends BaseController> {
       activeController = fxmlLoader.getController();
     } catch (IOException e) {
       System.out.println("[Error: Loading FXML failed]");
+      e.printStackTrace();
     }
   }
   public void teste(ImageView... imageViews) {
