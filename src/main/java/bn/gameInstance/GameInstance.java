@@ -6,14 +6,12 @@ package bn.gameInstance;
  */
 public class GameInstance {
 
-  private boolean isHost;
   private final boolean isMultiplayer;
   private UXController stateMachine;
   private Thread connectionThread;
   private GameController connection;
 
-  public GameInstance(boolean isMultiplayer, boolean isHost) throws Exception {
-    this.isHost = isHost;
+  public GameInstance(boolean isMultiplayer) throws Exception {
     this.isMultiplayer = isMultiplayer;
     setupGame();
   }
@@ -21,9 +19,6 @@ public class GameInstance {
   private void setupGame() {
     if (isMultiplayer) {
       multiplayerSetup();
-    } else {
-      this.isHost = true;
-      singleplayerSetup();
     }
   }
 
@@ -31,7 +26,7 @@ public class GameInstance {
     connection = new GameController(stateMachine);
     connectionThread = new Thread(connection);
     connectionThread.start();
-    
+
   }
 
   private void singleplayerSetup() {

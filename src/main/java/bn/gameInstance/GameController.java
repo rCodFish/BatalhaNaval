@@ -8,7 +8,7 @@ import java.net.Socket;
 public class GameController implements Runnable {
 
   private int port = 15000; // Set default port
-  private String hostAddress;
+  private String hostAddress = "193.137.97.169";
   private ServerSocket serverSocket;
   private UXController stateMachine;
   private final int CMD_PLAY = 1;
@@ -30,7 +30,7 @@ public class GameController implements Runnable {
         Socket socket = serverSocket.accept();
 
         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-
+        
         int cmd = inputStream.readInt();
         switch (cmd) {
           case CMD_PLAY:
