@@ -28,6 +28,10 @@ public class GameInstance {
     connectionThread.start();
 
   }
+  
+  public GameController getCon(){
+    return connection;
+  }
 
   private void singleplayerSetup() {
     //to do

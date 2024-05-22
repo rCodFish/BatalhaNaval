@@ -38,6 +38,7 @@ public class GameController implements Runnable {
             break;
           case CMD_WAIT:
             stateMachine.otherPlay();
+            System.out.println("wait deu");
             break;
           case CMD_HIT:
             int x = inputStream.readInt();

@@ -1,7 +1,7 @@
 package bn.app;
 
+import bn.gameInstance.GameController;
 import bn.gameInstance.GameInstance;
-import bn.gui.supportingLogic.windows.WindowWrapper;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -16,7 +16,8 @@ public class App extends Application {
     try {
       
       GameInstance gameInstance = new GameInstance(true);
-      
+      GameController gm = gameInstance.getCon();
+      gm.myPlayStarted();
       
       /*String firstFxml = "/bn/fxml/StartMenu.fxml";
       WindowWrapper primaryWindowWrapper = new WindowWrapper(firstFxml, "first");
