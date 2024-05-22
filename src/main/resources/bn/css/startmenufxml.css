@@ -1,11 +1,5 @@
-/*
- * Empty Stylesheet file.
- */
-.btnTab{
-    -fx-background-color: #22383d;
-}
-
-.btnX{
+/*/////////// Defaults ///////////*/
+.btnTab , .btnX{
     -fx-background-color: #22383d;
 }
 
@@ -14,22 +8,6 @@
     -fx-border-color:  #727e91;
     -fx-background-color: #0f1a16;
     -fx-background-radius: 5px;
-}
-
-.btnX:hover {
-    -fx-background-color: #D81717;
-}
-
-.btnX:pressed{
-    -fx-background-color: #A41F1F;
-}
-
-.btnPlay:hover {
-    -fx-background-color: #384B45;
-}
-
-.btnPlay:pressed{
-    -fx-background-color: #21302B;
 }
 
 .borderPane {
@@ -44,4 +22,23 @@
     -fx-background-image: url("../img/imgMenu.png");
     -fx-background-size: cover;
 }
+
+/*/////////// Actions ///////////*/
+
+.btnX:hover {
+    -fx-background-color: #D81717;
+}
+
+.btnX:pressed{
+    -fx-background-color: #A41F1F;
+}
+.btnTab:hover,.btnPlay:hover {
+    -fx-background-color: #384B45;
+}
+
+.btnTab:pressed , .btnPlay:pressed{
+    -fx-background-color: #21302B;
+}
+
+
 
