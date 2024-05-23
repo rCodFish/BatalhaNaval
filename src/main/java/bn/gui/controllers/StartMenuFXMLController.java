@@ -41,7 +41,7 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   public void beginGame()  {
       String gameFxml = "/bn/fxml/Game.fxml";
       try{
-
+        winAPI.setRoot(gameFxml, stage);
         winAPI.setFullScreen();
       }catch(Exception e){
         e.printStackTrace();

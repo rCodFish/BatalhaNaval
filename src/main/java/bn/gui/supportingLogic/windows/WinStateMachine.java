@@ -7,7 +7,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import javafx.scene.image.ImageView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -244,6 +243,7 @@ public class WinStateMachine<T extends BaseController> {
       e.printStackTrace();
     }
   }
+  
   public void teste(ImageView... imageViews) {
     Rectangle2D bounds = Screen.getPrimary().getBounds();
     double screenWidth = bounds.getWidth();
@@ -253,9 +253,8 @@ public class WinStateMachine<T extends BaseController> {
       imageView.setFitWidth(screenWidth * xPercentage);
       imageView.setFitHeight(screenHeight * yPercentage);
     }
-
-
   }
+  
   public void teste1(ImageView imageView) {
     Rectangle2D bounds = Screen.getPrimary().getBounds();
     double screenWidth = bounds.getWidth();
@@ -264,10 +263,8 @@ public class WinStateMachine<T extends BaseController> {
 
     imageView.setFitWidth(screenWidth * 0.2);
     imageView.setFitHeight(screenHeight * 0.1);
-
-
-
   }
+  
   //Privates///////////////////////////////////////
   private void prepareWindowForSceneChange(double width, double height) {
     updateSizeStatus();

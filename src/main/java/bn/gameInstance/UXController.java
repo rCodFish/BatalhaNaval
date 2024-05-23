@@ -16,7 +16,7 @@ public class UXController {
   
   private Grid playerGrid;
   
-  public UXController(boolean isHost){
+  public UXController(){
     playerGrid = new Grid(10, 10);
   }
   

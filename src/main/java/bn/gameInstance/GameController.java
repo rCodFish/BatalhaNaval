@@ -6,9 +6,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class GameController implements Runnable {
-
-  private int port = 15000; // Set default port
-  private String hostAddress = "193.137.97.169";
+  
+  private int otherPort = 15000;
+  private int selfPort = 15001; // Set default port
+  private String hostAddress = "localhost";
   private ServerSocket serverSocket;
   private UXController stateMachine;
   private final int CMD_PLAY = 1;
@@ -23,7 +24,8 @@ public class GameController implements Runnable {
   @Override
   public void run() {
     try {
-      serverSocket = new ServerSocket(port);
+      System.out.println("vroom");
+      serverSocket = new ServerSocket(selfPort);
       
       //Listeners////////////////////////////////////
       while (true) {
@@ -32,12 +34,13 @@ public class GameController implements Runnable {
         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
         
         int cmd = inputStream.readInt();
+        System.out.println("Received command: " + cmd);
         switch (cmd) {
           case CMD_PLAY:
             stateMachine.myPlay();
             break;
           case CMD_WAIT:
-            stateMachine.otherPlay();
+            //stateMachine.otherPlay();
             System.out.println("wait deu");
             break;
           case CMD_HIT:
@@ -46,11 +49,13 @@ public class GameController implements Runnable {
             boolean hit = stateMachine.otherPlayHit(x, y);
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
             outputStream.writeBoolean(hit);
+            outputStream.close();
             break;
           case CMD_FINISH:
             stateMachine.OtherEnd();
             break;
         }
+        inputStream.close();
         socket.close();
       }
 
@@ -61,43 +66,27 @@ public class GameController implements Runnable {
 
   //Callers////////////////////////////////////
   public void myPlayFinished() {
-    try {
-
-      Socket socket = new Socket(hostAddress, port);
-      ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-      outputStream.writeInt(CMD_PLAY);
-      socket.close();
-
-      stateMachine.otherPlay();
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    sendCommand(CMD_PLAY);
+    stateMachine.otherPlay();
   }
 
   public void myPlayStarted() {
-    try {
-
-      Socket socket = new Socket(hostAddress, port);
-      ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-      outputStream.writeInt(CMD_WAIT);
-      socket.close();
-
-      stateMachine.myPlay();
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    sendCommand(CMD_WAIT);
+    stateMachine.myPlay();
+  }
+  
+  public void myFinish() {
+      sendCommand(CMD_FINISH);
   }
 
   public boolean otherHit(int x, int y) {
     try {
 
-      Socket socket = new Socket(hostAddress, port);
+      Socket socket = new Socket(hostAddress, otherPort);
       ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
       ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-
-      outputStream.writeInt(CMD_HIT);
+      
+      sendCommand(CMD_HIT);
       outputStream.writeInt(x);
       outputStream.writeInt(y);
 
@@ -113,14 +102,13 @@ public class GameController implements Runnable {
     return false;
   }
   
-  public void myFinish() {
+  private void sendCommand(int cmd) {
     try {
-
-      Socket socket = new Socket(hostAddress, port);
+      Socket socket = new Socket(hostAddress, otherPort);
       ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-      outputStream.writeInt(CMD_FINISH);
+      outputStream.writeInt(cmd);
+      outputStream.close();
       socket.close();
-
     } catch (Exception e) {
       e.printStackTrace();
     }

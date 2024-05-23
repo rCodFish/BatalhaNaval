@@ -1,7 +1,6 @@
 package bn.app;
 
-import bn.gameInstance.GameController;
-import bn.gameInstance.GameInstance;
+import bn.gui.supportingLogic.windows.WindowWrapper;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
@@ -15,13 +14,14 @@ public class App extends Application {
   public void start(Stage unusedStage) {
     try {
       
-      GameInstance gameInstance = new GameInstance(true);
+      /*GameInstance gameInstance = new GameInstance(true);
+      Thread.sleep(10000);
       GameController gm = gameInstance.getCon();
-      gm.myPlayStarted();
+      gm.myPlayStarted();*/
       
-      /*String firstFxml = "/bn/fxml/StartMenu.fxml";
+      String firstFxml = "/bn/fxml/StartMenu.fxml";
       WindowWrapper primaryWindowWrapper = new WindowWrapper(firstFxml, "first");
-      primaryWindowWrapper.getWindowSM().show();*/
+      primaryWindowWrapper.getWindowSM().show();
 
     } catch (Exception e) {
       System.out.println("[Error: " + e.getMessage() + "]");

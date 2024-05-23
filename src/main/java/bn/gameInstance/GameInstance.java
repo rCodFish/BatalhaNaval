@@ -12,6 +12,7 @@ public class GameInstance {
   private GameController connection;
 
   public GameInstance(boolean isMultiplayer) throws Exception {
+    this.stateMachine = new UXController();
     this.isMultiplayer = isMultiplayer;
     setupGame();
   }
@@ -19,6 +20,9 @@ public class GameInstance {
   private void setupGame() {
     if (isMultiplayer) {
       multiplayerSetup();
+    }
+    else{
+      singleplayerSetup();
     }
   }
 

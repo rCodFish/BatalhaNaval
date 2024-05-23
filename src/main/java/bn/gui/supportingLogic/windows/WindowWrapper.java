@@ -76,7 +76,6 @@ public class WindowWrapper {
       System.err.println("WarningException: " + e.getMessage());
       return;
     }
-    
     Stage stage = new Stage();
     this.window = stage;
     this.winSM = new WinStateMachine(stage);
@@ -85,6 +84,5 @@ public class WindowWrapper {
     } catch (IOException e) {
       System.out.println("[Error: loading fxml gone bad]");
     }
-
   }
 }

@@ -24,14 +24,4 @@ public class Grid {
       }
     }
   }
-
-  public StatusObj getGridStatus() {
-    try {
-      StatusObj status = new StatusObj(grid);
-      return status;
-    } catch (Exception e) {
-      System.out.println("Matrix happens to be non square, please fix");
-    }
-    return null;
-  }
 }
