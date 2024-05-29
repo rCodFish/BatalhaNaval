@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -17,13 +21,19 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
 
   @FXML
   private VBox BoatsVBox;
+  @FXML
+  private GridPane PrepGrid;
 
   private ArrayList<BoatHBox> boatOptions = new ArrayList<>();
   private boolean boatSelected = false;
+  private boolean gridCellSelected = false;
+  private int selectedRow = -1;
+  private int selectedColumn = -1;
   
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     addBoatsOptions();
+    PrepGrid.setOnMouseClicked(event -> clickGrid(event));;
   }
 
   private void addBoatsOptions() {
@@ -42,21 +52,44 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
       boatOptions.add(boatOption);
 
       BoatsVBox.getChildren().add(boatOption.getBoatOption());
-
-      boatOption.getBoatOption().setOnMouseClicked(event -> handleBoatOptionClick(boatOption));
-      boatOption.getBoatOption().setOnMouseEntered(e -> {
+      HBox boatBox = boatOption.getBoatOption();
+      
+      boatBox.setOnMouseClicked(event -> handleBoatOptionClick(boatOption));
+      boatBox.setOnMouseEntered(e -> {
         if (!boatOption.isSelected()) {
           boatOption.getBoatOption().setStyle("-fx-background-color: lightgray;");
         }
       });
-      boatOption.getBoatOption().setOnMouseExited(e -> {
+      boatBox.setOnMouseExited(e -> {
         if (!boatOption.isSelected()) {
-          boatOption.getBoatOption().setStyle("-fx-background-color: transparent;");
+          boatBox.setStyle("-fx-background-color: transparent;");
         }
       });
     }
   }
-
+  
+  private void clickGrid(MouseEvent event) {
+    Node clickedNode = event.getPickResult().getIntersectedNode();
+    if (clickedNode != PrepGrid) {
+        // click on descendant node
+        Integer colIndex = GridPane.getColumnIndex(clickedNode);
+        Integer rowIndex = GridPane.getRowIndex(clickedNode);
+        
+        if (colIndex != null && rowIndex != null) {
+            // Update selected grid cell
+            selectedRow = rowIndex;
+            selectedColumn = colIndex;
+            gridCellSelected = true;
+            
+            // Change style of the clicked cell
+            clickedNode.setStyle("-fx-background-color: lightblue;");
+            
+            // Do something with the selected grid cell
+            System.out.println("Selected grid cell: [" + rowIndex + ", " + colIndex + "]");
+        }
+    }
+}
+  
   private void handleBoatOptionClick(BoatHBox boatOption) {
     if (boatSelected){
       deselectAll();

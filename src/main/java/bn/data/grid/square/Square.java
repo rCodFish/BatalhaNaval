@@ -1,10 +1,13 @@
 package bn.data.grid.square;
 
+import javafx.scene.layout.HBox;
+
 /**
  *
  * @author Eduardo Santos
  */
 public class Square {
+  private HBox square;
   private boolean hasBoat = false;
   private boolean hasBeenHit = false;
   

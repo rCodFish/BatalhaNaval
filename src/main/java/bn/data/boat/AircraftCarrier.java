@@ -10,7 +10,7 @@ public class AircraftCarrier extends Boat{
   private boolean destroyed = false;
 
   public AircraftCarrier(int gridInitialX, int gridInitialY, boolean vertical) {
-    super(gridInitialX, gridInitialY, 4, vertical);
+    super(gridInitialX, gridInitialY, size, vertical);
   }
 
   public boolean isDestroyed() {
