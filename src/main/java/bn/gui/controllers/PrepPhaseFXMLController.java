@@ -32,16 +32,31 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
   
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    populateGrid();
     addBoatsOptions();
     PrepGrid.setOnMouseClicked(event -> clickGrid(event));;
   }
+  
+  private void populateGrid(){
+    for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                HBox hBox = new HBox();
+                
+                hBox.setPrefSize(100, 100);
+                hBox.setOnMouseEntered(e -> hBox.setStyle("-fx-background-color: lightblue;"));
+                hBox.setOnMouseExited(e -> hBox.setStyle("-fx-background-color: transparent;"));
+                
+                PrepGrid.add(hBox, col, row);
+            }
+        }
+  }
 
   private void addBoatsOptions() {
-    String[] boatTypes = {"Carrier", "Battleship", "Cruiser", "Submarine"};
+    String[] boatTypes = {"Carrier", "Cruiser", "Destroyer", "Submarine"};
     ArrayList<Integer> boatCounts = new ArrayList<>();
     boatCounts.add(1); //carrier
-    boatCounts.add(2); //battleship
     boatCounts.add(3); //cruiser
+    boatCounts.add(2); //Destroyer  
     boatCounts.add(2); //submarine
 
     for (int i = 0; i < boatTypes.length; i++) {
@@ -71,20 +86,16 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
   private void clickGrid(MouseEvent event) {
     Node clickedNode = event.getPickResult().getIntersectedNode();
     if (clickedNode != PrepGrid) {
-        // click on descendant node
         Integer colIndex = GridPane.getColumnIndex(clickedNode);
         Integer rowIndex = GridPane.getRowIndex(clickedNode);
         
         if (colIndex != null && rowIndex != null) {
-            // Update selected grid cell
             selectedRow = rowIndex;
             selectedColumn = colIndex;
             gridCellSelected = true;
             
-            // Change style of the clicked cell
             clickedNode.setStyle("-fx-background-color: lightblue;");
             
-            // Do something with the selected grid cell
             System.out.println("Selected grid cell: [" + rowIndex + ", " + colIndex + "]");
         }
     }

@@ -1,5 +1,7 @@
 package bn.gui.controllers;
 
+import bn.gameInstance.GameController;
+import bn.gameInstance.GameInstance;
 import java.net.URL;
 import java.util.ResourceBundle;
 import bn.gui.supportingLogic.windows.WinStateMachine;
@@ -33,6 +35,21 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   @FXML
   public void setFullScreen() {
     winAPI.setFullScreen();
+  }
+  
+  @FXML
+  public void beginMultiplayer() {
+    String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
+    
+    /*try{
+    GameInstance gI = new GameInstance(true);
+    GameInstance.setGI(gI);
+    Thread.sleep(10000);
+    GameController gm = gI.getCon();
+    gm.prepPhaseStarted();
+    }catch(Exception e){
+      e.printStackTrace();
+    }*/
   }
 
   @FXML

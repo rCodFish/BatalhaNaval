@@ -5,7 +5,7 @@ package bn.gameInstance;
  * @author Eduardo Santos
  */
 public class GameInstance {
-
+  private static GameInstance gameInstance;
   private final boolean isMultiplayer;
   private UXController stateMachine;
   private Thread connectionThread;
@@ -17,6 +17,10 @@ public class GameInstance {
     setupGame();
   }
 
+  public static void setGI(GameInstance gI) {
+    gameInstance = gI;
+  }
+  
   private void setupGame() {
     if (isMultiplayer) {
       multiplayerSetup();
@@ -25,13 +29,13 @@ public class GameInstance {
       singleplayerSetup();
     }
   }
-
+  
   private void multiplayerSetup() {
     connection = new GameController(stateMachine);
     connectionThread = new Thread(connection);
     connectionThread.start();
-
   }
+  
   
   public GameController getCon(){
     return connection;

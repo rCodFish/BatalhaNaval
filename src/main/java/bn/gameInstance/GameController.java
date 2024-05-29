@@ -16,6 +16,8 @@ public class GameController implements Runnable {
   private final int CMD_WAIT = 2;
   private final int CMD_HIT = 3;
   private final int CMD_FINISH = 4;
+  private final int CDM_PREPSTART = 5;
+  private final int CDM_PREPEND = 6;
 
   public GameController(UXController stateMachine) {
     this.stateMachine = stateMachine;
@@ -76,7 +78,7 @@ public class GameController implements Runnable {
   }
   
   public void myFinish() {
-      sendCommand(CMD_FINISH);
+    sendCommand(CMD_FINISH);
   }
 
   public boolean otherHit(int x, int y) {
@@ -112,6 +114,10 @@ public class GameController implements Runnable {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+  
+  private void prepPhaseStarted(){
+    sendCommand(CDM_PREPSTART);
   }
 
 }
