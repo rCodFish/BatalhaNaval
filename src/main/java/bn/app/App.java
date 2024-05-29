@@ -14,11 +14,6 @@ public class App extends Application {
   public void start(Stage unusedStage) {
     try {
       
-      /*GameInstance gameInstance = new GameInstance(true);
-      Thread.sleep(10000);
-      GameController gm = gameInstance.getCon();
-      gm.myPlayStarted();*/
-      
       String firstFxml = "/bn/fxml/StartMenu.fxml";
       WindowWrapper primaryWindowWrapper = new WindowWrapper(firstFxml, "first");
       primaryWindowWrapper.getWindowSM().show();
