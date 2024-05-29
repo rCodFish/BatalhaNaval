@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -81,6 +82,8 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
         }
       });
     }
+    BoatsVBox.setAlignment(Pos.CENTER); // Center the children vertically and horizontally
+    BoatsVBox.setSpacing(50); // Add spacing between the BoatHBox components
   }
   
   private void clickGrid(MouseEvent event) {
