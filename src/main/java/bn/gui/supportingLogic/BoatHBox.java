@@ -21,16 +21,16 @@ public class BoatHBox {
         ImageView image = new ImageView();
         switch (boatType){
             case "Carrier":
-                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/iconMenu.png"))));
+                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/carrier.png"))));
                 break;
             case "Cruiser":
-                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/iconMenu.png"))));
+                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/cruiser.png"))));
                 break;
             case "Destroyer":
-                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/iconMenu.png"))));
+                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/destroyer.png"))));
                 break;
             case "Submarine":
-                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/iconMenu.png"))));
+                image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/submarine.png"))));
                 break;
             default:
                 break;
