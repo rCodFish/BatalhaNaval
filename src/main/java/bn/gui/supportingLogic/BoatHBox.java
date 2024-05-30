@@ -1,55 +1,55 @@
 package bn.gui.supportingLogic;
 
+import bn.data.boat.Boat;
 import java.util.Objects;
-
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 
 /**
+ * Class representing a Boat HBox for UI.
  *
- * @author Eduardo Santos
+ * Author: Eduardo Santos
  */
 public class BoatHBox {
+
   private final HBox boatOption;
   private boolean isSelected = false;
   private int counter;
+  private String type;
 
-  public BoatHBox(String boatType, int boatCount) {
+  public BoatHBox(String type, int boatCount) {
+    this.type = type;
+    counter = boatCount;
+    this.boatOption = new HBox();
+    this.boatOption.setAlignment(Pos.CENTER);
+    this.boatOption.setSpacing(20);
 
-      this.counter = boatCount;
-      this.boatOption = new HBox();
-      this.boatOption.setAlignment(Pos.CENTER);
-      this.boatOption.setSpacing(20);
-
-
-      ImageView image = new ImageView();
-      switch (boatType){
-
-          case "Carrier":
-              image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/carrier.png"))));
-              break;
-          case "Cruiser":
-              image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/cruiser.png"))));
-              break;
-          case "Destroyer":
-              image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/destroyer.png"))));
-              break;
-          case "Submarine":
-              image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/submarine.png"))));
-              break;
-          default:
-              break;
-        }
+    ImageView image = new ImageView();
+    switch (type) {
+      case "Carrier":
+        image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/carrier.png"))));
+        break;
+      case "Cruiser":
+        image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/cruiser.png"))));
+        break;
+      case "Destroyer":
+        image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/destroyer.png"))));
+        break;
+      case "Submarine":
+        image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/submarine.png"))));
+        break;
+      default:
+        break;
+    }
 
     Label label = new Label(" (x" + boatCount + ")");
+    label.setStyle("-fx-text-fill: white;");
 
     boatOption.getChildren().addAll(image, label);
-    }
+  }
 
   public HBox getBoatOption() {
     return boatOption;
@@ -70,8 +70,6 @@ public class BoatHBox {
   }
 
   public String getType() {
-    Label label = (Label) boatOption.getChildren().get(1);
-    String labelText = label.getText();
-    return labelText.substring(0, labelText.indexOf(" ("));
+    return type;
   }
 }

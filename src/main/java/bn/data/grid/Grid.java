@@ -1,6 +1,5 @@
 package bn.data.grid;
 
-import bn.data.grid.status.StatusObj;
 import bn.data.grid.square.Square;
 
 /**

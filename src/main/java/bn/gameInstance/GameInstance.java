@@ -7,18 +7,22 @@ package bn.gameInstance;
 public class GameInstance {
   private static GameInstance gameInstance;
   private final boolean isMultiplayer;
-  private UXController stateMachine;
+  private UXController uXController;
   private Thread connectionThread;
   private GameController connection;
 
   public GameInstance(boolean isMultiplayer) throws Exception {
-    this.stateMachine = new UXController();
+    this.uXController = new UXController();
     this.isMultiplayer = isMultiplayer;
     setupGame();
   }
 
-  public static void setGI(GameInstance gI) {
-    gameInstance = gI;
+  public static void setGameInstance(GameInstance gameInstance) {
+    gameInstance = gameInstance;
+  }
+  
+  public static void getGameInstance(GameInstance gameInstance) {
+    gameInstance = gameInstance;
   }
   
   private void setupGame() {
@@ -31,7 +35,7 @@ public class GameInstance {
   }
   
   private void multiplayerSetup() {
-    connection = new GameController(stateMachine);
+    connection = new GameController(uXController);
     connectionThread = new Thread(connection);
     connectionThread.start();
   }

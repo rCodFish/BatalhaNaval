@@ -14,6 +14,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import bn.gui.controllers.BaseController;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCombination;
 
 public class WinStateMachine<T extends BaseController> {
 
@@ -153,6 +154,10 @@ public class WinStateMachine<T extends BaseController> {
   public T getActiveController() {
     return activeController;
   }
+  
+  public Stage getStage(){
+    return stage;
+  }
 
   //Is///////////////////////////////////////
   public boolean isMaximized() {
@@ -234,7 +239,7 @@ public class WinStateMachine<T extends BaseController> {
       stage = (Stage) window;
       Scene newScene = new Scene(root, x * xPercentage, y * yPercentage);
       stage.setScene(newScene);
-      setupEscKeyHandler(newScene);
+      stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
       makeDraggable(true);
       prepareWindowForSceneChange(x * xPercentage, y * yPercentage);
       activeController = fxmlLoader.getController();
@@ -255,16 +260,6 @@ public class WinStateMachine<T extends BaseController> {
     }
   }
   
-  public void teste1(ImageView imageView) {
-    Rectangle2D bounds = Screen.getPrimary().getBounds();
-    double screenWidth = bounds.getWidth();
-    double screenHeight = bounds.getHeight();
-
-
-    imageView.setFitWidth(screenWidth * 0.2);
-    imageView.setFitHeight(screenHeight * 0.1);
-  }
-  
   //Privates///////////////////////////////////////
   private void prepareWindowForSceneChange(double width, double height) {
     updateSizeStatus();
@@ -272,16 +267,7 @@ public class WinStateMachine<T extends BaseController> {
     stage.setWidth(width);
     stage.centerOnScreen();
   }
-
-  private void setupEscKeyHandler(Scene scene) {
-    scene.setOnKeyPressed(event -> {
-      if (event.getCode() == KeyCode.ESCAPE && fullScreen) {
-        fullScreen = false;
-        updateSizeStatus("small");
-      }
-    });
-  }
-
+ 
   private void updateSizeStatus(String... states) {
     maximized = false;
     fullScreen = false;

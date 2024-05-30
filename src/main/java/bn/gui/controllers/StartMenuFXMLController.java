@@ -1,7 +1,5 @@
 package bn.gui.controllers;
 
-import bn.gameInstance.GameController;
-import bn.gameInstance.GameInstance;
 import java.net.URL;
 import java.util.ResourceBundle;
 import bn.gui.supportingLogic.windows.WinStateMachine;
@@ -24,6 +22,7 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
   private WinStateMachine winAPI = winWrap.getWindowSM();
   private Stage stage = winWrap.getStage();
+  
   @FXML
   private ImageView iVimg;
 

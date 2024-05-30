@@ -1,7 +1,8 @@
-/*
- * Empty Stylesheet file.
- */
+/*/////////// Defaults ///////////*/
+.borderPane {
+  -fx-background-color: #22383d;
+}
 
-.mainFxmlClass {
-
+.gridPane {
+  -fx-background-color: #3d585e;
 }

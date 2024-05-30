@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import bn.exceptions.WarningException;
 
 /**
  *
@@ -51,7 +50,7 @@ public class WindowWrapper {
     }
   }
 
-  public static void addWrapper(String key, WindowWrapper windowWrapper) throws WarningException {
+  public static void addWrapper(String key, WindowWrapper windowWrapper) throws Exception {
     windowWrappers.put(key, windowWrapper);
   }
 
@@ -72,7 +71,7 @@ public class WindowWrapper {
     
     try{
       addWrapper(hashKey, this);
-    }catch(WarningException e){
+    }catch(Exception e){
       System.err.println("WarningException: " + e.getMessage());
       return;
     }
