@@ -10,6 +10,7 @@ public class GridCellHBox {
 
   private final HBox cellHBox;
   private boolean isHighlighted = false;
+  private boolean hasBoat = false;
   private final int x;
   private final int y;
 
@@ -43,5 +44,18 @@ public class GridCellHBox {
 
   public int getY() {
     return y;
+  }
+
+  public boolean hasBoat() {
+    return hasBoat;
+  }
+
+  public void setHasBoat(boolean hasBoat) {
+    this.hasBoat = hasBoat;
+  }
+
+  @Override
+  public String toString() {
+    return "[" + x + ", " + y + "]";
   }
 }

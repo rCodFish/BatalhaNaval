@@ -7,7 +7,6 @@ import bn.gui.supportingLogic.windows.WindowWrapper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -42,8 +41,10 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
   };
   private static GridCellHBox[][] gridBoxes;
   private ArrayList<BoatHBox> boatOptions = new ArrayList<>();
+  private ArrayList<GridCellHBox> highlightedCells = new ArrayList<>();
   private boolean isBoatSelected = false;
   private BoatHBox boatSelected;
+  private GridCellHBox currentGridCell;
   private boolean isVerticalPlacement = true;
 
   @Override
@@ -52,15 +53,23 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
     populateGrid();
     addBoatsOptions();
     addKeyEventHandler();
-
-    PrepGrid.requestFocus();
-    PrepGrid.setFocusTraversable(true);
   }
 
   private void addKeyEventHandler() {
-    PrepGrid.setOnKeyPressed((KeyEvent event) -> {
-      if (event.getCode() == KeyCode.R) {
-        isVerticalPlacement = !isVerticalPlacement;
+    stage.sceneProperty().addListener((obs, oldScene, newScene) -> {
+      if (newScene != null) {
+        newScene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+          if (event.getCode() == KeyCode.R) {
+            isVerticalPlacement = !isVerticalPlacement;
+
+            if (isBoatSelected && currentGridCell != null) {
+              removePossibleHighlight();
+              insertPossibleHighlight(currentGridCell);
+            }
+
+            event.consume();
+          }
+        });
       }
     });
   }
@@ -76,7 +85,6 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
         gridCellHB.setOnMouseClicked(e -> cellOnMouseClick(gridCell));
         gridCellHB.setOnMouseEntered(e -> cellOnMouseEntered(gridCell));
         gridCellHB.setOnMouseExited(e -> cellOnMouseExited(gridCell));
-        gridCellHB.setOnKeyPressed(this::cellOnRPressed);
 
         PrepGrid.add(gridCellHB, x, y);
         gridBoxes[x][y] = gridCell;
@@ -86,13 +94,17 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
 
   private void cellOnRPressed(KeyEvent e) {
     if (e.getCode() == KeyCode.R) {
-      removePossibleHighlight();
       isVerticalPlacement = !isVerticalPlacement;
+      if (isBoatSelected && currentGridCell != null) {
+        removePossibleHighlight();
+        insertPossibleHighlight(currentGridCell);
+      }
     }
   }
 
   private void cellOnMouseEntered(GridCellHBox gridCell) {
     HBox cellHBox = gridCell.getHBox();
+    currentGridCell = gridCell;
     if (isBoatSelected) {
       insertPossibleHighlight(gridCell);
     }
@@ -100,15 +112,22 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
 
   private void cellOnMouseExited(GridCellHBox gridCell) {
     HBox cellHBox = gridCell.getHBox();
+    currentGridCell = null;
     if (isBoatSelected) {
       removePossibleHighlight();
     }
   }
 
-  private void cellOnMouseClick(GridCellHBox gC) {
+  private void cellOnMouseClick(GridCellHBox gridCell) {
+    /*if (highlightedCells.size() == boatSelected.getSize()) {
+      if (boatSelected.getCount() > 0) {
+        placeBoat();
+      }
+    }*/
   }
 
   private void insertPossibleHighlight(GridCellHBox gridCell) {
+    highlightedCells.clear();
     int size = 5;
     int x = gridCell.getX();
     int y = gridCell.getY();
@@ -117,31 +136,44 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
       if (y + size <= gridBoxes[x].length) {
         for (int i = 0; i < size; i++) {
           gridBoxes[x][y + i].highlight("#0a3608"); //green
+          if (!highlightedCells.contains(gridBoxes[x][y + i])) {
+            highlightedCells.add(gridBoxes[x][y + i]);
+          }
         }
       } else {
         for (int i = 0; i < size && y + i < gridBoxes[x].length; i++) {
           gridBoxes[x][y + i].highlight("#360808"); //red
+          if (!highlightedCells.contains(gridBoxes[x][y + i])) {
+            highlightedCells.add(gridBoxes[x][y + i]);
+          }
         }
       }
     } else { // Horizontal
       if (x + size <= gridBoxes.length) {
         for (int i = 0; i < size; i++) {
           gridBoxes[x + i][y].highlight("#0a3608"); //green
+          if (!highlightedCells.contains(gridBoxes[x + i][y])) {
+            highlightedCells.add(gridBoxes[x + i][y]);
+          }
         }
       } else {
         for (int i = 0; i < size && x + i < gridBoxes.length; i++) {
           gridBoxes[x + i][y].highlight("#360808"); //red
+          if (!highlightedCells.contains(gridBoxes[x + i][y])) {
+            highlightedCells.add(gridBoxes[x + i][y]);
+          }
         }
       }
     }
+    System.out.println("Highlighted Cells:" + highlightedCells);
   }
 
   private void removePossibleHighlight() {
-    for (int x = 0; x < gridBoxes.length; x++) {
-      for (int y = 0; y < gridBoxes[x].length; y++) {
-        gridBoxes[x][y].rmvHighlight();
-      }
+    for (GridCellHBox cell : highlightedCells) {
+      cell.rmvHighlight();
     }
+
+    highlightedCells.clear();
   }
 
   private void addBoatsOptions() {
