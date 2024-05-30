@@ -7,7 +7,7 @@ import bn.gui.supportingLogic.windows.WindowWrapper;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.event.EventHandler;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -52,23 +52,17 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
     populateGrid();
     addBoatsOptions();
     addKeyEventHandler();
+
+    PrepGrid.requestFocus();
+    PrepGrid.setFocusTraversable(true);
   }
 
   private void addKeyEventHandler() {
-    stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-      @Override
-      public void handle(KeyEvent event) {
-        System.out.println("event");
-        if (event.getCode() == KeyCode.R) {
-          handleRKeyPressed();
-        }
+    PrepGrid.setOnKeyPressed((KeyEvent event) -> {
+      if (event.getCode() == KeyCode.R) {
+        isVerticalPlacement = !isVerticalPlacement;
       }
     });
-  }
-
-  private void handleRKeyPressed() {
-    isVerticalPlacement = !isVerticalPlacement;
-    System.out.println("r");
   }
 
   private void populateGrid() {
@@ -79,13 +73,21 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
 
         gridCellHB.setPrefSize(100, 100);
 
-        gridCellHB.setOnMouseClicked(event -> cellOnMouseClick(gridCell));
+        gridCellHB.setOnMouseClicked(e -> cellOnMouseClick(gridCell));
         gridCellHB.setOnMouseEntered(e -> cellOnMouseEntered(gridCell));
         gridCellHB.setOnMouseExited(e -> cellOnMouseExited(gridCell));
+        gridCellHB.setOnKeyPressed(this::cellOnRPressed);
 
         PrepGrid.add(gridCellHB, x, y);
         gridBoxes[x][y] = gridCell;
       }
+    }
+  }
+
+  private void cellOnRPressed(KeyEvent e) {
+    if (e.getCode() == KeyCode.R) {
+      removePossibleHighlight();
+      isVerticalPlacement = !isVerticalPlacement;
     }
   }
 
@@ -99,7 +101,7 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
   private void cellOnMouseExited(GridCellHBox gridCell) {
     HBox cellHBox = gridCell.getHBox();
     if (isBoatSelected) {
-      removePossibleHighlight(gridCell);
+      removePossibleHighlight();
     }
   }
 
@@ -134,18 +136,10 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
     }
   }
 
-  private void removePossibleHighlight(GridCellHBox gridCell) {
-    int size = 5;
-    int x = gridCell.getX();
-    int y = gridCell.getY();
-
-    if (isVerticalPlacement) {
-      for (int i = 0; i < size && y + i < gridBoxes[x].length; i++) {
-        gridBoxes[x][y + i].rmvHighlight();
-      }
-    } else { // Horizontal
-      for (int i = 0; i < size && x + i < gridBoxes.length; i++) {
-        gridBoxes[x + i][y].rmvHighlight();
+  private void removePossibleHighlight() {
+    for (int x = 0; x < gridBoxes.length; x++) {
+      for (int y = 0; y < gridBoxes[x].length; y++) {
+        gridBoxes[x][y].rmvHighlight();
       }
     }
   }
