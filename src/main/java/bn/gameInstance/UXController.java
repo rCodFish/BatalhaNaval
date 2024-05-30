@@ -8,10 +8,6 @@ import bn.data.grid.Grid;
  * @author Eduardo Santos
  */
 public class UXController {
-  private boolean isPrep;
-  private boolean isPrepFinished;
-
-  //private WinStateMachine gameWinSM = gameWinWrapper.getWindowAPI();
   
   private Grid playerGrid;
   

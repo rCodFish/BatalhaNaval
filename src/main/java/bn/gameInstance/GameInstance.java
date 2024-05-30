@@ -5,11 +5,13 @@ package bn.gameInstance;
  * @author Eduardo Santos
  */
 public class GameInstance {
+
   private static GameInstance gameInstance;
-  private final boolean isMultiplayer;
-  private UXController uXController;
-  private Thread connectionThread;
   private GameController connection;
+  private UXController uXController;
+
+  private final boolean isMultiplayer;
+  private Thread connectionThread;
 
   public GameInstance(boolean isMultiplayer) throws Exception {
     this.uXController = new UXController();
@@ -17,31 +19,29 @@ public class GameInstance {
     setupGame();
   }
 
-  public static void setGameInstance(GameInstance gameInstance) {
-    gameInstance = gameInstance;
+  public static void setGameInstance(GameInstance instance) {
+    gameInstance = instance;
   }
-  
-  public static void getGameInstance(GameInstance gameInstance) {
-    gameInstance = gameInstance;
+
+  public static GameInstance getGameInstance() {
+    return gameInstance;
   }
-  
+
   private void setupGame() {
     if (isMultiplayer) {
       multiplayerSetup();
-    }
-    else{
+    } else {
       singleplayerSetup();
     }
   }
-  
+
   private void multiplayerSetup() {
     connection = new GameController(uXController);
     connectionThread = new Thread(connection);
     connectionThread.start();
   }
-  
-  
-  public GameController getCon(){
+
+  public GameController getCon() {
     return connection;
   }
 

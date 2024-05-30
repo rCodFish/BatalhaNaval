@@ -11,7 +11,7 @@ public class GameController implements Runnable {
   private int selfPort = 15001; // Set default port
   private String hostAddress = "localhost";
   private ServerSocket serverSocket;
-  private UXController stateMachine;
+  private UXController uXController;
   private final int CMD_PLAY = 1;
   private final int CMD_WAIT = 2;
   private final int CMD_HIT = 3;
@@ -19,8 +19,8 @@ public class GameController implements Runnable {
   private final int CDM_PREPSTART = 5;
   private final int CDM_PREPEND = 6;
 
-  public GameController(UXController stateMachine) {
-    this.stateMachine = stateMachine;
+  public GameController(UXController uXController) {
+    this.uXController = uXController;
   }
 
   @Override
@@ -38,8 +38,12 @@ public class GameController implements Runnable {
         int cmd = inputStream.readInt();
         System.out.println("Received command: " + cmd);
         switch (cmd) {
+          case CDM_PREPSTART:
+            
+            System.out.println("wait deu");
+            break;
           case CMD_PLAY:
-            stateMachine.myPlay();
+            uXController.myPlay();
             break;
           case CMD_WAIT:
             //stateMachine.otherPlay();
@@ -48,13 +52,13 @@ public class GameController implements Runnable {
           case CMD_HIT:
             int x = inputStream.readInt();
             int y = inputStream.readInt();
-            boolean hit = stateMachine.otherPlayHit(x, y);
+            boolean hit = uXController.otherPlayHit(x, y);
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
             outputStream.writeBoolean(hit);
             outputStream.close();
             break;
           case CMD_FINISH:
-            stateMachine.OtherEnd();
+            uXController.OtherEnd();
             break;
         }
         inputStream.close();
@@ -69,12 +73,12 @@ public class GameController implements Runnable {
   //Callers////////////////////////////////////
   public void myPlayFinished() {
     sendCommand(CMD_PLAY);
-    stateMachine.otherPlay();
+    uXController.otherPlay();
   }
 
   public void myPlayStarted() {
     sendCommand(CMD_WAIT);
-    stateMachine.myPlay();
+    uXController.myPlay();
   }
   
   public void myFinish() {

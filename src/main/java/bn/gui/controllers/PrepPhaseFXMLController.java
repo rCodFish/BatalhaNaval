@@ -1,5 +1,7 @@
 package bn.gui.controllers;
 
+import bn.data.boat.Boat;
+import bn.data.boat.BoatFactory;
 import bn.gui.supportingLogic.BoatHBox;
 import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
@@ -28,24 +30,31 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
   private WinStateMachine winAPI = winWrap.getWindowSM();
   private Stage stage = winWrap.getStage();
 
-  @FXML
-  private VBox BoatsVBox;
-  @FXML
-  private GridPane PrepGrid;
+  private GridCellHBox[][] gridBoxes;
+  private ArrayList<BoatHBox> boatOptions = new ArrayList<>();
+  private ArrayList<GridCellHBox> highlightedCells = new ArrayList<>();
+  private ArrayList<GridCellHBox> boatFilledCells = new ArrayList<>();
+  private ArrayList<Boat> placedBoats = new ArrayList<>();
+
+  private boolean isBoatSelected = false;
+  private boolean isVerticalPlacement = true;
+  private boolean isPlacementValid = false;
+
+  private BoatHBox boatSelected;
+  private GridCellHBox currentGridCell;
 
   private String[][] boatData = {
     {"Carrier", "1"},
-    {"Cruiser", "3"},
+    {"Cruiser", "2"},
     {"Destroyer", "2"},
     {"Submarine", "2"}
   };
-  private static GridCellHBox[][] gridBoxes;
-  private ArrayList<BoatHBox> boatOptions = new ArrayList<>();
-  private ArrayList<GridCellHBox> highlightedCells = new ArrayList<>();
-  private boolean isBoatSelected = false;
-  private BoatHBox boatSelected;
-  private GridCellHBox currentGridCell;
-  private boolean isVerticalPlacement = true;
+
+  @FXML
+  private VBox BoatsVBox;
+
+  @FXML
+  private GridPane PrepGrid;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -82,22 +91,12 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
 
         gridCellHB.setPrefSize(100, 100);
 
-        gridCellHB.setOnMouseClicked(e -> cellOnMouseClick(gridCell));
+        gridCellHB.setOnMouseClicked(e -> cellOnMouseClick());
         gridCellHB.setOnMouseEntered(e -> cellOnMouseEntered(gridCell));
         gridCellHB.setOnMouseExited(e -> cellOnMouseExited(gridCell));
 
         PrepGrid.add(gridCellHB, x, y);
         gridBoxes[x][y] = gridCell;
-      }
-    }
-  }
-
-  private void cellOnRPressed(KeyEvent e) {
-    if (e.getCode() == KeyCode.R) {
-      isVerticalPlacement = !isVerticalPlacement;
-      if (isBoatSelected && currentGridCell != null) {
-        removePossibleHighlight();
-        insertPossibleHighlight(currentGridCell);
       }
     }
   }
@@ -118,54 +117,144 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
     }
   }
 
-  private void cellOnMouseClick(GridCellHBox gridCell) {
-    /*if (highlightedCells.size() == boatSelected.getSize()) {
+  private void cellOnMouseClick() {
+    if (boatSelected == null) {
+      return; // Exit the method early if boatSelected is null
+    }
+
+    if (highlightedCells.size() == boatSelected.getSize() && isPlacementValid) {
       if (boatSelected.getCount() > 0) {
         placeBoat();
       }
-    }*/
+    }
+  }
+
+  private void placeBoat() {
+    for (GridCellHBox cell : highlightedCells) {
+      cell.select("#141414");
+      boatFilledCells.add(cell);
+    }
+
+    try {
+      int xIni = currentGridCell.getX();
+      int yIni = currentGridCell.getY();
+      int xEnd, yEnd;
+
+      if (isVerticalPlacement) {
+        xEnd = xIni;
+        yEnd = yIni + boatSelected.getSize() - 1;
+      } else {
+        xEnd = xIni + boatSelected.getSize() - 1;
+        yEnd = yIni;
+      }
+      Boat boat = BoatFactory.createBoat(boatSelected.getType(), xIni, yIni, xEnd, yEnd);
+      placedBoats.add(boat);
+    } catch (Exception e) {
+    }
+
+    highlightedCells.clear();
+    isBoatSelected = false;
+    boatSelected.decrementCount();
+    boatSelected.deselect();
+    boatSelected = null;
+    isPlacementValid = false;
   }
 
   private void insertPossibleHighlight(GridCellHBox gridCell) {
     highlightedCells.clear();
-    int size = 5;
+    int size = boatSelected.getSize();
     int x = gridCell.getX();
     int y = gridCell.getY();
 
     if (isVerticalPlacement) {
-      if (y + size <= gridBoxes[x].length) {
+      //if boats fits in grid && doesnt intercept another boat
+      if (y + size <= gridBoxes[x].length && !intersectsAnotherBoat()) {
+
+        //highlight all squares that boat type would fill
         for (int i = 0; i < size; i++) {
           gridBoxes[x][y + i].highlight("#0a3608"); //green
+          isPlacementValid = true;
+
+          //add highlighted cells to highlightedCells array if not already there
           if (!highlightedCells.contains(gridBoxes[x][y + i])) {
             highlightedCells.add(gridBoxes[x][y + i]);
           }
         }
+        //if boat doesnt fit or intercepts another boat
       } else {
+        //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && y + i < gridBoxes[x].length; i++) {
-          gridBoxes[x][y + i].highlight("#360808"); //red
+          gridBoxes[x][y + i].highlight("#360808"); //red      
+          isPlacementValid = false;
+
+          //add highlighted cells to highlightedCells array if not already there
           if (!highlightedCells.contains(gridBoxes[x][y + i])) {
             highlightedCells.add(gridBoxes[x][y + i]);
           }
         }
       }
-    } else { // Horizontal
-      if (x + size <= gridBoxes.length) {
+      // Horizontal
+    } else {
+      //if boats fits in grid && doesnt intercept another boat
+      if (x + size <= gridBoxes.length && !intersectsAnotherBoat()) {
+        //highlight all squares that boat type would fill
         for (int i = 0; i < size; i++) {
-          gridBoxes[x + i][y].highlight("#0a3608"); //green
+          gridBoxes[x + i][y].highlight("#0a3608"); //green   
+          isPlacementValid = true;
+
+          //add highlighted cells to highlightedCells array if not already there
           if (!highlightedCells.contains(gridBoxes[x + i][y])) {
             highlightedCells.add(gridBoxes[x + i][y]);
           }
         }
+        //if boat doesnt fit
       } else {
+        //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && x + i < gridBoxes.length; i++) {
-          gridBoxes[x + i][y].highlight("#360808"); //red
+          gridBoxes[x + i][y].highlight("#360808"); //red  
+          isPlacementValid = false;
+
+          //add highlighted cells to highlightedCells array if not already there
           if (!highlightedCells.contains(gridBoxes[x + i][y])) {
             highlightedCells.add(gridBoxes[x + i][y]);
           }
         }
       }
     }
-    System.out.println("Highlighted Cells:" + highlightedCells);
+    //System.out.println("Highlighted Cells:" + highlightedCells);
+  }
+
+  private boolean intersectsAnotherBoat() {
+    int size = boatSelected.getSize();
+    int x = currentGridCell.getX();
+    int y = currentGridCell.getY();
+
+    if (isVerticalPlacement) {
+      // Check if the boat would fit within the grid
+      if (y + size > gridBoxes[x].length) {
+        return true;
+      }
+      // Check each cell the boat would occupy
+      for (int i = 0; i < size; i++) {
+        GridCellHBox currentCell = gridBoxes[x][y + i];
+        if (boatFilledCells.contains(currentCell)) {
+          return true;
+        }
+      }
+    } else { // Horizontal
+      // Check if the boat would fit within the grid
+      if (x + size > gridBoxes.length) {
+        return true;
+      }
+      // Check each cell the boat would occupy
+      for (int i = 0; i < size; i++) {
+        GridCellHBox currentCell = gridBoxes[x + i][y];
+        if (boatFilledCells.contains(currentCell)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   private void removePossibleHighlight() {
@@ -206,18 +295,14 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
     BoatsVBox.setSpacing(50);
   }
 
-  private boolean canPlaceBoat() {
-    return false;
-  }
-
   private void handleBoatOptionClick(BoatHBox boatOption) {
     if (isBoatSelected) {
       deselectAllBoatOptions();
     }
-    if (!boatOption.isSelected()) {
+    if (!boatOption.isSelected() && boatOption.getCount() > 0) {
       boatOption.select();
       boatSelected = boatOption;
-      System.out.println("Clicked on boat type: " + boatOption.getType());
+      //System.out.println("Clicked on boat type: " + boatOption.getType());
       isBoatSelected = true;
     }
   }
@@ -228,12 +313,48 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
     }
   }
 
-  private String getBoatSelectedType() {
-    if (!isBoatSelected) {
-      return null;
+  @FXML
+  private void goBackPlacement() {
+    if (!placedBoats.isEmpty()) {
+      Boat boatToRemove = placedBoats.remove(placedBoats.size() - 1);
+      if (boatToRemove != null) {
+        int[] startCoordinates = boatToRemove.getStartingCoordinates();
+        int[] endCoordinates = boatToRemove.getEndingCoordinates();
+
+        for (int x = startCoordinates[0]; x <= endCoordinates[0]; x++) {
+          for (int y = startCoordinates[1]; y <= endCoordinates[1]; y++) {
+            gridBoxes[x][y].rmvSelect("transparent");
+            boatFilledCells.remove(gridBoxes[x][y]);
+          }
+        }
+
+        // really sketchy
+        String boatType = boatToRemove.getClass().getSimpleName();
+
+        for (BoatHBox boatOption : boatOptions) {
+          if (boatOption.getType().equals(boatType)) {
+            boatOption.incrementCount();
+            break;
+          }
+        }
+
+      } else {
+        //System.out.println("No boats to remove.");
+      }
+    } else {
+      //System.out.println("No boats placed yet.");
     }
-
-    return boatSelected.getType();
   }
-
+  
+  @FXML
+  private void readyToPlay(){
+    String PrepPhaseFXML = "/bn/fxml/Game.fxml";
+    try {
+      winAPI.setRoot(PrepPhaseFXML, stage);
+      winAPI.setFullScreen();
+    } catch (Exception e) {
+      System.out.println("Error:" + e.getMessage());
+      //e.printStackTrace();
+    }
+  }
 }

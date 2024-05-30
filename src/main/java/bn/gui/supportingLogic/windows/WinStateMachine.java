@@ -247,8 +247,8 @@ public class WinStateMachine<T extends BaseController> {
       prepareWindowForSceneChange(x * xPercentage, y * yPercentage);
       activeController = fxmlLoader.getController();
     } catch (IOException e) {
-      System.out.println("[Error: Loading FXML failed]");
-      e.printStackTrace();
+      System.out.println("[Error: Loading FXML failed]" + e.getMessage());
+      //e.printStackTrace();
     }
   }
   

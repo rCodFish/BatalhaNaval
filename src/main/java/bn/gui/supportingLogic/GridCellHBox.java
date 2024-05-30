@@ -29,13 +29,27 @@ public class GridCellHBox {
   }
 
   public void rmvHighlight() {
-    cellHBox.setStyle("-fx-background-color: transparent;");
-    isHighlighted = false;
+    if(!hasBoat){
+      cellHBox.setStyle("-fx-background-color: transparent;");
+      isHighlighted = false;
+    }
   }
 
   public void highlight(String color) {
+    if(!hasBoat){
+      cellHBox.setStyle("-fx-background-color: " + color + ";");
+      isHighlighted = true;
+    }
+  }
+  
+  public void select(String color) {
     cellHBox.setStyle("-fx-background-color: " + color + ";");
-    isHighlighted = true;
+    hasBoat = true;
+  }
+  
+  public void rmvSelect(String color) {
+    cellHBox.setStyle("-fx-background-color: " + color + ";");
+    hasBoat = false;
   }
 
   public int getX() {

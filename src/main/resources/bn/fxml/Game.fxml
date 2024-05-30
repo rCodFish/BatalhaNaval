@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="1000.0" styleClass="borderPane" stylesheets="@../css/gamefxml.css.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="bn.gui.controllers.PrepPhaseFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="1000.0" styleClass="borderPane" stylesheets="@../css/gamefxml.css.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.GameFXMLController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
          <children>
