@@ -34,7 +34,7 @@ public class OptionsController extends BaseController implements Initializable {
 
     @FXML
     public void close() {
-        String PrepPhaseFXML = "/bn/fxml/Options.fxml";
+        String PrepPhaseFXML = "options";
         try {
             winAPI.closeStage(PrepPhaseFXML);
 

@@ -37,7 +37,6 @@ public class WinStateMachine<T extends BaseController> {
   private Stage stage;
   private Parent root;
 
-  private Map<String, Stage> additionalStages = new HashMap<>();
   private T activeController;
 
   //Initializer///////////////////////////////////////
@@ -187,11 +186,11 @@ public class WinStateMachine<T extends BaseController> {
   public void exit() {
     Platform.exit();
   }
-  public void closeStage(String fxml) {
-    Stage stageToClose = additionalStages.get(fxml);
+  public void closeStage(String fxml) throws Exception {
+    Stage stageToClose = WindowWrapper.getWindowWrapper(fxml).getStage();
     if (stageToClose != null) {
       stageToClose.close();
-      additionalStages.remove(fxml);
+      WindowWrapper.removeWrapper(fxml);
     } else {
       System.out.println("[Error: No stage found with identifier " + fxml + "]");
     }
@@ -275,27 +274,7 @@ public class WinStateMachine<T extends BaseController> {
     }
   }
 
-  public void showNewStage(String fxml) {
-    try {
-      if(!additionalStages.containsKey(fxml)) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
-        root = fxmlLoader.load();
-        Scene newScene = new Scene(root);
 
-        Stage newStage = new Stage();
-        newStage.setScene(newScene);
-        newStage.initStyle(StageStyle.UNDECORATED);
-        newStage.show();
-        additionalStages.put(fxml, newStage);
-      }
-      else{
-        closeStage(fxml);
-      }
-    } catch (IOException e) {
-      System.out.println("[Error: Loading FXML failed] " + e.getMessage());
-      //e.printStackTrace();
-    }
-  }
   
   //Privates///////////////////////////////////////
   private void prepareWindowForSceneChange(double width, double height) {

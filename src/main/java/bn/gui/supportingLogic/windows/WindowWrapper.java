@@ -53,6 +53,9 @@ public class WindowWrapper {
   public static void addWrapper(String key, WindowWrapper windowWrapper) throws Exception {
     windowWrappers.put(key, windowWrapper);
   }
+  public static void removeWrapper(String key) throws Exception {
+    windowWrappers.remove(key);
+  }
 
   public static WindowWrapper getWindowWrapper(String key)  {
     return windowWrappers.get(key);

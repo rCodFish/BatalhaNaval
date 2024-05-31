@@ -63,9 +63,10 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   }
   @FXML
   public void options() {
-    String PrepPhaseFXML = "/bn/fxml/Options.fxml";
     try {
-      winAPI.showNewStage(PrepPhaseFXML);
+      String firstFxml = "/bn/fxml/Options.fxml";
+      WindowWrapper primaryWindowWrapper = new WindowWrapper(firstFxml, "options");
+      primaryWindowWrapper.getWindowSM().show();
 
     } catch (Exception e) {
       e.printStackTrace();
