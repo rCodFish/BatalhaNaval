@@ -1,6 +1,9 @@
 package bn.gui.supportingLogic.windows;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -34,6 +37,7 @@ public class WinStateMachine<T extends BaseController> {
   private Stage stage;
   private Parent root;
 
+  private Map<String, Stage> additionalStages = new HashMap<>();
   private T activeController;
 
   //Initializer///////////////////////////////////////
@@ -183,7 +187,15 @@ public class WinStateMachine<T extends BaseController> {
   public void exit() {
     Platform.exit();
   }
-
+  public void closeStage(String fxml) {
+    Stage stageToClose = additionalStages.get(fxml);
+    if (stageToClose != null) {
+      stageToClose.close();
+      additionalStages.remove(fxml);
+    } else {
+      System.out.println("[Error: No stage found with identifier " + fxml + "]");
+    }
+  }
   public void show() {
     stage.show();
   }
@@ -262,15 +274,27 @@ public class WinStateMachine<T extends BaseController> {
       imageView.setFitHeight(screenHeight * yPercentage);
     }
   }
-  
-  public void teste1(ImageView imageView) {
-    Rectangle2D bounds = Screen.getPrimary().getBounds();
-    double screenWidth = bounds.getWidth();
-    double screenHeight = bounds.getHeight();
 
+  public void showNewStage(String fxml) {
+    try {
+      if(!additionalStages.containsKey(fxml)) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+        root = fxmlLoader.load();
+        Scene newScene = new Scene(root);
 
-    imageView.setFitWidth(screenWidth * 0.2);
-    imageView.setFitHeight(screenHeight * 0.1);
+        Stage newStage = new Stage();
+        newStage.setScene(newScene);
+        newStage.initStyle(StageStyle.UNDECORATED);
+        newStage.show();
+        additionalStages.put(fxml, newStage);
+      }
+      else{
+        closeStage(fxml);
+      }
+    } catch (IOException e) {
+      System.out.println("[Error: Loading FXML failed] " + e.getMessage());
+      //e.printStackTrace();
+    }
   }
   
   //Privates///////////////////////////////////////

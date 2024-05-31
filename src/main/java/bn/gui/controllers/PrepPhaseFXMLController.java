@@ -207,7 +207,7 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
             highlightedCells.add(gridBoxes[x + i][y]);
           }
         }
-        //if boat doesnt fit
+        //if boat doesn't fit
       } else {
         //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && x + i < gridBoxes.length; i++) {
@@ -356,5 +356,13 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
       System.out.println("Error:" + e.getMessage());
       //e.printStackTrace();
     }
+  }
+
+  @FXML
+  public void close() {
+    winAPI.exit();
+  }
+  public void minimize() {
+    ;
   }
 }

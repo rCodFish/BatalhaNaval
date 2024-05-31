@@ -61,10 +61,22 @@ public class StartMenuFXMLController extends BaseController implements Initializ
       e.printStackTrace();
     }
   }
+  @FXML
+  public void options() {
+    String PrepPhaseFXML = "/bn/fxml/Options.fxml";
+    try {
+      winAPI.showNewStage(PrepPhaseFXML);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
   @FXML
   public void close() {
     winAPI.exit();
   }
+
+  public void minimize() {}
 
 }

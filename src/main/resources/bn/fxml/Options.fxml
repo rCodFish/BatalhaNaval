@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="250.0" prefWidth="250.0" style="-fx-background-color: #766E5F;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.OptionsController">
+   <children>
+      <ImageView fitHeight="19.0" fitWidth="182.0" layoutX="33.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/optName.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="23.0" layoutY="57.0" prefHeight="176.0" prefWidth="193.0">
+         <children>
+            <ImageView fitHeight="12.0" fitWidth="83.0" layoutX="14.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/optFull.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="12.0" fitWidth="52.0" layoutX="14.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/optSound.png" />
+               </image>
+            </ImageView>
+            <StackPane fx:id="toggleSwitchPane1" layoutX="131.0" layoutY="43.0" prefHeight="25.0" prefWidth="62.0">
+         <!-- The ToggleSwitch will be added dynamically via the controller -->
+      </StackPane>
+            <StackPane fx:id="toggleSwitchPane" layoutX="131.0" layoutY="77.0" prefHeight="25.0" prefWidth="62.0">
+                     <!-- The ToggleSwitch will be added dynamically via the controller -->
+                  </StackPane>
+         </children>
+      </Pane>
+      <Button fx:id="btnX" layoutX="206.0" layoutY="23.0" mnemonicParsing="false" onAction="#close" style="-fx-background-color: #766E5F;">
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/optX.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
