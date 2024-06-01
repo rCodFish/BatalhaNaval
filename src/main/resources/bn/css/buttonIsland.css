@@ -1,0 +1,40 @@
+
+/*
+lightGray: #4f4f4f;
+darkerGray: #3e3e42;
+Black: #000000;
+darkRed: #990000;
+brightRed: #ff0000;
+*/
+
+.buttonBar{
+  -fx-background-color: transparent;
+}
+
+.button, .grey-button {
+  -fx-background-color: transparent;
+}
+
+.button:hover {
+  -fx-background-color: #6b6b6b;
+}
+
+.button:pressed {
+  -fx-background-color: #4f4f4f;
+  -fx-background-insets: 3 0 0 0, 3, 0, 0;
+}
+
+/*////////////////////////////////////////////////*/
+.red-button {
+  -fx-background-color: transparent;
+}
+
+.red-button:hover {
+  -fx-background-color: #ff0000;
+}
+
+.red-button:pressed {
+  -fx-background-color: #990000;
+  -fx-background-insets: 3 0 0 0, 3, 0, 0;
+}
+

@@ -11,6 +11,7 @@ public class GridCellHBox {
   private final HBox cellHBox;
   private boolean isHighlighted = false;
   private boolean hasBoat = false;
+  private boolean hasBeenHit = false;
   private final int x;
   private final int y;
 

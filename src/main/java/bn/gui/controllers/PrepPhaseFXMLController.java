@@ -1,5 +1,6 @@
 package bn.gui.controllers;
 
+import bn.app.App;
 import bn.data.boat.Boat;
 import bn.data.boat.BoatFactory;
 import bn.gui.supportingLogic.BoatHBox;
@@ -131,7 +132,7 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
 
   private void placeBoat() {
     for (GridCellHBox cell : highlightedCells) {
-      cell.select("#141414");
+      cell.select("#0d0d17");
       boatFilledCells.add(cell);
     }
 
@@ -351,7 +352,9 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
     String PrepPhaseFXML = "/bn/fxml/Game.fxml";
     try {
       winAPI.setRoot(PrepPhaseFXML, stage);
-      winAPI.setFullScreen();
+      // winAPI.setFullScreen();
+      
+      App.gameInstance.getGameController().readyToStart();
     } catch (Exception e) {
       System.out.println("Error:" + e.getMessage());
       //e.printStackTrace();
@@ -359,10 +362,12 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
   }
 
   @FXML
-  public void close() {
+  public void exit() {
     winAPI.exit();
   }
+  
+  @FXML
   public void minimize() {
-    ;
+    winAPI.setMinimized();
   }
 }

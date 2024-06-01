@@ -19,11 +19,18 @@ public class WindowWrapper {
   private Window window;
   private WinStateMachine winSM;
 
+  public WindowWrapper(String initialFXML, String hashKey, int xPer, int yPer) {
+    synchronized (mutex) {
+      this.id = idCounter++;
+    }
+    createWindow(initialFXML, hashKey, xPer, yPer, true);
+  }
+
   public WindowWrapper(String initialFXML, String hashKey) {
     synchronized (mutex) {
       this.id = idCounter++;
     }
-    createWindow(initialFXML, hashKey);
+    createWindow(initialFXML, hashKey, 0, 0, false);
   }
 
   public Window getWindow() {
@@ -37,6 +44,18 @@ public class WindowWrapper {
   public int getID() {
     return id;
   }
+  
+  public void deleteWinWrap() {
+    try {
+        windowWrappers.remove(this.id);
+
+        if (window instanceof Stage) {
+            ((Stage) window).close();
+        }
+    } catch (Exception e) {
+        System.err.println("Error occurred while trying to delete WindowWrapper: " + e.getMessage());
+    }
+}
 
   public Stage getStage() {
     return getStage(window);
@@ -53,11 +72,12 @@ public class WindowWrapper {
   public static void addWrapper(String key, WindowWrapper windowWrapper) throws Exception {
     windowWrappers.put(key, windowWrapper);
   }
+
   public static void removeWrapper(String key) throws Exception {
     windowWrappers.remove(key);
   }
 
-  public static WindowWrapper getWindowWrapper(String key)  {
+  public static WindowWrapper getWindowWrapper(String key) {
     return windowWrappers.get(key);
   }
 
@@ -70,17 +90,23 @@ public class WindowWrapper {
    * @param initialHeight The initial height of the window.
    * @param hashKey The key for the hashmap.
    */
-  private void createWindow(String initialFXML, String hashKey) {
-    
-    try{
+  private void createWindow(String initialFXML, String hashKey, int xPer, int yPer, boolean useDimensions) {
+    try {
       addWrapper(hashKey, this);
-    }catch(Exception e){
+    } catch (Exception e) {
       System.err.println("WarningException: " + e.getMessage());
       return;
     }
+
     Stage stage = new Stage();
-    this.window = stage;
-    this.winSM = new WinStateMachine(stage);
+    window = stage;
+
+    if (useDimensions) {
+      winSM = new WinStateMachine(stage, xPer, yPer);
+    } else {
+      winSM = new WinStateMachine(stage);
+    }
+
     try {
       winSM.setRoot(initialFXML, stage);
     } catch (IOException e) {

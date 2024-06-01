@@ -1,7 +1,7 @@
 package bn.gameInstance;
 
 
-import bn.data.grid.Grid;
+import bn.data.Grid.GridCell;
 
 /**
  *
@@ -9,23 +9,43 @@ import bn.data.grid.Grid;
  */
 public class UXController {
   
-  private Grid playerGrid;
+  private static final String GAME_GUI_CONTROLLER = "";
+  
+  private GridCell[][] gridBoxes;
   
   public UXController(){
-    playerGrid = new Grid(10, 10);
+    gridBoxes = new GridCell[8][8];
+    populateGrid();
+  }
+  
+  private void populateGrid(){
+    for (int x = 0; x < 8; x++) {
+      for (int y = 0; y < 8; y++) {
+        GridCell gridCell = new GridCell(x, y);
+        gridBoxes[x][y] = gridCell;
+      }
+    }
   }
   
   public void myPlay(){
+    // GAME_GUI_CONTROLLER.playerPlay();
   }
   
-  public void otherPlay(){    
+  public void otherPlay(){ 
+    //enemyPlay();
   }
   
   public boolean otherPlayHit(int x, int y){
     return true;
   }
   
-  public void OtherEnd(){
+  public void otherPartyFinishedGame() {
+    
+  }
+  
+  
+  public void otherPartyIsReadyToPlay(){
+    
   }
   
 }

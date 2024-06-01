@@ -1,8 +1,6 @@
 package bn.gui.supportingLogic.windows;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -25,8 +23,8 @@ public class WinStateMachine<T extends BaseController> {
   private boolean minimized = false;  //same as iconified
   private boolean small = false;  //small form meaning not fullScreen or Maximized but still visible, this is the position to which every set defaults to
 
-  private final double xPercentage = 0.45;
-  private final double yPercentage = 0.45;
+  private double xPercentage = 0.45;
+  private double yPercentage = 0.45;
 
   private double xOffset = 0;
   private double yOffset = 0;
@@ -40,6 +38,16 @@ public class WinStateMachine<T extends BaseController> {
   private T activeController;
 
   //Initializer///////////////////////////////////////
+  public WinStateMachine(Stage stage, int xPer, int yPer) {
+    if (xPer > 0 && xPer <= 100 && yPer > 0 && yPer <= 100) {
+      xPercentage = (double)xPer * 0.01;
+      yPercentage = (double)yPer * 0.01;
+    }
+
+    this.stage = stage;
+    stage.initStyle(StageStyle.UNDECORATED);
+  }
+  
   public WinStateMachine(Stage stage) {
     this.stage = stage;
     stage.initStyle(StageStyle.UNDECORATED);
@@ -123,7 +131,6 @@ public class WinStateMachine<T extends BaseController> {
   public void setMinimized() {
     if (!minimized) {
       stage.setIconified(true);
-      makeDraggable(false);
       updateSizeStatus("minimized");
     }
   }
@@ -131,9 +138,7 @@ public class WinStateMachine<T extends BaseController> {
   public void setSmall() {
     if (!small) {
       Rectangle2D bounds = Screen.getPrimary().getBounds();
-      double y = bounds.getHeight();
-      double x = bounds.getWidth();
-
+      
       stage.setX(originalX);
       stage.setY(originalY);
       stage.setWidth(bounds.getWidth() * xPercentage);
@@ -156,12 +161,12 @@ public class WinStateMachine<T extends BaseController> {
   public T getActiveController() {
     return activeController;
   }
-  
-  public Parent getRoot(){
+
+  public Parent getRoot() {
     return root;
   }
-  
-  public Scene getScene(){
+
+  public Scene getScene() {
     return stage.getScene();
   }
 
@@ -186,15 +191,10 @@ public class WinStateMachine<T extends BaseController> {
   public void exit() {
     Platform.exit();
   }
-  public void closeStage(String fxml) throws Exception {
-    Stage stageToClose = WindowWrapper.getWindowWrapper(fxml).getStage();
-    if (stageToClose != null) {
-      stageToClose.close();
-      WindowWrapper.removeWrapper(fxml);
-    } else {
-      System.out.println("[Error: No stage found with identifier " + fxml + "]");
-    }
+
+  public void disableStage() {
   }
+
   public void show() {
     stage.show();
   }
@@ -246,7 +246,7 @@ public class WinStateMachine<T extends BaseController> {
     Rectangle2D bounds = Screen.getPrimary().getBounds();
     double y = bounds.getHeight();
     double x = bounds.getWidth();
-    
+
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
       root = fxmlLoader.load();
@@ -262,7 +262,7 @@ public class WinStateMachine<T extends BaseController> {
       //e.printStackTrace();
     }
   }
-  
+
   public void teste(ImageView... imageViews) {
     Rectangle2D bounds = Screen.getPrimary().getBounds();
     double screenWidth = bounds.getWidth();
@@ -274,8 +274,6 @@ public class WinStateMachine<T extends BaseController> {
     }
   }
 
-
-  
   //Privates///////////////////////////////////////
   private void prepareWindowForSceneChange(double width, double height) {
     updateSizeStatus();

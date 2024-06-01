@@ -7,16 +7,31 @@ package bn.gameInstance;
 public class GameInstance {
 
   private static GameInstance gameInstance;
-  private GameController connection;
+  private GameController gameController;
   private UXController uXController;
 
-  private final boolean isMultiplayer;
+  private int selfPort = GameController.DEFAULT_SERVER_PORT;
+
+  private String otherAddress = null;
+  private int otherPort = GameController.DEFAULT_SERVER_PORT;
+
+  private boolean isMultiplayer = false;
   private Thread connectionThread;
 
-  public GameInstance(boolean isMultiplayer) throws Exception {
+  public GameInstance(int selfPort, String otherAddress, int otherPort) throws Exception {
     this.uXController = new UXController();
-    this.isMultiplayer = isMultiplayer;
+    
+    this.isMultiplayer = true;
+
+    this.selfPort = selfPort;
+    this.otherAddress = otherAddress;
+    this.otherPort = otherPort;
+
     setupGame();
+  }
+
+  public GameController getGameController() {
+    return gameController;
   }
 
   public static void setGameInstance(GameInstance instance) {
@@ -36,13 +51,13 @@ public class GameInstance {
   }
 
   private void multiplayerSetup() {
-    connection = new GameController(uXController);
-    connectionThread = new Thread(connection);
+    gameController = new GameController(uXController, selfPort, otherAddress, otherPort);
+    connectionThread = new Thread(gameController);
     connectionThread.start();
   }
 
   public GameController getCon() {
-    return connection;
+    return gameController;
   }
 
   private void singleplayerSetup() {
