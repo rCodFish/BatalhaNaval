@@ -353,10 +353,6 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   }
 
   private boolean areAllBoatsPlaced() {
-    if (1 == 1) {
-      return true;
-    }
-
     int boatNumber = 0;
 
     for (int i = 0; i < boatData.length; i++) {
@@ -371,8 +367,10 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
     String GamePhaseFXML = "/bn/fxml/Game.fxml";
     if (areAllBoatsPlaced()) {
       try {
+        App.gameInstance.getUXController().setBoats(placedBoats);
+        
         winAPI.setRoot(GamePhaseFXML, stage);
-        // winAPI.setFullScreen();
+        winAPI.setFullScreen();
 
         //comunicate with other instance
         App.gameInstance.getLogicController().myPrepFinished();

@@ -33,8 +33,12 @@ public class GUIUXController extends UXController {
     }
   }
 
-  public void setBoats() {
-
+  public void setBoats(ArrayList<Boat> placedBoats) {
+    this.placedBoats = new ArrayList<>(placedBoats);
+  }
+  
+  public ArrayList<Boat> getBoats() {
+    return placedBoats;
   }
 
   public void start() throws Exception {

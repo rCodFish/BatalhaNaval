@@ -1,6 +1,9 @@
 
 package bn.gameInstance;
 
+import bn.data.boat.Boat;
+import java.util.ArrayList;
+
 /**
  *
  * @author Eduardo Santos
