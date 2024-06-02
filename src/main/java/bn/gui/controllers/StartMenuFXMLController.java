@@ -1,8 +1,8 @@
 package bn.gui.controllers;
 
 import bn.app.App;
-import bn.gameInstance.GameController;
-import bn.gameInstance.GameInstance;
+import bn.gameInstance.NetworkGameController;
+import bn.gameInstance.GameEngine;
 import java.net.URL;
 import java.util.ResourceBundle;
 import bn.gui.supportingLogic.windows.WinStateMachine;
@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  *
  * @author Eduardo Santos
  */
-public class StartMenuFXMLController extends BaseController implements Initializable {
+public class StartMenuFXMLController extends GuiBaseController implements Initializable {
 
   /**
    * Initializes the controller class.
@@ -45,8 +45,8 @@ public class StartMenuFXMLController extends BaseController implements Initializ
     String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
 
     if (App.otherPort == -1) {
-      App.selfPort = GameController.DEFAULT_SERVER_PORT;
-      App.otherPort = GameController.DEFAULT_SERVER_PORT;
+      App.selfPort = NetworkGameController.DEFAULT_SERVER_PORT;
+      App.otherPort = NetworkGameController.DEFAULT_SERVER_PORT;
 
       if (App.sameComputerDevMode) {
         // only for usage in dev mode
@@ -59,19 +59,21 @@ public class StartMenuFXMLController extends BaseController implements Initializ
           socket.close();
 
           // Dev mode when lauching app in same computer
-          App.otherPort = GameController.DEFAULT_SERVER_PORT + 1;
+          App.otherPort = NetworkGameController.DEFAULT_SERVER_PORT + 1;
         } catch (Exception e) {
           App.selfPort++;
 
           // Dev mode when lauching app in same computer
-          App.otherPort = GameController.DEFAULT_SERVER_PORT;
+          App.otherPort = NetworkGameController.DEFAULT_SERVER_PORT;
         }
         System.out.println("I'm in dev mode. I will use self port: " + App.selfPort + " and client port " + App.otherPort);
       }
     }
 
     try {
-      App.gameInstance = new GameInstance(App.selfPort, "localhost", App.otherPort);
+      NetworkGameController logicController = new NetworkGameController(App.gameInstance, App.selfPort, "localhost", App.otherPort);
+
+      App.gameInstance.setLogicController(logicController);
     } catch (Exception e) {
       System.err.println("Failed to start server instance: " + e);
     }
@@ -84,10 +86,10 @@ public class StartMenuFXMLController extends BaseController implements Initializ
     }
 
     /*try{
-    GameInstance gI = new GameInstance(true);
-    GameInstance.setGI(gI);
+    GameEngine gI = new GameEngine(true);
+    GameEngine.setGI(gI);
     Thread.sleep(10000);
-    GameController gm = gI.getCon();
+    NetworkGameController gm = gI.getCon();
     gm.prepPhaseStarted();
     }catch(Exception e){
       e.printStackTrace();
@@ -99,7 +101,7 @@ public class StartMenuFXMLController extends BaseController implements Initializ
     try {
       String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
       winAPI.setRoot(PrepPhaseFXML, stage);
-      winAPI.setFullScreen();
+      // winAPI.setFullScreen();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -121,6 +123,8 @@ public class StartMenuFXMLController extends BaseController implements Initializ
   @FXML
   public void close() {
     winAPI.exit();
+    
+    App.stopApplication();
   }
 
   public void minimize() {

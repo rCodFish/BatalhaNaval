@@ -13,10 +13,10 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
-import bn.gui.controllers.BaseController;
+import bn.gui.controllers.GuiBaseController;
 import javafx.scene.input.KeyCode;
 
-public class WinStateMachine<T extends BaseController> {
+public class WinStateMachine<T extends GuiBaseController> {
 
   private boolean maximized = false;  //Same as fullScreen but with taskBar still visible
   private boolean fullScreen = false; //fullScreen

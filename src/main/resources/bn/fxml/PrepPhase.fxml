@@ -26,7 +26,7 @@
                   <HBox prefHeight="26.0" prefWidth="30.0" />
                   <VBox alignment="CENTER" prefHeight="37.0" prefWidth="298.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Place your boats!" textFill="WHITE" />
+                        <Label fx:id="statusLabel" text="Place your boats!" textFill="WHITE" />
                      </children>
                   </VBox>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttonIsland.css">

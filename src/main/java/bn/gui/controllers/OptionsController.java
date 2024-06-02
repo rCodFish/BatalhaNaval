@@ -19,7 +19,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class OptionsController extends BaseController implements Initializable {
+public class OptionsController extends GuiBaseController implements Initializable {
 
   @FXML
   private StackPane toggleSwitchPane;

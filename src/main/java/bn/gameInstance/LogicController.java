@@ -5,19 +5,27 @@ package bn.gameInstance;
  *
  * @author Eduardo Santos
  */
-abstract public class UXController {
+abstract public class LogicController {
   GameEngine gameInstance;
   
-  public UXController(GameEngine gameInstance) {
+  public LogicController(GameEngine gameInstance) {
     this.gameInstance = gameInstance;
   }
   
   abstract public void start() throws Exception;
 
   abstract public void stop() throws Exception;
-  
-  abstract public void waitingOtherPartyPrep();
+ 
+  abstract public void myPlayFinished();
 
+  abstract public void myPlayStarted();
+
+  abstract public void myGameFinished();
+  
+  abstract public void myPrepFinished();
+
+  abstract public boolean hitOther(int x, int y);
+  
   abstract public void otherPartyFinishedPrep();
 
   abstract public void imPlaying();

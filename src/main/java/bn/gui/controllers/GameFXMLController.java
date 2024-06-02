@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  *
  * @author Eduardo Santos
  */
-public class GameFXMLController extends BaseController implements Initializable{
+public class GameFXMLController extends GuiBaseController implements Initializable{
   
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
   private WinStateMachine winSM = winWrap.getWindowSM();

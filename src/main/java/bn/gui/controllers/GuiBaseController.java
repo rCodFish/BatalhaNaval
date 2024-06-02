@@ -7,5 +7,5 @@ package bn.gui.controllers;
  * 
  * @author Eduardo Santos
  */
-public abstract class BaseController {
+public abstract class GuiBaseController {
 }

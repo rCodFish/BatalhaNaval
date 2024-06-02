@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -25,7 +26,9 @@ import javafx.stage.Stage;
  *
  * @author Eduardo Santos
  */
-public class PrepPhaseFXMLController extends BaseController implements Initializable {
+public class PrepPhaseFXMLController extends GuiBaseController implements Initializable {
+
+  public static PrepPhaseFXMLController prepController;
 
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
   private WinStateMachine winAPI = winWrap.getWindowSM();
@@ -53,12 +56,14 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
 
   @FXML
   private VBox BoatsVBox;
-
   @FXML
   private GridPane PrepGrid;
+  @FXML
+  private Label statusLabel;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    prepController = this;
     gridBoxes = new GridCellHBox[8][8];
     populateGrid();
     addBoatsOptions();
@@ -346,28 +351,54 @@ public class PrepPhaseFXMLController extends BaseController implements Initializ
       //System.out.println("No boats placed yet.");
     }
   }
-  
+
+  private boolean areAllBoatsPlaced() {
+    if (1 == 1) {
+      return true;
+    }
+
+    int boatNumber = 0;
+
+    for (int i = 0; i < boatData.length; i++) {
+      boatNumber += Integer.parseInt(boatData[i][1]);
+    }
+
+    return placedBoats.size() == boatNumber;
+  }
+
   @FXML
-  private void readyToPlay(){
-    String PrepPhaseFXML = "/bn/fxml/Game.fxml";
-    try {
-      winAPI.setRoot(PrepPhaseFXML, stage);
-      // winAPI.setFullScreen();
-      
-      App.gameInstance.getGameController().readyToStart();
-    } catch (Exception e) {
-      System.out.println("Error:" + e.getMessage());
-      //e.printStackTrace();
+  private void readyToPlay() {
+    String GamePhaseFXML = "/bn/fxml/Game.fxml";
+    if (areAllBoatsPlaced()) {
+      try {
+        winAPI.setRoot(GamePhaseFXML, stage);
+        // winAPI.setFullScreen();
+
+        //comunicate with other instance
+        App.gameInstance.getLogicController().myPrepFinished();
+        
+        statusLabel.setText("Waiting for other party!");
+      } catch (Exception e) {
+        System.out.println("Error:" + e.getMessage());
+      }
+    } else {
+      statusLabel.setText("Please place all your boats!");
     }
   }
 
   @FXML
   public void exit() {
     winAPI.exit();
+    
+    App.stopApplication();
   }
-  
+
   @FXML
   public void minimize() {
     winAPI.setMinimized();
+  }
+
+  public void otherFinishedPrep() {
+
   }
 }
