@@ -36,4 +36,6 @@ abstract public class UXController {
   abstract public void setBoats(ArrayList<Boat> placedBoats);
   
   abstract public ArrayList<Boat> getBoats();
+  
+  abstract public boolean amIFirstPlaying();
 }

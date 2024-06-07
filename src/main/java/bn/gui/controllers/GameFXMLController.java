@@ -56,6 +56,14 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     populateGrid(EnemyGrid, enemyGridBoxes, this::enemyCellOnMouseClick, this::enemyCellOnMouseEntered, this::enemyCellOnMouseExited);
 
     getPlaceBoats();
+
+    firstPlayInitializer();
+  }
+
+  public void firstPlayInitializer() {
+    if (App.gameInstance.getUXController().amIFirstPlaying()) {
+      imPlaying();
+    }
   }
 
   private void populateGrid(GridPane grid, GridCellHBox[][] gridBoxes, Runnable onMouseClick, Consumer<GridCellHBox> onMouseEntered, Consumer<GridCellHBox> onMouseExited) {
@@ -105,7 +113,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     isCurrentGridEnemy = false;
     isCurrentGridPlayer = true;
 
-    gridCell.highlight("#0a3608");
+    gridCell.highlight("#020ffa");
   }
 
   private void playerCellOnMouseExited(GridCellHBox gridCell) {
@@ -138,28 +146,29 @@ public class GameFXMLController extends GuiBaseController implements Initializab
 
   public void imPlaying() {
     App.gameInstance.getLogicController().send_myPlayStarted();
-    PlayerGrid.setMouseTransparent(true);
-    EnemyGrid.setMouseTransparent(true);
+    PlayerGrid.setMouseTransparent(false);
+    EnemyGrid.setMouseTransparent(false);
     isMyRound = true;
     endRoundButton.setText("End Round");
     statusLabel.setText("Attack!");
   }
 
   public void otherPlaying() {
-    PlayerGrid.setMouseTransparent(false);
-    EnemyGrid.setMouseTransparent(false);
+    PlayerGrid.setMouseTransparent(true);
+    EnemyGrid.setMouseTransparent(true);
     isMyRound = false;
     endRoundButton.setText("Other player is playing");
     statusLabel.setText("Other player is playing");
   }
-  
+
   public void finishGame() {
   }
-  
+
   @FXML
   public void endRound() {
     if (isMyRound) {
       App.gameInstance.getLogicController().send_myPlayFinished();
+      isMyRound = false;
     } else {
       endRoundButton.setText("Other player is playing");
       statusLabel.setText("Other player is playing");
@@ -178,13 +187,22 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     winSM.setMinimized();
   }
   
+  @FXML
+  public void setFullScreen() {
+    if (winSM.isFullScreen()) {
+      winSM.setSmall();
+    } else {
+      winSM.setFullScreen();
+    }
+  }
+
   @Override
   public void transition() {
-    throw new UnsupportedOperationException("Not supported yet."); 
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override
   public void otherReadyTotransition() {
-    throw new UnsupportedOperationException("Not supported yet."); 
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 }

@@ -57,6 +57,10 @@ public class GUIUXController extends UXController {
   public void setBoats(ArrayList<Boat> placedBoats) {
     this.placedBoats = new ArrayList<>(placedBoats);
   }
+  
+  public boolean amIFirstPlaying() {
+    return imFirstPlaying;
+  }
 
   /**
    *
@@ -66,8 +70,8 @@ public class GUIUXController extends UXController {
   public ArrayList<Boat> getBoats() {
     return placedBoats;
   }
-  
-  //passageTicket true for changing scene and false for warn own gui
+
+  //passageTicket true for changing scene and false for warning own gui
   private void sceneSwitchMethods(boolean passageTicket) {
     WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
 
@@ -85,7 +89,7 @@ public class GUIUXController extends UXController {
           } else {
             controller.otherReadyTotransition();
           }
-          
+
         } else {
           Utils.errorMessage("scene change from " + currentScene + " to " + GAME_SCREEN);
         }
@@ -143,15 +147,15 @@ public class GUIUXController extends UXController {
       otherSceneTransitionRdy = false;
 
       sceneSwitchMethods(true);
+    } else {
+      imFirstPlaying = true;
     }
   }
 
 //UIUX_Dispatchers/////////////////////////////
-
   /**
    *
    */
-  
   @Override
   public void otherRdyToTransition() {
     otherSceneTransitionRdy = true;
