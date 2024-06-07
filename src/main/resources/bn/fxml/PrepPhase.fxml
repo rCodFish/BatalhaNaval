@@ -14,24 +14,33 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="borderPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.PrepPhaseFXMLController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="borderPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.PrepPhaseFXMLController">
   <stylesheets>
     <URL value="@../css/prepphasefxml.css" />
   </stylesheets>
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="600.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="600.0">
                <children>
-                  <HBox prefHeight="26.0" prefWidth="30.0" />
-                  <VBox alignment="CENTER" prefHeight="37.0" prefWidth="298.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" HBox.hgrow="ALWAYS">
+                  <HBox prefHeight="35.0" prefWidth="30.0" />
+                  <VBox alignment="CENTER" prefHeight="35.0" prefWidth="382.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="statusLabel" text="Place your boats!" textFill="WHITE" />
                      </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
                   </VBox>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttonIsland.css">
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" styleClass="buttonBar" stylesheets="@../css/buttons.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttonIsland.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -40,7 +49,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="exitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="40.0" styleClass="red-button" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="exitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="40.0" styleClass="red-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -52,7 +61,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttonIsland.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setFullScreen" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -75,20 +84,32 @@
                <children>
                   <VBox prefHeight="400.0" prefWidth="500.0" HBox.hgrow="NEVER">
                      <children>
-                        <VBox fx:id="BoatsVBox" prefHeight="313.0" prefWidth="109.0" VBox.vgrow="ALWAYS" />
-                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="125.0">
+                        <VBox fx:id="BoatsVBox" prefHeight="292.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="15.0" />
+                           </padding></VBox>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="60.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button fx:id="goBackButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBackPlacement" styleClass="grey-button" stylesheets="@../css/buttonIsland.css" text="GoBack" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Button fx:id="goBackButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBackPlacement" prefHeight="35.0" prefWidth="69.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Redo" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="3.0" left="2.0" right="2.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="next" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#readyToPlay" styleClass="grey-button" stylesheets="@../css/buttonIsland.css" text="Continue" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Button fx:id="next" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#myPrepFinished" prefHeight="35.0" prefWidth="73.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Continue" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="3.0" left="2.0" right="2.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" />
+                           </padding>
                         </HBox>
                      </children>
                   </VBox>
@@ -116,7 +137,7 @@
                               <RowConstraints minHeight="10.0" percentHeight="12.5" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                            </rowConstraints>
                            <VBox.margin>
-                              <Insets bottom="15.0" right="15.0" top="15.0" />
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </VBox.margin>
                         </GridPane>
                      </children>

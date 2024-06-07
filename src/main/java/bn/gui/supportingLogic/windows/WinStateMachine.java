@@ -29,8 +29,8 @@ public class WinStateMachine<T extends GuiBaseController> {
   private double xOffset = 0;
   private double yOffset = 0;
 
-  private double originalX;
-  private double originalY;
+  private double originalX = 0;
+  private double originalY = 0;
 
   private Stage stage;
   private Parent root;
@@ -40,14 +40,14 @@ public class WinStateMachine<T extends GuiBaseController> {
   //Initializer///////////////////////////////////////
   public WinStateMachine(Stage stage, int xPer, int yPer) {
     if (xPer > 0 && xPer <= 100 && yPer > 0 && yPer <= 100) {
-      xPercentage = (double)xPer * 0.01;
-      yPercentage = (double)yPer * 0.01;
+      xPercentage = (double) xPer * 0.01;
+      yPercentage = (double) yPer * 0.01;
     }
 
     this.stage = stage;
     stage.initStyle(StageStyle.UNDECORATED);
   }
-  
+
   public WinStateMachine(Stage stage) {
     this.stage = stage;
     stage.initStyle(StageStyle.UNDECORATED);
@@ -80,22 +80,12 @@ public class WinStateMachine<T extends GuiBaseController> {
     }
   }
 
-  //incomplete
   public void toggleFullScreen() {
-    Rectangle2D bounds = Screen.getPrimary().getBounds();
-    double y = bounds.getHeight();
-    double x = bounds.getWidth();
-
     if (!fullScreen) {
-      if (small) {
-        originalX = stage.getX();
-        originalY = stage.getY();
-      }
-      stage.setFullScreen(true);
-      updateSizeStatus("fullScreen");
-    } else {
+      setFullScreen();
+    } else if (fullScreen) {
       stage.setFullScreen(false);
-      updateSizeStatus("small");
+      setSmall();
     }
   }
 
@@ -123,7 +113,6 @@ public class WinStateMachine<T extends GuiBaseController> {
       stage.setWidth(bounds.getWidth());
       stage.setHeight(bounds.getHeight());
 
-      makeDraggable(false);
       updateSizeStatus("maximized");
     }
   }
@@ -131,20 +120,24 @@ public class WinStateMachine<T extends GuiBaseController> {
   public void setMinimized() {
     if (!minimized) {
       stage.setIconified(true);
-      updateSizeStatus("minimized");
+      //keep commented, in theory it should be used but i cant catch the event of opening the window after being minimized
+      //updateSizeStatus("minimized");
     }
   }
 
   public void setSmall() {
     if (!small) {
-      Rectangle2D bounds = Screen.getPrimary().getBounds();
+      if(fullScreen){
+        stage.setFullScreen(false);
+      }
       
+      Rectangle2D bounds = Screen.getPrimary().getBounds();
+
       stage.setX(originalX);
       stage.setY(originalY);
       stage.setWidth(bounds.getWidth() * xPercentage);
       stage.setHeight(bounds.getHeight() * yPercentage);
 
-      makeDraggable(true);
       updateSizeStatus("small");
     }
   }
@@ -152,7 +145,6 @@ public class WinStateMachine<T extends GuiBaseController> {
   public void setFullScreen() {
     if (!fullScreen) {
       stage.setFullScreen(true);
-      makeDraggable(false);
       updateSizeStatus("fullScreen");
     }
   }
@@ -285,7 +277,7 @@ public class WinStateMachine<T extends GuiBaseController> {
   private void setupEscKeyHandler(Scene scene) {
     scene.setOnKeyPressed(event -> {
       if (event.getCode() == KeyCode.ESCAPE && fullScreen) {
-        fullScreen = false;
+        stage.setFullScreen(false);
         updateSizeStatus("small");
       }
     });
@@ -301,9 +293,11 @@ public class WinStateMachine<T extends GuiBaseController> {
       switch (state) {
         case "maximized":
           maximized = true;
+          makeDraggable(false);
           break;
         case "fullScreen":
           fullScreen = true;
+          makeDraggable(false);
           break;
         case "minimized":
           minimized = true;

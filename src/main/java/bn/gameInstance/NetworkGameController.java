@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import javafx.application.Platform;
 
 public class NetworkGameController extends LogicController implements Runnable {
 
@@ -19,7 +20,7 @@ public class NetworkGameController extends LogicController implements Runnable {
   private final int CMD_WAIT = 2;
   private final int CMD_HIT = 3;
   private final int CMD_FINISH = 4;
-  private final int CDM_READY_TO_START = 5;
+  private final int CMD_READY_TO_START = 5;
 
   private Thread connectionThread;
 
@@ -31,6 +32,34 @@ public class NetworkGameController extends LogicController implements Runnable {
     this.selfPort = selfPort;
     this.otherAddress = otherAddress;
     this.otherPort = otherPort;
+  }
+
+  private void sendCommand(int cmd) {
+    try {
+      System.out.println("Sending command " + cmd + " to " + otherAddress + ":" + otherPort);
+
+      Socket socket = new Socket(otherAddress, otherPort);
+      ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+      outputStream.writeInt(cmd);
+      outputStream.close();
+      socket.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Override
+  public void start() throws Exception {
+    connectionThread = new Thread(this);
+    connectionThread.start();
+  }
+
+  @Override
+  public void stop() throws Exception {
+    if (connectionThread != null) {
+      stopRequested = true;
+      connectionThread.interrupt();
+    }
   }
 
   @Override
@@ -53,31 +82,30 @@ public class NetworkGameController extends LogicController implements Runnable {
           System.out.println("Command " + cmd + " received");
 
           switch (cmd) {
-            case CDM_READY_TO_START:
-              gameInstance.getLogicController().otherPartyFinishedPrep();
+            case CMD_READY_TO_START:
+              receive_otherFinishedPrep();
               break;
 
             case CMD_PLAY:
-              gameInstance.getLogicController().imPlaying();
+              receive_imPlaying();
               break;
 
             case CMD_WAIT:
-              gameInstance.getLogicController().otherPlaying();
+              receive_otherPlaying();
               break;
 
             case CMD_HIT:
               int x = inputStream.readInt();
               int y = inputStream.readInt();
+              boolean hit = receive_otherHit(x, y);
 
-              boolean hit = gameInstance.getLogicController().otherPlayHit(x, y);
-
-              ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-              outputStream.writeBoolean(hit);
-              outputStream.close();
+              try (ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
+                outputStream.writeBoolean(hit);
+              }
               break;
 
             case CMD_FINISH:
-              gameInstance.getLogicController().otherPartyFinishedGame();
+              receive_otherFinishedGame();
               break;
 
             default:
@@ -110,41 +138,29 @@ public class NetworkGameController extends LogicController implements Runnable {
     }
   }
 
-  //Callers////////////////////////////////////
-  public void start() throws Exception {
-    connectionThread = new Thread(this);
-    connectionThread.start();
-  }
-
-  public void stop() throws Exception {
-    if (connectionThread != null) {
-      stopRequested = true;
-      connectionThread.interrupt();
-    }
-  }
-
-  public void myPlayFinished() {
+//Throwers////////////////////////////////////
+  @Override
+  public void send_myPlayFinished() {
     sendCommand(CMD_PLAY);
-
-    gameInstance.getUXController().otherPlaying();
   }
 
-  public void myPlayStarted() {
+  @Override
+  public void send_myPlayStarted() {
     sendCommand(CMD_WAIT);
-    gameInstance.getUXController().imPlaying();
   }
 
-  public void myGameFinished() {
+  @Override
+  public void send_myGameFinished() {
     sendCommand(CMD_FINISH);
   }
 
-  public void myPrepFinished() {
-    sendCommand(CDM_READY_TO_START);
-    
-    gameInstance.getUXController().waitingOtherPartyPrep();
+  @Override
+  public void send_myPrepFinished() {
+    sendCommand(CMD_READY_TO_START);
   }
 
-  public boolean hitOther(int x, int y) {
+  @Override
+  public boolean send_hitOther(int x, int y) {
     try {
       Socket socket = new Socket(otherAddress, otherPort);
       ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -166,41 +182,37 @@ public class NetworkGameController extends LogicController implements Runnable {
     return false;
   }
 
-  public void otherPartyFinishedPrep() {
-    gameInstance.getUXController().otherPartyFinishedPrep();
+//Receivers////////////////////////////////////
+  @Override
+  public void receive_otherFinishedPrep() {
+    Platform.runLater(() -> {
+      gameInstance.getUXController().otherRdyToTransition();
+    });
   }
 
-  public void imPlaying() {
-
+  @Override
+  public void receive_imPlaying() {
+    Platform.runLater(() -> {
+      gameInstance.getUXController().imPlaying();
+    });
   }
 
-  public void otherPlaying() {
-
+  @Override
+  public void receive_otherPlaying() {
+    Platform.runLater(() -> {
+      gameInstance.getUXController().otherPlaying();
+    });
   }
 
-  public boolean otherPlayHit(int x, int y) {
-    return true;
+  @Override
+  public boolean receive_otherHit(int x, int y) {
+    return gameInstance.getUXController().otherHit(x, y);
   }
 
-  public void otherPartyFinishedGame() {
-
-  }
-
-  public void otherPartyIsReadyToPlay() {
-
-  }
-
-  private void sendCommand(int cmd) {
-    try {
-      System.out.println("Sending command " + cmd + " to " + otherAddress + ":" + otherPort);
-
-      Socket socket = new Socket(otherAddress, otherPort);
-      ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-      outputStream.writeInt(cmd);
-      outputStream.close();
-      socket.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  @Override
+  public void receive_otherFinishedGame() {
+    Platform.runLater(() -> {
+      gameInstance.getUXController().otherPlaying();
+    });
   }
 }

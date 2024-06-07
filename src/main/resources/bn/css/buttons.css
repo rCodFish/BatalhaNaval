@@ -15,6 +15,18 @@ brightRed: #ff0000;
   -fx-background-color: transparent;
 }
 
+.default-button {
+  -fx-background-color: #3d585e;
+}
+
+.default-button:hover {
+  -fx-background-color: #6b6b6b;
+}
+
+.default-button:pressed {
+  -fx-background-color: #4f4f4f;
+}
+
 .button:hover {
   -fx-background-color: #6b6b6b;
 }

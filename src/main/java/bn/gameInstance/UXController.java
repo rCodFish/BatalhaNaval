@@ -14,24 +14,24 @@ abstract public class UXController {
   public UXController(GameEngine gameInstance) {
     this.gameInstance = gameInstance;
   }
-
+  
+  abstract public void setMySceneTransitionRdy();
+  
+  abstract public boolean isMySceneTransitionRdy();
+  
+  abstract public boolean isOtherSceneTransitionRdy();
+  
   abstract public void start() throws Exception;
 
   abstract public void stop() throws Exception;
 
-  abstract public void waitingOtherPartyPrep();
-
-  abstract public void otherPartyFinishedPrep();
-
+  abstract public void otherRdyToTransition();
+  
+  abstract public void otherPlaying();
+    
   abstract public void imPlaying();
 
-  abstract public void otherPlaying();
-
-  abstract public boolean otherPlayHit(int x, int y);
-
-  abstract public void otherPartyFinishedGame();
-
-  abstract public void otherPartyIsReadyToPlay();
+  abstract public boolean otherHit(int x, int y);
 
   abstract public void setBoats(ArrayList<Boat> placedBoats);
   

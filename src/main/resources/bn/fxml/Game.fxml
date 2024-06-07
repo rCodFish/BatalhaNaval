@@ -18,17 +18,17 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="1000.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="47.0" prefWidth="1000.0">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="130.0" />
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="30.0" prefWidth="142.0" />
+                  <VBox alignment="CENTER" prefHeight="50.0" prefWidth="734.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="68.0" text="Attack!" textFill="WHITE" />
+                        <Label fx:id="statusLabel" alignment="CENTER" prefHeight="18.0" prefWidth="68.0" text="Attack!" textFill="WHITE" />
                      </children>
                   </VBox>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttonIsland.css">
                      <children>
-                        <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttonIsland.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -37,7 +37,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="exitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="40.0" styleClass="red-button" stylesheets="@../css/buttonIsland.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="exitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="40.0" styleClass="red-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -49,7 +49,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttonIsland.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -72,7 +72,7 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="445.0" styleClass="bottom_hbox" stylesheets="@../css/gamefxml.css">
+                        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="401.0" styleClass="bottom_hbox" stylesheets="@../css/gamefxml.css">
                            <children>
                               <Label text="Your Grid" textFill="WHITE">
                                  <font>
@@ -80,6 +80,9 @@
                                  </font>
                               </Label>
                            </children>
+                           <VBox.margin>
+                              <Insets right="1.0" />
+                           </VBox.margin>
                         </HBox>
                         <GridPane fx:id="PlayerGrid" gridLinesVisible="true" prefHeight="240.0" prefWidth="240.0" styleClass="gridPane" stylesheets="@../css/gamefxml.css" VBox.vgrow="ALWAYS">
                            <columnConstraints>
@@ -109,6 +112,11 @@
                               <Insets left="1.0" right="1.0" />
                            </VBox.margin>
                         </GridPane>
+                        <HBox prefHeight="30.0" prefWidth="414.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css">
+                           <VBox.margin>
+                              <Insets right="1.0" />
+                           </VBox.margin>
+                        </HBox>
                      </children>
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="130.0">
@@ -175,6 +183,7 @@
                               <Insets left="1.0" right="1.0" />
                            </VBox.margin>
                         </GridPane>
+                        <HBox prefHeight="30.0" prefWidth="414.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" />
                      </children>
                   </VBox>
                </children>
@@ -184,12 +193,18 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="67.0" prefWidth="1000.0">
                <children>
-                  <Button contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="grey-button" stylesheets="@../css/buttonIsland.css" text="End my round" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button fx:id="endRoundButton" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#endRound" prefHeight="35.0" prefWidth="899.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="End my round" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets bottom="3.0" left="50.0" right="50.0" />
+                        <Insets bottom="7.0" left="50.0" right="50.0" />
                      </HBox.margin>
                   </Button>
                </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

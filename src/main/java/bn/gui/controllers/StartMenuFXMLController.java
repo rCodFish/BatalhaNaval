@@ -84,16 +84,6 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
     } catch (Exception e) {
       e.printStackTrace();
     }
-
-    /*try{
-    GameEngine gI = new GameEngine(true);
-    GameEngine.setGI(gI);
-    Thread.sleep(10000);
-    NetworkGameController gm = gI.getCon();
-    gm.prepPhaseStarted();
-    }catch(Exception e){
-      e.printStackTrace();
-    }*/
   }
 
   @FXML
@@ -128,6 +118,16 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
   }
 
   public void minimize() {
+  }
+
+  @Override
+  public void transition() {
+    throw new UnsupportedOperationException("Not supported yet."); 
+  }
+
+  @Override
+  public void otherReadyTotransition() {
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 
 }

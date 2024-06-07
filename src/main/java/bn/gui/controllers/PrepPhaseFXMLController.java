@@ -7,6 +7,7 @@ import bn.gui.supportingLogic.BoatHBox;
 import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -137,7 +138,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
 
   private void placeBoat() {
     for (GridCellHBox cell : highlightedCells) {
-      cell.select("#0d0d17");
+      cell.select("#383b37");
       boatFilledCells.add(cell);
     }
 
@@ -283,6 +284,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       HBox boatBox = boatOption.getBoatOption();
 
       boatBox.setOnMouseClicked(event -> handleBoatOptionClick(boatOption));
+      boatBox.prefHeightProperty().bind(BoatsVBox.heightProperty().multiply(0.2));
 
       boatBox.setOnMouseEntered(e -> {
         if (!boatOption.isSelected()) {
@@ -319,6 +321,16 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
     }
   }
 
+  private boolean areAllBoatsPlaced() {
+    int boatNumber = 0;
+
+    for (String[] boatData1 : boatData) {
+      boatNumber += Integer.parseInt(boatData1[1]);
+    }
+
+    return placedBoats.size() == boatNumber;
+  }
+
   @FXML
   private void goBackPlacement() {
     if (!placedBoats.isEmpty()) {
@@ -352,32 +364,16 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
     }
   }
 
-  private boolean areAllBoatsPlaced() {
-    int boatNumber = 0;
-
-    for (int i = 0; i < boatData.length; i++) {
-      boatNumber += Integer.parseInt(boatData[i][1]);
-    }
-
-    return placedBoats.size() == boatNumber;
-  }
-
   @FXML
-  private void readyToPlay() {
-    String GamePhaseFXML = "/bn/fxml/Game.fxml";
+  private void myPrepFinished() {
     if (areAllBoatsPlaced()) {
-      try {
-        App.gameInstance.getUXController().setBoats(placedBoats);
-        
-        winAPI.setRoot(GamePhaseFXML, stage);
-        winAPI.setFullScreen();
+      App.gameInstance.getUXController().setBoats(placedBoats);
+      App.gameInstance.getUXController().setMySceneTransitionRdy();
+      App.gameInstance.getLogicController().send_myPrepFinished();
+      statusLabel.setText("Waiting for other party!");
 
-        //comunicate with other instance
-        App.gameInstance.getLogicController().myPrepFinished();
-        
-        statusLabel.setText("Waiting for other party!");
-      } catch (Exception e) {
-        System.out.println("Error:" + e.getMessage());
+      if (App.gameInstance.getUXController().isOtherSceneTransitionRdy()) {
+        transition();
       }
     } else {
       statusLabel.setText("Please place all your boats!");
@@ -387,7 +383,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   @FXML
   public void exit() {
     winAPI.exit();
-    
+
     App.stopApplication();
   }
 
@@ -396,7 +392,28 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
     winAPI.setMinimized();
   }
 
-  public void otherFinishedPrep() {
+  @FXML
+  public void setFullScreen() {
+    if (winAPI.isFullScreen()) {
+      winAPI.setSmall();
+    } else {
+      winAPI.setFullScreen();
+    }
+  }
 
+  @Override
+  public void transition() {
+    String GamePhaseFXML = "/bn/fxml/Game.fxml";
+    try {
+      winAPI.setRoot(GamePhaseFXML, stage);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+    winAPI.setFullScreen();
+  }
+
+  @Override
+  public void otherReadyTotransition() {
+    statusLabel.setText("Opponent has finished prep!");
   }
 }

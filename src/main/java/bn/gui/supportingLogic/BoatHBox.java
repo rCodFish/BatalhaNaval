@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 /**
  * Class representing a Boat HBox for UI.
@@ -53,11 +54,16 @@ public class BoatHBox {
       default:
         break;
     }
-
+    
+    image.setPreserveRatio(true);
+    //image.setFitHeight(boatOption.getHeight());
+    //image.setSmooth(true);
+    
     label = new Label(" (x" + boatCount + ")");
     label.setStyle("-fx-text-fill: white;");
 
     boatOption.getChildren().addAll(image, label);
+    HBox.setHgrow(image, Priority.ALWAYS);
   }
 
   public HBox getBoatOption() {

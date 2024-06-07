@@ -5,8 +5,8 @@ import bn.data.boat.Boat;
 import bn.gui.controllers.GameFXMLController;
 import bn.gui.controllers.PrepPhaseFXMLController;
 import bn.gui.supportingLogic.windows.WindowWrapper;
+import bn.utils.Utils;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -14,9 +14,25 @@ import java.util.Date;
  */
 public class GUIUXController extends UXController {
 
+  private boolean imFirstPlaying = false;
+
+  private boolean mySceneTransitionRdy = false;
+  private boolean otherSceneTransitionRdy = false;
+
+  private final int MENU_SCREEN = 0;
+  private final int PREP_SCREEN = 1;
+  private final int GAME_SCREEN = 2;
+  private final int ENDING_SCREEN = 3;
+
+  private int currentScene = PREP_SCREEN;
+
   private GridCell[][] gridBoxes;
   private ArrayList<Boat> placedBoats = new ArrayList<>();
 
+  /**
+   *
+   * @param gameInstance
+   */
   public GUIUXController(GameEngine gameInstance) {
     super(gameInstance);
 
@@ -33,80 +49,149 @@ public class GUIUXController extends UXController {
     }
   }
 
+  /**
+   *
+   * @param placedBoats
+   */
+  @Override
   public void setBoats(ArrayList<Boat> placedBoats) {
     this.placedBoats = new ArrayList<>(placedBoats);
   }
-  
+
+  /**
+   *
+   * @return
+   */
+  @Override
   public ArrayList<Boat> getBoats() {
     return placedBoats;
   }
+  
+  //passageTicket true for changing scene and false for warn own gui
+  private void sceneSwitchMethods(boolean passageTicket) {
+    WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
 
+    switch (currentScene) {
+      case MENU_SCREEN:
+        break;
+
+      case PREP_SCREEN:
+        if (winWrap.getWindowSM().getActiveController() instanceof PrepPhaseFXMLController) {
+          PrepPhaseFXMLController controller = (PrepPhaseFXMLController) winWrap.getWindowSM().getActiveController();
+
+          if (passageTicket) {
+            controller.transition();
+            currentScene = GAME_SCREEN;
+          } else {
+            controller.otherReadyTotransition();
+          }
+          
+        } else {
+          Utils.errorMessage("scene change from " + currentScene + " to " + GAME_SCREEN);
+        }
+        break;
+
+      case GAME_SCREEN:
+
+        break;
+    }
+  }
+
+  /**
+   *
+   * @throws Exception
+   */
+  @Override
   public void start() throws Exception {
-
   }
 
+  /**
+   *
+   * @throws Exception
+   */
+  @Override
   public void stop() throws Exception {
-
   }
 
-  public void waitingOtherPartyPrep() {
-    System.out.println("[" + new Date() + "] GUIUXController.waitingOtherPartyPrep: start");
+  /**
+   *
+   * @return
+   */
+  @Override
+  public boolean isMySceneTransitionRdy() {
+    return mySceneTransitionRdy;
+  }
 
-    WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
+  /**
+   *
+   * @return
+   */
+  @Override
+  public boolean isOtherSceneTransitionRdy() {
+    return otherSceneTransitionRdy;
+  }
 
-    if (winWrap.getWindowSM().getActiveController() instanceof PrepPhaseFXMLController) {
-      PrepPhaseFXMLController controller = (PrepPhaseFXMLController) winWrap.getWindowSM().getActiveController();
-      
-      System.out.println("I'm "+controller.getClass().getCanonicalName());
-    } else if (winWrap.getWindowSM().getActiveController() instanceof GameFXMLController) {
-      GameFXMLController controller = (GameFXMLController) winWrap.getWindowSM().getActiveController();
-      
-      System.out.println("I'm "+controller.getClass().getCanonicalName());
-    } else {
-      System.out.println("Invalid game state!");
+  /**
+   *
+   */
+  @Override
+  public void setMySceneTransitionRdy() {
+    mySceneTransitionRdy = true;
+
+    if (otherSceneTransitionRdy) {
+      mySceneTransitionRdy = false;
+      otherSceneTransitionRdy = false;
+
+      sceneSwitchMethods(true);
     }
-
-    System.out.println("[" + new Date() + "] GUIUXController.waitingOtherPartyPrep: end");
   }
 
-  public void otherPartyFinishedPrep() {
-    System.out.println("[" + new Date() + "] GUIUXController.otherPartyFinishedPrep: start");
+//UIUX_Dispatchers/////////////////////////////
 
-    WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
+  /**
+   *
+   */
+  
+  @Override
+  public void otherRdyToTransition() {
+    otherSceneTransitionRdy = true;
 
-    if (winWrap.getWindowSM().getActiveController() instanceof PrepPhaseFXMLController) {
-      PrepPhaseFXMLController controller = (PrepPhaseFXMLController) winWrap.getWindowSM().getActiveController();
-      
-      System.out.println("I'm "+controller.getClass().getCanonicalName());
-    } else if (winWrap.getWindowSM().getActiveController() instanceof GameFXMLController) {
-      GameFXMLController controller = (GameFXMLController) winWrap.getWindowSM().getActiveController();
-      
-      System.out.println("I'm "+controller.getClass().getCanonicalName());
+    if (mySceneTransitionRdy) {
+      mySceneTransitionRdy = false;
+      otherSceneTransitionRdy = false;
+
+      sceneSwitchMethods(true);
     } else {
-      System.out.println("Invalid game state!");
+      sceneSwitchMethods(false);
     }
-
-    System.out.println("[" + new Date() + "] GUIUXController.otherPartyFinishedPrep: end");
   }
 
+  /**
+   *
+   */
+  @Override
   public void imPlaying() {
-
+    WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
+    if (winWrap.getWindowSM().getActiveController() instanceof GameFXMLController) {
+      GameFXMLController controller = (GameFXMLController) winWrap.getWindowSM().getActiveController();
+      controller.imPlaying();
+    }
   }
 
+  /**
+   *
+   */
+  @Override
   public void otherPlaying() {
-
+    WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
+    if (winWrap.getWindowSM().getActiveController() instanceof GameFXMLController) {
+      GameFXMLController controller = (GameFXMLController) winWrap.getWindowSM().getActiveController();
+      controller.otherPlaying();
+    }
   }
 
-  public boolean otherPlayHit(int x, int y) {
+  @Override
+  public boolean otherHit(int x, int y) {
     return true;
   }
-
-  public void otherPartyFinishedGame() {
-
-  }
-
-  public void otherPartyIsReadyToPlay() {
-
-  }
-
 }

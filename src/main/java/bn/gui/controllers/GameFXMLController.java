@@ -11,6 +11,8 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -32,6 +34,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   private boolean isPlacementValid = false;
   private boolean isCurrentGridEnemy;
   private boolean isCurrentGridPlayer;
+  private boolean isMyRound = false;
 
   private GridCellHBox currentGridCell;
 
@@ -39,6 +42,10 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   private GridPane EnemyGrid;
   @FXML
   private GridPane PlayerGrid;
+  @FXML
+  private Button endRoundButton;
+  @FXML
+  private Label statusLabel;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -47,8 +54,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
 
     populateGrid(PlayerGrid, playerGridBoxes, this::playerCellOnMouseClick, this::playerCellOnMouseEntered, this::playerCellOnMouseExited);
     populateGrid(EnemyGrid, enemyGridBoxes, this::enemyCellOnMouseClick, this::enemyCellOnMouseEntered, this::enemyCellOnMouseExited);
-    
-    System.out.println("verticalA");
+
     getPlaceBoats();
   }
 
@@ -71,11 +77,8 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   private void getPlaceBoats() {
-    System.out.println("verticalB");
     placedBoats = new ArrayList<>(App.gameInstance.getUXController().getBoats());
-    System.out.println("PLacedBoats: " + placedBoats);
     for (Boat boat : placedBoats) {
-      System.out.println("verticalFor");
       int[] startingCoordinates = boat.getStartingCoordinates();
       int x = startingCoordinates[0];
       int y = startingCoordinates[1];
@@ -83,11 +86,11 @@ public class GameFXMLController extends GuiBaseController implements Initializab
 
       if (boat.isVertical()) {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x][y + i].select("#0d0d17"); 
+          playerGridBoxes[x][y + i].select("#383b37");
         }
       } else {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x + i][y].select("#0d0d17"); 
+          playerGridBoxes[x + i][y].select("#383b37");
         }
       }
     }
@@ -98,16 +101,14 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   private void playerCellOnMouseEntered(GridCellHBox gridCell) {
-    HBox cellHBox = gridCell.getHBox();
     currentGridCell = gridCell;
     isCurrentGridEnemy = false;
     isCurrentGridPlayer = true;
+
     gridCell.highlight("#0a3608");
   }
 
   private void playerCellOnMouseExited(GridCellHBox gridCell) {
-    HBox cellHBox = gridCell.getHBox();
-
     currentGridCell = null;
     isCurrentGridEnemy = false;
     isCurrentGridPlayer = false;
@@ -120,8 +121,6 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   private void enemyCellOnMouseEntered(GridCellHBox gridCell) {
-    HBox cellHBox = gridCell.getHBox();
-
     currentGridCell = gridCell;
     isCurrentGridEnemy = true;
     isCurrentGridPlayer = false;
@@ -130,8 +129,6 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   private void enemyCellOnMouseExited(GridCellHBox gridCell) {
-    HBox cellHBox = gridCell.getHBox();
-
     currentGridCell = null;
     isCurrentGridEnemy = false;
     isCurrentGridPlayer = false;
@@ -139,13 +136,55 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     gridCell.rmvHighlight();
   }
 
+  public void imPlaying() {
+    App.gameInstance.getLogicController().send_myPlayStarted();
+    PlayerGrid.setMouseTransparent(true);
+    EnemyGrid.setMouseTransparent(true);
+    isMyRound = true;
+    endRoundButton.setText("End Round");
+    statusLabel.setText("Attack!");
+  }
+
+  public void otherPlaying() {
+    PlayerGrid.setMouseTransparent(false);
+    EnemyGrid.setMouseTransparent(false);
+    isMyRound = false;
+    endRoundButton.setText("Other player is playing");
+    statusLabel.setText("Other player is playing");
+  }
+  
+  public void finishGame() {
+  }
+  
+  @FXML
+  public void endRound() {
+    if (isMyRound) {
+      App.gameInstance.getLogicController().send_myPlayFinished();
+    } else {
+      endRoundButton.setText("Other player is playing");
+      statusLabel.setText("Other player is playing");
+    }
+  }
+
   @FXML
   public void exit() {
     winSM.exit();
+
+    App.stopApplication();
   }
 
   @FXML
   public void minimize() {
     winSM.setMinimized();
+  }
+  
+  @Override
+  public void transition() {
+    throw new UnsupportedOperationException("Not supported yet."); 
+  }
+
+  @Override
+  public void otherReadyTotransition() {
+    throw new UnsupportedOperationException("Not supported yet."); 
   }
 }
