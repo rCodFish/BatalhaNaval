@@ -187,6 +187,7 @@ public class NetworkGameController extends LogicController implements Runnable {
     }
   }
 
+  @Override
   public void send_hitResponse(boolean hasHit) {
     try {
       Socket socket = new Socket(otherAddress, otherPort);
@@ -203,6 +204,7 @@ public class NetworkGameController extends LogicController implements Runnable {
     }
   }
 
+  
 //Receivers////////////////////////////////////
   @Override
   public void receive_otherFinishedPrep() {

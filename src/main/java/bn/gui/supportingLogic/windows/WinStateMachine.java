@@ -181,7 +181,7 @@ public class WinStateMachine<T extends GuiBaseController> {
 
   //Others///////////////////////////////////////
   public void exit() {
-    Platform.exit();
+    stage.close();
   }
 
   public void disableStage() {

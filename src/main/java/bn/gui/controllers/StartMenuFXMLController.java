@@ -25,6 +25,9 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
   private WinStateMachine winAPI = winWrap.getWindowSM();
   private Stage stage = winWrap.getStage();
+  
+  private String detailsFxml = "/bn/fxml/DetailsScreen.fxml";
+  private WindowWrapper detailsWindowWrapper;
 
   @FXML
   private ImageView iVimg;
@@ -32,11 +35,6 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     winAPI.teste(iVimg);
-  }
-
-  @FXML
-  public void setFullScreen() {
-    winAPI.setFullScreen();
   }
 
   @FXML
@@ -80,6 +78,7 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
     try {
       winAPI.setRoot(PrepPhaseFXML, stage);
       winAPI.setFullScreen();
+      winAPI.setSmall();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -88,8 +87,11 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
   @FXML
   public void beginGame() {
     try {
-      String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
-      winAPI.setRoot(PrepPhaseFXML, stage);
+      detailsWindowWrapper = new WindowWrapper(detailsFxml, "details");
+      detailsWindowWrapper.getWindowSM().show();
+      
+      //String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
+      //winAPI.setRoot(PrepPhaseFXML, stage);
       // winAPI.setFullScreen();
     } catch (Exception e) {
       e.printStackTrace();
@@ -97,26 +99,24 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
   }
 
   @FXML
-  public void options() {
-    try {
-      String optFxml = "/bn/fxml/Options.fxml";
-      WindowWrapper optWindowWrapper = new WindowWrapper(optFxml, "options", 15, 20);
-      optWindowWrapper.getWindowSM().show();
-      optWindowWrapper.getWindowSM().setSmall();
-      optWindowWrapper.getStage().setAlwaysOnTop(true);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  @FXML
-  public void close() {
+  public void exit() {
     winAPI.exit();
-    
+
     App.stopApplication();
   }
 
+  @FXML
   public void minimize() {
+    winAPI.setMinimized();
+  }
+
+  @FXML
+  public void setFullScreen() {
+    if (winAPI.isFullScreen()) {
+      winAPI.setSmall();
+    } else {
+      winAPI.setFullScreen();
+    }
   }
 
   @Override

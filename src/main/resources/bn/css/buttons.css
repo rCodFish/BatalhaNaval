@@ -11,12 +11,26 @@ brightRed: #ff0000;
   -fx-background-color: transparent;
 }
 
-.button, .grey-button {
+/*////////////////////////////////////////////////*/
+.trans-button {
   -fx-background-color: transparent;
+  -fx-background-insets: 0 0 0 0, 0, 0, 0;
 }
 
+.trans-button:hover {
+  -fx-background-color: #6b6b6b;
+}
+
+.trans-button:pressed {
+  -fx-background-color: #4f4f4f;
+  -fx-background-insets: 3 0 0 0, 3, 0, 0;
+}
+
+/*////////////////////////////////////////////////*/
 .default-button {
   -fx-background-color: #3d585e;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.50), 5, 0, 2, 2);
+  -fx-background-insets: 0 0 0 0, 0, 0, 0;
 }
 
 .default-button:hover {
@@ -25,20 +39,13 @@ brightRed: #ff0000;
 
 .default-button:pressed {
   -fx-background-color: #4f4f4f;
-}
-
-.button:hover {
-  -fx-background-color: #6b6b6b;
-}
-
-.button:pressed {
-  -fx-background-color: #4f4f4f;
   -fx-background-insets: 3 0 0 0, 3, 0, 0;
 }
 
 /*////////////////////////////////////////////////*/
 .red-button {
   -fx-background-color: transparent;
+  -fx-background-insets: 0 0 0 0, 0, 0, 0;
 }
 
 .red-button:hover {

@@ -40,7 +40,7 @@
                   </VBox>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="135.0" styleClass="buttonBar" stylesheets="@../css/buttons.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="trans-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -61,7 +61,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setFullScreen" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
+                        <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setFullScreen" prefHeight="20.0" prefWidth="40.0" styleClass="trans-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

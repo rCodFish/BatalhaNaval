@@ -42,6 +42,11 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   private boolean isAttackSelected = false;
   private boolean didIAttack = false;
 
+  private int roundCounter = 1;
+  private int hitCounter = 0;
+  private int missCounter = 0;
+  private int hitsRemaining = -1;
+
   private GridCellHBox lastAttackGridCell;
   private GridCellHBox currentGridCell;
   private AttackHBox attackSelected;
@@ -58,6 +63,10 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   private Label roundCounterLabel;
   @FXML
   private Label hitCounterLabel;
+  @FXML
+  private Label missCounterLabel;
+  @FXML
+  private Label hitsRemainingLabel;
   @FXML
   private VBox attacksVBox;
 
@@ -225,6 +234,8 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     EnemyGrid.setMouseTransparent(false);
     isMyRound = true;
     didIAttack = false;
+    roundCounter++;
+    roundCounterLabel.setText(String.valueOf(roundCounter));
     endRoundButton.setText("End Round");
     statusLabel.setText("Attack!");
   }
@@ -233,6 +244,8 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     PlayerGrid.setMouseTransparent(true);
     EnemyGrid.setMouseTransparent(true);
     isMyRound = false;
+    roundCounter++;
+    roundCounterLabel.setText(String.valueOf(roundCounter));
     endRoundButton.setText("Other player is playing");
     statusLabel.setText("Other player is playing");
   }
@@ -286,19 +299,24 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     GridCellHBox gridCell = playerGridBoxes[x][y];
 
     if (hit) {
-      gridCell.hit(Utils.RED); //red
+      gridCell.hit(Utils.RED);
     } else {
-      gridCell.hit(Utils.BLUE); //blue
+      gridCell.hit(Utils.BLUE);
     }
 
     App.gameInstance.getLogicController().send_hitResponse(hit);
   }
 
+  //other instance response to my attack
   public void otherHitResponse(boolean hit) {
     if (hit) {
-      lastAttackGridCell.hit(Utils.RED); //red
+      lastAttackGridCell.hit(Utils.RED);
+      hitCounter++;
+      hitCounterLabel.setText(String.valueOf(hitCounter));
     } else {
-      lastAttackGridCell.hit(Utils.BLUE); //blue
+      lastAttackGridCell.hit(Utils.BLUE);
+      missCounter++;
+      missCounterLabel.setText(String.valueOf(missCounter));
     }
   }
 }
