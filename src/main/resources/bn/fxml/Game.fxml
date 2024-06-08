@@ -23,10 +23,10 @@
                   <VBox prefHeight="30.0" prefWidth="142.0" />
                   <VBox alignment="CENTER" prefHeight="50.0" prefWidth="734.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="statusLabel" alignment="CENTER" prefHeight="18.0" prefWidth="68.0" text="Attack!" textFill="WHITE" />
+                        <Label fx:id="statusLabel" alignment="CENTER" prefHeight="18.0" prefWidth="500.0" text="Attack!" textFill="WHITE" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttonIsland.css">
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttons.css">
                      <children>
                         <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="grey-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
                            <graphic>
@@ -145,6 +145,7 @@
                            </VBox.margin>
                         </Label>
                         <Label text="0" textFill="WHITE" />
+                        <VBox fx:id="attacksVBox" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">

@@ -2,6 +2,8 @@ package bn.gui.controllers;
 
 import bn.app.App;
 import bn.data.boat.Boat;
+import bn.gui.supportingLogic.AttackHBox;
+import bn.gui.supportingLogic.BoatHBox;
 import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
@@ -11,10 +13,12 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -27,16 +31,20 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   private WinStateMachine winSM = winWrap.getWindowSM();
   private Stage stage = winWrap.getStage();
 
+  private ArrayList<AttackHBox> attackOptions = new ArrayList<>();
   private GridCellHBox[][] playerGridBoxes;
   private GridCellHBox[][] enemyGridBoxes;
   private ArrayList<Boat> placedBoats;
 
-  private boolean isPlacementValid = false;
   private boolean isCurrentGridEnemy;
   private boolean isCurrentGridPlayer;
   private boolean isMyRound = false;
+  private boolean isAttackSelected = false;
+  private boolean didIAttack = false;
 
+  private GridCellHBox lastAttackGridCell;
   private GridCellHBox currentGridCell;
+  private AttackHBox attackSelected;
 
   @FXML
   private GridPane EnemyGrid;
@@ -46,6 +54,17 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   private Button endRoundButton;
   @FXML
   private Label statusLabel;
+  @FXML
+  private Label roundCounterLabel;
+  @FXML
+  private Label hitCounterLabel;
+  @FXML
+  private VBox attacksVBox;
+
+  private String[][] attackData = {
+    {"Normal attack", "-1"},
+    {"Line attack", "1"},
+    {"Area attack", "1"},};
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -56,8 +75,56 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     populateGrid(EnemyGrid, enemyGridBoxes, this::enemyCellOnMouseClick, this::enemyCellOnMouseEntered, this::enemyCellOnMouseExited);
 
     getPlaceBoats();
-
+    addAttacksOptions();
     firstPlayInitializer();
+  }
+
+  private void addAttacksOptions() {
+    for (String[] attackInfo : attackData) {
+      String attackType = attackInfo[0];
+      int attackCount = Integer.parseInt(attackInfo[1]);
+
+      AttackHBox attackOption = new AttackHBox(attackType, attackCount);
+      attacksVBox.getChildren().add(attackOption.getAttackOption());
+
+      HBox attackBox = attackOption.getAttackOption();
+      attackOptions.add(attackOption);
+
+      attackBox.setOnMouseClicked(event -> handleAttackOptionClick(attackOption));
+      attackBox.prefHeightProperty().bind(attacksVBox.heightProperty().multiply(0.2));
+
+      attackBox.setOnMouseEntered(e -> {
+        if (!attackOption.isSelected()) {
+          attackOption.getAttackOption().setStyle("-fx-background-color: lightgray;");
+        }
+      });
+
+      attackBox.setOnMouseExited(e -> {
+        if (!attackOption.isSelected()) {
+          attackBox.setStyle("-fx-background-color: transparent;");
+        }
+      });
+    }
+
+    attacksVBox.setAlignment(Pos.CENTER);
+    attacksVBox.setSpacing(10);
+  }
+
+  private void handleAttackOptionClick(AttackHBox attackOption) {
+    if (isAttackSelected) {
+      deselectAllAttackOptions();
+    }
+    if (!attackOption.isSelected() && attackOption.getCount() > 0) {
+      attackOption.select();
+      attackSelected = attackOption;
+      isAttackSelected = true;
+    }
+  }
+
+  private void deselectAllAttackOptions() {
+    for (AttackHBox attackOption : attackOptions) {
+      attackOption.deselect();
+    }
   }
 
   public void firstPlayInitializer() {
@@ -113,7 +180,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     isCurrentGridEnemy = false;
     isCurrentGridPlayer = true;
 
-    gridCell.highlight("#020ffa");
+    gridCell.highlight("#0d3e8c");
   }
 
   private void playerCellOnMouseExited(GridCellHBox gridCell) {
@@ -125,7 +192,15 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   private void enemyCellOnMouseClick() {
-    // Implement the enemy cell mouse click logic here
+    if (!didIAttack) {
+      GridCellHBox gridCell = currentGridCell;
+      App.gameInstance.getLogicController().send_hitOther(gridCell.getX(), gridCell.getY());
+      lastAttackGridCell = gridCell;
+      didIAttack = true;
+    } else {
+      statusLabel.setText("You have already attacked!");
+    }
+
   }
 
   private void enemyCellOnMouseEntered(GridCellHBox gridCell) {
@@ -149,6 +224,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     PlayerGrid.setMouseTransparent(false);
     EnemyGrid.setMouseTransparent(false);
     isMyRound = true;
+    didIAttack = false;
     endRoundButton.setText("End Round");
     statusLabel.setText("Attack!");
   }
@@ -186,7 +262,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   public void minimize() {
     winSM.setMinimized();
   }
-  
+
   @FXML
   public void setFullScreen() {
     if (winSM.isFullScreen()) {
@@ -204,5 +280,25 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   @Override
   public void otherReadyTotransition() {
     throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  public void otherHit(boolean hit, int x, int y) {
+    GridCellHBox gridCell = playerGridBoxes[x][y];
+
+    if (hit) {
+      gridCell.hit("#360808"); //red
+    } else {
+      gridCell.hit("#0d3e8c"); //blue
+    }
+
+    App.gameInstance.getLogicController().send_hitResponse(hit);
+  }
+
+  public void otherHitResponse(boolean hit) {
+    if (hit) {
+      lastAttackGridCell.hit("#360808"); //red
+    } else {
+      lastAttackGridCell.hit("#0d3e8c"); //blue
+    }
   }
 }

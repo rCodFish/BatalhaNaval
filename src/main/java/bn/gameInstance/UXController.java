@@ -31,11 +31,13 @@ abstract public class UXController {
     
   abstract public void imPlaying();
 
-  abstract public boolean otherHit(int x, int y);
+  abstract public void otherHit(int x, int y);
 
   abstract public void setBoats(ArrayList<Boat> placedBoats);
   
   abstract public ArrayList<Boat> getBoats();
   
   abstract public boolean amIFirstPlaying();
+  
+  abstract public void otherHitResponse(boolean hit);
 }

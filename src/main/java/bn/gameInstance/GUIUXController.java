@@ -56,8 +56,34 @@ public class GUIUXController extends UXController {
   @Override
   public void setBoats(ArrayList<Boat> placedBoats) {
     this.placedBoats = new ArrayList<>(placedBoats);
+    markBoatPositions();
   }
-  
+
+  private void markBoatPositions() {
+    for (int x = 0; x < 8; x++) {
+      for (int y = 0; y < 8; y++) {
+        gridBoxes[x][y].setBoat(false);
+      }
+    }
+
+    for (Boat boat : placedBoats) {
+      int[] startingCoordinates = boat.getStartingCoordinates();
+      int x = startingCoordinates[0];
+      int y = startingCoordinates[1];
+      int size = boat.getSize();
+
+      if (boat.isVertical()) {
+        for (int i = 0; i < size; i++) {
+          gridBoxes[x][y + i].setBoat(true);
+        }
+      } else {
+        for (int i = 0; i < size; i++) {
+          gridBoxes[x + i][y].setBoat(true);
+        }
+      }
+    }
+  }
+
   public boolean amIFirstPlaying() {
     return imFirstPlaying;
   }
@@ -152,6 +178,17 @@ public class GUIUXController extends UXController {
     }
   }
 
+  private boolean hasHit_1x1(int x, int y) {
+    GridCell gridBox = gridBoxes[x][y];
+    if (gridBox.hasBoat() && !gridBox.hasBeenHit()) {
+      gridBox.setBeenHit(true);
+      return true;
+    } else {
+      gridBox.setBeenHit(true);
+      return false;
+    }
+  }
+
 //UIUX_Dispatchers/////////////////////////////
   /**
    *
@@ -195,7 +232,23 @@ public class GUIUXController extends UXController {
   }
 
   @Override
-  public boolean otherHit(int x, int y) {
-    return true;
+  public void otherHit(int x, int y) {
+    WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
+    if (winWrap.getWindowSM().getActiveController() instanceof GameFXMLController) {
+      GameFXMLController controller = (GameFXMLController) winWrap.getWindowSM().getActiveController();
+      boolean hit = hasHit_1x1(x, y);
+      System.out.println("hit: " + hit);
+      controller.otherHit(hit, x, y);
+    } else {
+      Utils.errorMessage("rather unexpected error ngl");
+    }
+  }
+
+  public void otherHitResponse(boolean hit) {
+    WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
+    if (winWrap.getWindowSM().getActiveController() instanceof GameFXMLController) {
+      GameFXMLController controller = (GameFXMLController) winWrap.getWindowSM().getActiveController();
+      controller.otherHitResponse(hit);
+    }
   }
 }

@@ -21,6 +21,7 @@ public class NetworkGameController extends LogicController implements Runnable {
   private final int CMD_HIT = 3;
   private final int CMD_FINISH = 4;
   private final int CMD_READY_TO_START = 5;
+  private final int CMD_HIT_RESPONSE = 6;
 
   private Thread connectionThread;
 
@@ -41,7 +42,9 @@ public class NetworkGameController extends LogicController implements Runnable {
       Socket socket = new Socket(otherAddress, otherPort);
       ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
       outputStream.writeInt(cmd);
+      outputStream.flush();
       outputStream.close();
+
       socket.close();
     } catch (Exception e) {
       e.printStackTrace();
@@ -97,17 +100,22 @@ public class NetworkGameController extends LogicController implements Runnable {
             case CMD_HIT:
               int x = inputStream.readInt();
               int y = inputStream.readInt();
-              boolean hit = receive_otherHit(x, y);
 
-              try (ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream())) {
-                outputStream.writeBoolean(hit);
-              }
+              receive_otherHit(x, y);
+
               break;
 
             case CMD_FINISH:
               receive_otherFinishedGame();
               break;
-
+              
+            case CMD_HIT_RESPONSE:
+              boolean hit = inputStream.readBoolean();
+              
+              receive_hitResponse(hit);
+              
+              break;
+              
             default:
               System.out.println("...Unknown command...");
           }
@@ -160,26 +168,39 @@ public class NetworkGameController extends LogicController implements Runnable {
   }
 
   @Override
-  public boolean send_hitOther(int x, int y) {
+  public void send_hitOther(int x, int y) {
     try {
       Socket socket = new Socket(otherAddress, otherPort);
       ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-      ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
-      sendCommand(CMD_HIT);
+      System.out.println("Sending command " + CMD_HIT + " to " + otherAddress + ":" + otherPort);
+
+      outputStream.writeInt(CMD_HIT);
       outputStream.writeInt(x);
       outputStream.writeInt(y);
-
-      boolean hasHit = inputStream.readBoolean();
+      outputStream.flush();
+      outputStream.close();
 
       socket.close();
-      return hasHit;
-
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
 
-    return false;
+  public void send_hitResponse(boolean hasHit) {
+    try {
+      Socket socket = new Socket(otherAddress, otherPort);
+      ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+      
+      outputStream.writeInt(CMD_HIT_RESPONSE);
+      outputStream.writeBoolean(hasHit);
+      outputStream.flush();
+      outputStream.close();
+
+      socket.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 //Receivers////////////////////////////////////
@@ -205,14 +226,23 @@ public class NetworkGameController extends LogicController implements Runnable {
   }
 
   @Override
-  public boolean receive_otherHit(int x, int y) {
-    return gameInstance.getUXController().otherHit(x, y);
+  public void receive_otherHit(int x, int y) {
+    Platform.runLater(() -> {
+      gameInstance.getUXController().otherHit(x, y);
+    });
   }
 
   @Override
   public void receive_otherFinishedGame() {
     Platform.runLater(() -> {
       gameInstance.getUXController().otherPlaying();
+    });
+  }
+  
+  @Override
+  public void receive_hitResponse(boolean hit) {
+    Platform.runLater(() -> {
+      gameInstance.getUXController().otherHitResponse(hit);
     });
   }
 }

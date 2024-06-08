@@ -30,24 +30,31 @@ public class GridCellHBox {
   }
 
   public void rmvHighlight() {
-    if(!hasBoat){
+    if (!hasBoat && !hasBeenHit) {
       cellHBox.setStyle("-fx-background-color: transparent;");
       isHighlighted = false;
     }
   }
 
   public void highlight(String color) {
-    if(!hasBoat){
+    if (!hasBoat && !hasBeenHit) {
       cellHBox.setStyle("-fx-background-color: " + color + ";");
       isHighlighted = true;
     }
   }
-  
+
   public void select(String color) {
     cellHBox.setStyle("-fx-background-color: " + color + ";");
     hasBoat = true;
   }
-  
+
+  public void hit(String color) {
+    if (!hasBeenHit) {
+      cellHBox.setStyle("-fx-background-color: " + color + ";");
+      hasBeenHit = true;
+    }
+  }
+
   public void rmvSelect(String color) {
     cellHBox.setStyle("-fx-background-color: " + color + ";");
     hasBoat = false;
