@@ -9,5 +9,5 @@ public abstract class GuiBaseController {
   
   abstract public void transition();
   
-  abstract public void otherReadyTotransition();
+  abstract public void otherReadyToTransition();
 }

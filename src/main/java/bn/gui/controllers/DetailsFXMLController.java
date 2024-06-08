@@ -1,13 +1,14 @@
 package bn.gui.controllers;
 
-import bn.app.App;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
+import bn.utils.Utils;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
@@ -23,20 +24,31 @@ public class DetailsFXMLController extends GuiBaseController implements Initiali
 
   @FXML
   private Accordion accordion;
+  @FXML
+  private TextField myPortField;
+  @FXML
+  private TextField oppPortField;
+  @FXML
+  private TextField oppIpField;
+
+  private int myPort;
+  private int oppPort;
+  private String oppIp;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     System.out.println("Hello???");
+
     openFirstAccordionPane();
   }
-  
-  private void openFirstAccordionPane(){
+
+  private void openFirstAccordionPane() {
     if (!accordion.getPanes().isEmpty()) {
       TitledPane firstPane = accordion.getPanes().get(0);
       accordion.setExpandedPane(firstPane);
     }
   }
-  
+
   @Override
   public void transition() {
     //no use
@@ -44,9 +56,29 @@ public class DetailsFXMLController extends GuiBaseController implements Initiali
   }
 
   @Override
-  public void otherReadyTotransition() {
+  public void otherReadyToTransition() {
     //no use
     throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  @FXML
+    public void imReady() {
+    try {
+      myPort = Integer.parseInt(myPortField.getText());
+      oppPort = Integer.parseInt(oppPortField.getText());
+      oppIp = oppIpField.getText();
+      
+      WindowWrapper winWrapMain = WindowWrapper.getWindowWrapper("first");
+      if (winWrapMain.getWindowSM().getActiveController() instanceof StartMenuFXMLController) {
+        StartMenuFXMLController controller = (StartMenuFXMLController) winWrapMain.getWindowSM().getActiveController();
+        controller.setConnectionData(myPort, oppPort, oppIp);
+        winSM.exit();
+      }else{
+        Utils.errorMessage("Unexpected game state");
+      }
+    } catch (NumberFormatException e) {
+      Utils.errorMessage("Invalid port number format.");
+    }
   }
 
   @FXML

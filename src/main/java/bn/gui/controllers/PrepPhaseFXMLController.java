@@ -45,7 +45,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   private boolean isBoatSelected = false;
   private boolean isVerticalPlacement = true;
   private boolean isPlacementValid = false;
-
+    
   private BoatHBox boatSelected;
   private GridCellHBox currentGridCell;
 
@@ -414,7 +414,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   }
 
   @Override
-  public void otherReadyTotransition() {
+  public void otherReadyToTransition() {
     statusLabel.setText("Opponent has finished prep!");
   }
 }

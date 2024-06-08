@@ -18,7 +18,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="600.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="36.0" prefWidth="600.0">
                <children>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttons.css">
                      <children>
@@ -66,7 +66,7 @@
                                  <children>
                                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="280.0" prefWidth="683.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <TextField promptText="Your Port">
+                                          <TextField fx:id="myPortField" promptText="Your Port">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </VBox.margin>
@@ -74,7 +74,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField promptText="Your Ip (Leave black for local host)">
+                                          <TextField editable="false" promptText="Your Ip is:">
                                              <VBox.margin>
                                                 <Insets top="5.0" />
                                              </VBox.margin>
@@ -101,7 +101,7 @@
                                  <children>
                                     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="280.0" prefWidth="683.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <TextField promptText="Your Port">
+                                          <TextField fx:id="oppPortField" promptText="Opponent Port">
                                              <VBox.margin>
                                                 <Insets bottom="5.0" top="5.0" />
                                              </VBox.margin>
@@ -109,7 +109,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField promptText="Your Ip (Leave black for local host)">
+                                          <TextField fx:id="oppIpField" editable="false" promptText="Opponent Ip (Leave blank for local host)">
                                              <VBox.margin>
                                                 <Insets top="5.0" />
                                              </VBox.margin>
@@ -131,7 +131,7 @@
             </Accordion>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="0.0" prefWidth="600.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Im Ready" textFill="WHITE" VBox.vgrow="ALWAYS">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#imReady" prefHeight="0.0" prefWidth="600.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Im Ready" textFill="WHITE" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>

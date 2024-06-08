@@ -25,9 +25,13 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
   private WindowWrapper winWrap = WindowWrapper.getWindowWrapper("first");
   private WinStateMachine winAPI = winWrap.getWindowSM();
   private Stage stage = winWrap.getStage();
-  
+
   private String detailsFxml = "/bn/fxml/DetailsScreen.fxml";
   private WindowWrapper detailsWindowWrapper;
+
+  private int myPort;
+  private int oppPort;
+  private String oppIp;
 
   @FXML
   private ImageView iVimg;
@@ -89,10 +93,6 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
     try {
       detailsWindowWrapper = new WindowWrapper(detailsFxml, "details");
       detailsWindowWrapper.getWindowSM().show();
-      
-      //String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
-      //winAPI.setRoot(PrepPhaseFXML, stage);
-      // winAPI.setFullScreen();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -121,12 +121,29 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
 
   @Override
   public void transition() {
-    throw new UnsupportedOperationException("Not supported yet."); 
+    throw new UnsupportedOperationException("Not supported yet.");
   }
 
   @Override
-  public void otherReadyTotransition() {
+  public void otherReadyToTransition() {
     throw new UnsupportedOperationException("Not supported yet.");
+  }
+
+  public void setConnectionData(int myPort, int oppPort, String oppIp) {
+    App.selfPort = myPort;
+    App.otherPort = oppPort;
+    //App.otherAddress = oppIp;
+
+    try {
+      NetworkGameController logicController = new NetworkGameController(App.gameInstance, App.selfPort, "localhost", App.otherPort);
+      App.gameInstance.setLogicController(logicController);
+
+      String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
+      winAPI.setRoot(PrepPhaseFXML, stage);
+      winAPI.setFullScreen();
+    } catch (Exception e) {
+      System.err.println("Failed to start server instance: " + e);
+    }
   }
 
 }

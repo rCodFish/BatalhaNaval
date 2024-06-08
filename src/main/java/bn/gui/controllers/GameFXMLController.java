@@ -291,7 +291,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   @Override
-  public void otherReadyTotransition() {
+  public void otherReadyToTransition() {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 

@@ -113,7 +113,7 @@ public class GUIUXController extends UXController {
             controller.transition();
             currentScene = GAME_SCREEN;
           } else {
-            controller.otherReadyTotransition();
+            controller.otherReadyToTransition();
           }
 
         } else {
