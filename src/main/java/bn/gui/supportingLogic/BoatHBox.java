@@ -4,6 +4,7 @@ import bn.data.boat.Carrier;
 import bn.data.boat.Cruiser;
 import bn.data.boat.Destroyer;
 import bn.data.boat.Submarine;
+import bn.utils.Utils;
 import java.util.Objects;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -25,6 +26,7 @@ public class BoatHBox {
   private String type;
   private int size;
   private Label label;
+  private String color;
 
   public BoatHBox(String type, int boatCount) {
     this.type = type;
@@ -38,18 +40,22 @@ public class BoatHBox {
       case "Carrier":
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/carrier.png"))));
         size = Carrier.getSIZE();
+        color = Carrier.getCOLOR();
         break;
       case "Cruiser":
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/cruiser.png"))));
         size = Cruiser.getSIZE();
+        color = Cruiser.getCOLOR();
         break;
       case "Destroyer":
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/destroyer.png"))));
         size = Destroyer.getSIZE();
+        color = Destroyer.getCOLOR();
         break;
       case "Submarine":
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/submarine.png"))));
         size = Submarine.getSIZE();
+        color = Submarine.getCOLOR();
         break;
       default:
         break;
@@ -66,6 +72,10 @@ public class BoatHBox {
     HBox.setHgrow(image, Priority.ALWAYS);
   }
 
+  public String getColor() {
+    return color;
+  }
+  
   public HBox getBoatOption() {
     return boatOption;
   }

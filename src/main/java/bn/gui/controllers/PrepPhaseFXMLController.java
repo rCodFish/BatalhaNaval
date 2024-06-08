@@ -139,7 +139,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
 
   private void placeBoat() {
     for (GridCellHBox cell : highlightedCells) {
-      cell.select("#383b37");
+      cell.select(boatSelected.getColor());
       boatFilledCells.add(cell);
     }
 
