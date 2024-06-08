@@ -7,6 +7,7 @@ import bn.gui.supportingLogic.BoatHBox;
 import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
+import bn.utils.Utils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -179,7 +180,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
 
         //highlight all squares that boat type would fill
         for (int i = 0; i < size; i++) {
-          gridBoxes[x][y + i].highlight("#0a3608"); //green
+          gridBoxes[x][y + i].highlight(Utils.GREEN);
           isPlacementValid = true;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -191,7 +192,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       } else {
         //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && y + i < gridBoxes[x].length; i++) {
-          gridBoxes[x][y + i].highlight("#360808"); //red      
+          gridBoxes[x][y + i].highlight(Utils.RED);     
           isPlacementValid = false;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -206,7 +207,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       if (x + size <= gridBoxes.length && !intersectsAnotherBoat()) {
         //highlight all squares that boat type would fill
         for (int i = 0; i < size; i++) {
-          gridBoxes[x + i][y].highlight("#0a3608"); //green   
+          gridBoxes[x + i][y].highlight(Utils.GREEN);  
           isPlacementValid = true;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -218,7 +219,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       } else {
         //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && x + i < gridBoxes.length; i++) {
-          gridBoxes[x + i][y].highlight("#360808"); //red  
+          gridBoxes[x + i][y].highlight(Utils.RED); 
           isPlacementValid = false;
 
           //add highlighted cells to highlightedCells array if not already there

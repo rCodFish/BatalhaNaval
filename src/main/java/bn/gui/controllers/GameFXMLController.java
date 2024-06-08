@@ -3,10 +3,10 @@ package bn.gui.controllers;
 import bn.app.App;
 import bn.data.boat.Boat;
 import bn.gui.supportingLogic.AttackHBox;
-import bn.gui.supportingLogic.BoatHBox;
 import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
+import bn.utils.Utils;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -161,11 +161,11 @@ public class GameFXMLController extends GuiBaseController implements Initializab
 
       if (boat.isVertical()) {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x][y + i].select("#383b37");
+          playerGridBoxes[x][y + i].select(Utils.GREY);
         }
       } else {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x + i][y].select("#383b37");
+          playerGridBoxes[x + i][y].select(Utils.GREY);
         }
       }
     }
@@ -180,7 +180,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     isCurrentGridEnemy = false;
     isCurrentGridPlayer = true;
 
-    gridCell.highlight("#0d3e8c");
+    gridCell.highlight(Utils.BLUE);
   }
 
   private void playerCellOnMouseExited(GridCellHBox gridCell) {
@@ -208,7 +208,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     isCurrentGridEnemy = true;
     isCurrentGridPlayer = false;
 
-    gridCell.highlight("#0a3608");
+    gridCell.highlight(Utils.GREEN);
   }
 
   private void enemyCellOnMouseExited(GridCellHBox gridCell) {
@@ -286,9 +286,9 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     GridCellHBox gridCell = playerGridBoxes[x][y];
 
     if (hit) {
-      gridCell.hit("#360808"); //red
+      gridCell.hit(Utils.RED); //red
     } else {
-      gridCell.hit("#0d3e8c"); //blue
+      gridCell.hit(Utils.BLUE); //blue
     }
 
     App.gameInstance.getLogicController().send_hitResponse(hit);
@@ -296,9 +296,9 @@ public class GameFXMLController extends GuiBaseController implements Initializab
 
   public void otherHitResponse(boolean hit) {
     if (hit) {
-      lastAttackGridCell.hit("#360808"); //red
+      lastAttackGridCell.hit(Utils.RED); //red
     } else {
-      lastAttackGridCell.hit("#0d3e8c"); //blue
+      lastAttackGridCell.hit(Utils.BLUE); //blue
     }
   }
 }
