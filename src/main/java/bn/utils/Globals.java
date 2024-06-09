@@ -30,6 +30,13 @@ public class Globals {
   public static final int DESTROYER_COUNT = 3;
   public static final int SUBMARINE_COUNT = 4;
 
+  public static final String[][] BOAT_DATA = {
+    {"Carrier", Integer.toString(CARRIER_COUNT), Integer.toString(CARRIER_SIZE)},
+    {"Cruiser", Integer.toString(CRUISER_COUNT), Integer.toString(CRUISER_SIZE)},
+    {"Destroyer", Integer.toString(DESTROYER_COUNT), Integer.toString(DESTROYER_SIZE)},
+    {"Submarine", Integer.toString(SUBMARINE_COUNT), Integer.toString(SUBMARINE_SIZE)}
+  };
+
   public static final int MAX_POSITIVE_HITS = maxPositiveHits();
 
   public static final String CARRIER_COLOR = YELLOW;
@@ -37,13 +44,6 @@ public class Globals {
   public static final String DESTROYER_COLOR = ORANGE;
   public static final String SUBMARINE_COLOR = PURPLE;
 
-  public static final String[][] BOAT_DATA = {
-    {"Carrier", Integer.toString(CARRIER_COUNT), Integer.toString(CARRIER_SIZE)},
-    {"Cruiser", Integer.toString(CRUISER_COUNT), Integer.toString(CRUISER_SIZE)},
-    {"Destroyer", Integer.toString(DESTROYER_COUNT), Integer.toString(DESTROYER_SIZE)},
-    {"Submarine", Integer.toString(SUBMARINE_COUNT), Integer.toString(SUBMARINE_SIZE)}
-  };
-  
   //not implemented
   public static final String[][] ATTACK_DATA = {
     {"Normal attack", "-1"},

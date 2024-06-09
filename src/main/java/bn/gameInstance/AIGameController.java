@@ -44,12 +44,6 @@ public class AIGameController extends LogicController {
     return maxPositiveHits == positiveHits;
   }
 
-  private void initializeMaxHits() {
-    for (Boat boat : placedBoats) {
-      maxPositiveHits += boat.getSize();
-    }
-  }
-
   @Override
   public void start() throws Exception {
     try {
@@ -106,7 +100,6 @@ public class AIGameController extends LogicController {
           } else {
             myGrid[x][y + i] = BOAT;
           }
-          maxPositiveHits++;
         }
         placed = true;
       }
