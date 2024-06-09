@@ -24,7 +24,7 @@
             </Button>
          </bottom>
          <center>
-            <Label fx:id="endLabel" prefHeight="54.0" prefWidth="495.0" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="endLabel" prefHeight="54.0" prefWidth="495.0" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="36.0" />
                </font>

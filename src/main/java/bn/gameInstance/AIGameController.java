@@ -27,7 +27,7 @@ public class AIGameController extends LogicController {
   private boolean stopRequested = false;
 
   private int positiveHits = 0;
-  private int maxPositiveHits;
+  private int maxPositiveHits = Globals.MAX_POSITIVE_HITS;
 
   private Random random = new Random();
 
@@ -106,6 +106,7 @@ public class AIGameController extends LogicController {
           } else {
             myGrid[x][y + i] = BOAT;
           }
+          maxPositiveHits++;
         }
         placed = true;
       }
@@ -282,8 +283,9 @@ public class AIGameController extends LogicController {
       if (debug >= 2) {
         System.out.println("AIGameController.send_hitOther (" + x + ", " + y + ")=true");
       }
-
-      boolean win = false;
+      
+      positiveHits++;
+      boolean win = wasFinalHit();
 
       receive_hitResponse(true, win);
     } else {

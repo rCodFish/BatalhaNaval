@@ -25,22 +25,39 @@ public class Globals {
   public static final int DESTROYER_SIZE = 3;
   public static final int SUBMARINE_SIZE = 2;
 
+  public static final int CARRIER_COUNT = 1;
+  public static final int CRUISER_COUNT = 2;
+  public static final int DESTROYER_COUNT = 3;
+  public static final int SUBMARINE_COUNT = 4;
+
+  public static final int MAX_POSITIVE_HITS = maxPositiveHits();
+
   public static final String CARRIER_COLOR = YELLOW;
   public static final String CRUISER_COLOR = PINK;
   public static final String DESTROYER_COLOR = ORANGE;
   public static final String SUBMARINE_COLOR = PURPLE;
 
   public static final String[][] BOAT_DATA = {
-    {"Carrier", "1", "5"},
-    {"Cruiser", "2", "4"},
-    {"Destroyer", "3", "3"},
-    {"Submarine", "4", "2"}
+    {"Carrier", Integer.toString(CARRIER_COUNT), Integer.toString(CARRIER_SIZE)},
+    {"Cruiser", Integer.toString(CRUISER_COUNT), Integer.toString(CRUISER_SIZE)},
+    {"Destroyer", Integer.toString(DESTROYER_COUNT), Integer.toString(DESTROYER_SIZE)},
+    {"Submarine", Integer.toString(SUBMARINE_COUNT), Integer.toString(SUBMARINE_SIZE)}
   };
 
   public static final String[][] ATTACK_DATA = {
     {"Normal attack", "-1"},
     {"Line attack", "1"},
     {"Area attack", "1"}
+  };
+
+  private static int maxPositiveHits() {
+    int res = 0;
+    for (String[] boat : BOAT_DATA) {
+      int count = Integer.parseInt(boat[1]);
+      int size = Integer.parseInt(boat[2]);
+      res += count * size;
+    }
+    return res;
   };
 
   public static void errorMessage(String msg) {

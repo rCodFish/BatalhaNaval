@@ -26,7 +26,7 @@ public class GUIUXController extends UXController {
   private final int ENDING_SCREEN = 3;
 
   private int positiveHits = 0;
-  private int maxPositiveHits;
+  private int maxPositiveHits = Globals.MAX_POSITIVE_HITS;
 
   private int currentScene = PREP_SCREEN;
 
@@ -42,12 +42,6 @@ public class GUIUXController extends UXController {
 
     gridBoxes = new GridCell[Globals.GRID_SIZE][Globals.GRID_SIZE];
     populateGrid();
-  }
-
-  private void initializeMaxHits() {
-    for (Boat boat : placedBoats) {
-      maxPositiveHits += boat.getSize();
-    }
   }
 
   private void populateGrid() {
@@ -67,7 +61,6 @@ public class GUIUXController extends UXController {
   public void setBoats(ArrayList<Boat> placedBoats) {
     this.placedBoats = new ArrayList<>(placedBoats);
     markBoatPositions();
-    initializeMaxHits();
   }
 
   private boolean wasFinalHit() {
