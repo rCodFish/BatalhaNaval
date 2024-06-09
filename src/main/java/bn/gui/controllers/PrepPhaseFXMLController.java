@@ -154,12 +154,16 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       placedBoats.add(boat);
     } catch (Exception e) {
     }
+    
+    boatSelected.decrementCount();
+    
+    if(boatSelected.getCount() == 0){
+      isBoatSelected = false;
+      boatSelected.deselect();
+      boatSelected = null;
+    }
 
     highlightedCells.clear();
-    isBoatSelected = false;
-    boatSelected.decrementCount();
-    boatSelected.deselect();
-    boatSelected = null;
     isPlacementValid = false;
   }
 
