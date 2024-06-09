@@ -1,6 +1,6 @@
 package bn.data.boat;
 
-import bn.utils.Utils;
+import bn.utils.Globals;
 
 /**
  *
@@ -8,8 +8,8 @@ import bn.utils.Utils;
  */
 public class Cruiser extends Boat {
 
-  private static final int SIZE = 3;
-  private static final String COLOR = Utils.PINK;
+  private static final int SIZE = Globals.CRUISER_SIZE;
+  private static final String COLOR = Globals.CRUISER_COLOR;
 
   public Cruiser(int xIni, int yIni, int xEnd, int yEnd) throws Exception {
     super(SIZE, xIni, yIni, xEnd, yEnd);

@@ -2,7 +2,7 @@ package bn.gui.controllers;
 
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
-import bn.utils.Utils;
+import bn.utils.Globals;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -23,11 +23,11 @@ public class DetailsFXMLController extends GuiBaseController implements Initiali
   private Stage stage = winWrap.getStage();
 
   @FXML
-  private Accordion accordion;
-  @FXML
   private TextField myPortField;
   @FXML
-  private TextField oppPortField;
+  private TextField myIpField;
+  @FXML
+  private TextField oppPortField; 
   @FXML
   private TextField oppIpField;
 
@@ -39,14 +39,6 @@ public class DetailsFXMLController extends GuiBaseController implements Initiali
   public void initialize(URL url, ResourceBundle rb) {
     System.out.println("Hello???");
 
-    openFirstAccordionPane();
-  }
-
-  private void openFirstAccordionPane() {
-    if (!accordion.getPanes().isEmpty()) {
-      TitledPane firstPane = accordion.getPanes().get(0);
-      accordion.setExpandedPane(firstPane);
-    }
   }
 
   @Override
@@ -74,10 +66,10 @@ public class DetailsFXMLController extends GuiBaseController implements Initiali
         controller.setConnectionData(myPort, oppPort, oppIp);
         winSM.exit();
       }else{
-        Utils.errorMessage("Unexpected game state");
+        Globals.errorMessage("Unexpected game state");
       }
     } catch (NumberFormatException e) {
-      Utils.errorMessage("Invalid port number format.");
+      Globals.errorMessage("Invalid port number format.");
     }
   }
 

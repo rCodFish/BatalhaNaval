@@ -4,7 +4,7 @@ import bn.data.boat.Carrier;
 import bn.data.boat.Cruiser;
 import bn.data.boat.Destroyer;
 import bn.data.boat.Submarine;
-import bn.utils.Utils;
+import bn.utils.Globals;
 import java.util.Objects;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

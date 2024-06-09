@@ -1,6 +1,6 @@
 package bn.data.boat;
 
-import bn.utils.Utils;
+import bn.utils.Globals;
 
 /**
  *
@@ -8,8 +8,8 @@ import bn.utils.Utils;
  */
 public class Destroyer extends Boat {
 
-  private static final int SIZE = 2;
-  private static final String COLOR = Utils.ORANGE;
+  private static final int SIZE = Globals.DESTROYER_SIZE;
+  private static final String COLOR = Globals.DESTROYER_COLOR;
 
   public Destroyer(int xIni, int yIni, int xEnd, int yEnd) throws Exception {
     super(SIZE, xIni, yIni, xEnd, yEnd);

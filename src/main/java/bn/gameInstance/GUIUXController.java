@@ -5,7 +5,7 @@ import bn.data.boat.Boat;
 import bn.gui.controllers.GameFXMLController;
 import bn.gui.controllers.PrepPhaseFXMLController;
 import bn.gui.supportingLogic.windows.WindowWrapper;
-import bn.utils.Utils;
+import bn.utils.Globals;
 import java.util.ArrayList;
 
 /**
@@ -36,13 +36,13 @@ public class GUIUXController extends UXController {
   public GUIUXController(GameEngine gameInstance) {
     super(gameInstance);
 
-    gridBoxes = new GridCell[8][8];
+    gridBoxes = new GridCell[Globals.GRID_SIZE][Globals.GRID_SIZE];
     populateGrid();
   }
 
   private void populateGrid() {
-    for (int x = 0; x < 8; x++) {
-      for (int y = 0; y < 8; y++) {
+    for (int x = 0; x < Globals.GRID_SIZE; x++) {
+      for (int y = 0; y < Globals.GRID_SIZE; y++) {
         GridCell gridCell = new GridCell(x, y);
         gridBoxes[x][y] = gridCell;
       }
@@ -60,8 +60,8 @@ public class GUIUXController extends UXController {
   }
 
   private void markBoatPositions() {
-    for (int x = 0; x < 8; x++) {
-      for (int y = 0; y < 8; y++) {
+    for (int x = 0; x < Globals.GRID_SIZE; x++) {
+      for (int y = 0; y < Globals.GRID_SIZE; y++) {
         gridBoxes[x][y].setBoat(false);
       }
     }
@@ -117,7 +117,7 @@ public class GUIUXController extends UXController {
           }
 
         } else {
-          Utils.errorMessage("scene change from " + currentScene + " to " + GAME_SCREEN);
+          Globals.errorMessage("scene change from " + currentScene + " to " + GAME_SCREEN);
         }
         break;
 
@@ -239,8 +239,10 @@ public class GUIUXController extends UXController {
       boolean hit = hasHit_1x1(x, y);
       System.out.println("hit: " + hit);
       controller.otherHit(hit, x, y);
+      
+      
     } else {
-      Utils.errorMessage("rather unexpected error ngl");
+      Globals.errorMessage("rather unexpected error ngl");
     }
   }
 

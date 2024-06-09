@@ -7,7 +7,7 @@ import bn.gui.supportingLogic.BoatHBox;
 import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
-import bn.utils.Utils;
+import bn.utils.Globals;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   private ArrayList<GridCellHBox> highlightedCells = new ArrayList<>();
   private ArrayList<GridCellHBox> boatFilledCells = new ArrayList<>();
   private ArrayList<Boat> placedBoats = new ArrayList<>();
-
+    
   private boolean isBoatSelected = false;
   private boolean isVerticalPlacement = true;
   private boolean isPlacementValid = false;
@@ -49,12 +49,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   private BoatHBox boatSelected;
   private GridCellHBox currentGridCell;
 
-  private String[][] boatData = {
-    {"Carrier", "1"},
-    {"Cruiser", "2"},
-    {"Destroyer", "2"},
-    {"Submarine", "2"}
-  };
+  private String[][] boatData = Globals.BOAT_DATA;
 
   @FXML
   private VBox BoatsVBox;
@@ -66,7 +61,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     prepController = this;
-    gridBoxes = new GridCellHBox[8][8];
+    gridBoxes = new GridCellHBox[Globals.GRID_SIZE][Globals.GRID_SIZE];
     populateGrid();
     addBoatsOptions();
     addKeyEventHandler();
@@ -92,8 +87,8 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   }
 
   private void populateGrid() {
-    for (int x = 0; x < 8; x++) {
-      for (int y = 0; y < 8; y++) {
+    for (int x = 0; x < Globals.GRID_SIZE; x++) {
+      for (int y = 0; y < Globals.GRID_SIZE; y++) {
         GridCellHBox gridCell = new GridCellHBox(x, y);
         HBox gridCellHB = gridCell.getHBox();
 
@@ -180,7 +175,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
 
         //highlight all squares that boat type would fill
         for (int i = 0; i < size; i++) {
-          gridBoxes[x][y + i].highlight(Utils.GREEN);
+          gridBoxes[x][y + i].highlight(Globals.GREEN);
           isPlacementValid = true;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -192,7 +187,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       } else {
         //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && y + i < gridBoxes[x].length; i++) {
-          gridBoxes[x][y + i].highlight(Utils.RED);     
+          gridBoxes[x][y + i].highlight(Globals.RED);     
           isPlacementValid = false;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -207,7 +202,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       if (x + size <= gridBoxes.length && !intersectsAnotherBoat()) {
         //highlight all squares that boat type would fill
         for (int i = 0; i < size; i++) {
-          gridBoxes[x + i][y].highlight(Utils.GREEN);  
+          gridBoxes[x + i][y].highlight(Globals.GREEN);  
           isPlacementValid = true;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -219,7 +214,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       } else {
         //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && x + i < gridBoxes.length; i++) {
-          gridBoxes[x + i][y].highlight(Utils.RED); 
+          gridBoxes[x + i][y].highlight(Globals.RED); 
           isPlacementValid = false;
 
           //add highlighted cells to highlightedCells array if not already there

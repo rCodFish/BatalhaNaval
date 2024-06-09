@@ -145,5 +145,4 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
       System.err.println("Failed to start server instance: " + e);
     }
   }
-
 }

@@ -6,7 +6,7 @@ import bn.gui.supportingLogic.AttackHBox;
 import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
-import bn.utils.Utils;
+import bn.utils.Globals;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -70,15 +70,12 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   @FXML
   private VBox attacksVBox;
 
-  private String[][] attackData = {
-    {"Normal attack", "-1"},
-    {"Line attack", "1"},
-    {"Area attack", "1"},};
+  private String[][] attackData = Globals.ATTACK_DATA;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    playerGridBoxes = new GridCellHBox[8][8];
-    enemyGridBoxes = new GridCellHBox[8][8];
+    playerGridBoxes = new GridCellHBox[Globals.GRID_SIZE][Globals.GRID_SIZE];
+    enemyGridBoxes = new GridCellHBox[Globals.GRID_SIZE][Globals.GRID_SIZE];
 
     populateGrid(PlayerGrid, playerGridBoxes, this::playerCellOnMouseClick, this::playerCellOnMouseEntered, this::playerCellOnMouseExited);
     populateGrid(EnemyGrid, enemyGridBoxes, this::enemyCellOnMouseClick, this::enemyCellOnMouseEntered, this::enemyCellOnMouseExited);
@@ -143,8 +140,8 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   private void populateGrid(GridPane grid, GridCellHBox[][] gridBoxes, Runnable onMouseClick, Consumer<GridCellHBox> onMouseEntered, Consumer<GridCellHBox> onMouseExited) {
-    for (int x = 0; x < 8; x++) {
-      for (int y = 0; y < 8; y++) {
+    for (int x = 0; x < Globals.GRID_SIZE; x++) {
+      for (int y = 0; y < Globals.GRID_SIZE; y++) {
         GridCellHBox gridCell = new GridCellHBox(x, y);
         HBox gridCellHB = gridCell.getHBox();
 
@@ -167,14 +164,15 @@ public class GameFXMLController extends GuiBaseController implements Initializab
       int x = startingCoordinates[0];
       int y = startingCoordinates[1];
       int size = boat.getSize();
+      //int color = boat.get
 
       if (boat.isVertical()) {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x][y + i].select(Utils.GREY);
+          playerGridBoxes[x][y + i].select(Globals.GREY);
         }
       } else {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x + i][y].select(Utils.GREY);
+          playerGridBoxes[x + i][y].select(Globals.GREY);
         }
       }
     }
@@ -189,7 +187,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     isCurrentGridEnemy = false;
     isCurrentGridPlayer = true;
 
-    gridCell.highlight(Utils.BLUE);
+    gridCell.highlight(Globals.BLUE);
   }
 
   private void playerCellOnMouseExited(GridCellHBox gridCell) {
@@ -209,7 +207,6 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     } else {
       statusLabel.setText("You have already attacked!");
     }
-
   }
 
   private void enemyCellOnMouseEntered(GridCellHBox gridCell) {
@@ -217,7 +214,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     isCurrentGridEnemy = true;
     isCurrentGridPlayer = false;
 
-    gridCell.highlight(Utils.GREEN);
+    gridCell.highlight(Globals.GREEN);
   }
 
   private void enemyCellOnMouseExited(GridCellHBox gridCell) {
@@ -299,9 +296,9 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     GridCellHBox gridCell = playerGridBoxes[x][y];
 
     if (hit) {
-      gridCell.hit(Utils.RED);
+      gridCell.hit(Globals.RED);
     } else {
-      gridCell.hit(Utils.BLUE);
+      gridCell.hit(Globals.BLUE);
     }
 
     App.gameInstance.getLogicController().send_hitResponse(hit);
@@ -310,11 +307,12 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   //other instance response to my attack
   public void otherHitResponse(boolean hit) {
     if (hit) {
-      lastAttackGridCell.hit(Utils.RED);
+      lastAttackGridCell.hit(Globals.RED);
       hitCounter++;
+      didIAttack = false;
       hitCounterLabel.setText(String.valueOf(hitCounter));
     } else {
-      lastAttackGridCell.hit(Utils.BLUE);
+      lastAttackGridCell.hit(Globals.BLUE);
       missCounter++;
       missCounterLabel.setText(String.valueOf(missCounter));
     }
