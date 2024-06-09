@@ -32,9 +32,9 @@ public class Globals {
 
   public static final String[][] BOAT_DATA = {
     {"Carrier", "1", "5"},
-    /*{"Cruiser", "2", "4"},
+    {"Cruiser", "2", "4"},
     {"Destroyer", "3", "3"},
-    {"Submarine", "4", "2"}*/
+    {"Submarine", "4", "2"}
   };
 
   public static final String[][] ATTACK_DATA = {

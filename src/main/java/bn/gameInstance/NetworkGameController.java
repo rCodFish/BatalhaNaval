@@ -1,5 +1,6 @@
 package bn.gameInstance;
 
+import bn.data.boat.Boat;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -14,9 +15,6 @@ public class NetworkGameController extends LogicController implements Runnable {
 
   private String otherAddress = "localhost";
   private int otherPort = DEFAULT_SERVER_PORT;
-  
-  private int positiveHits = 0;
-  private int maxPositiveHits;
 
   private ServerSocket serverSocket;
   private final int CMD_PLAY = 1;
@@ -37,10 +35,6 @@ public class NetworkGameController extends LogicController implements Runnable {
     this.selfPort = selfPort;
     this.otherAddress = otherAddress;
     this.otherPort = otherPort;
-  }
-
-  private boolean wasFinalHit() {
-    return maxPositiveHits == positiveHits;
   }
   
   private void sendCommand(int cmd) {
