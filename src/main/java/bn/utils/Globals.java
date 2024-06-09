@@ -43,7 +43,8 @@ public class Globals {
     {"Destroyer", Integer.toString(DESTROYER_COUNT), Integer.toString(DESTROYER_SIZE)},
     {"Submarine", Integer.toString(SUBMARINE_COUNT), Integer.toString(SUBMARINE_SIZE)}
   };
-
+  
+  //not implemented
   public static final String[][] ATTACK_DATA = {
     {"Normal attack", "-1"},
     {"Line attack", "1"},
@@ -58,7 +59,7 @@ public class Globals {
       res += count * size;
     }
     return res;
-  };
+  }
 
   public static void errorMessage(String msg) {
     String timeStamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
