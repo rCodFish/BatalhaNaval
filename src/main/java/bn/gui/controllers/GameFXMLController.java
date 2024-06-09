@@ -7,6 +7,7 @@ import bn.gui.supportingLogic.GridCellHBox;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
 import bn.utils.Globals;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -164,15 +165,15 @@ public class GameFXMLController extends GuiBaseController implements Initializab
       int x = startingCoordinates[0];
       int y = startingCoordinates[1];
       int size = boat.getSize();
-      //int color = boat.get
+      String color = boat.getColor();
 
       if (boat.isVertical()) {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x][y + i].select(Globals.GREY);
+          playerGridBoxes[x][y + i].select(color);
         }
       } else {
         for (int i = 0; i < size; i++) {
-          playerGridBoxes[x + i][y].select(Globals.GREY);
+          playerGridBoxes[x + i][y].select(color);
         }
       }
     }
@@ -247,9 +248,6 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     statusLabel.setText("Other player is playing");
   }
 
-  public void finishGame() {
-  }
-
   @FXML
   public void endRound() {
     if (isMyRound) {
@@ -284,15 +282,32 @@ public class GameFXMLController extends GuiBaseController implements Initializab
 
   @Override
   public void transition() {
-    throw new UnsupportedOperationException("Not supported yet.");
+    String EndScreenFXML = "/bn/fxml/EndScreen.fxml";
+
+    try {
+      winSM.setRoot(EndScreenFXML, stage);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+
+    winSM.setFullScreen();
   }
 
   @Override
   public void otherReadyToTransition() {
-    throw new UnsupportedOperationException("Not supported yet.");
-  }
+    String EndScreenFXML = "/bn/fxml/EndScreen.fxml";
 
-  public void otherHit(boolean hit, int x, int y) {
+    try {
+      winSM.setRoot(EndScreenFXML, stage);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+
+    winSM.setFullScreen();
+  }
+  
+  //if win = true he won
+  public void otherHit(boolean hit, boolean win, int x, int y) {
     GridCellHBox gridCell = playerGridBoxes[x][y];
 
     if (hit) {
@@ -300,12 +315,21 @@ public class GameFXMLController extends GuiBaseController implements Initializab
     } else {
       gridCell.hit(Globals.BLUE);
     }
-
-    App.gameInstance.getLogicController().send_hitResponse(hit);
+    
+    App.gameInstance.getLogicController().send_hitResponse(hit, win);
+    
+    if (win) {
+      transition();
+    } 
   }
 
   //other instance response to my attack
-  public void otherHitResponse(boolean hit) {
+  //if win = true i won 
+  public void otherHitResponse(boolean hit, boolean win) {
+    if (win) {
+      transition();
+    } 
+    
     if (hit) {
       lastAttackGridCell.hit(Globals.RED);
       hitCounter++;

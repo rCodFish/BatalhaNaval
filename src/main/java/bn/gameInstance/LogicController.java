@@ -29,7 +29,7 @@ abstract public class LogicController {
 
   abstract public void send_hitOther(int x, int y);
   
-  abstract public void send_hitResponse(boolean hit);
+  abstract public void send_hitResponse(boolean hit, boolean win);
   
   abstract public void receive_otherFinishedPrep();
 
@@ -41,5 +41,5 @@ abstract public class LogicController {
 
   abstract public void receive_otherFinishedGame();
   
-  abstract public void receive_hitResponse(boolean hit);
+  abstract public void receive_hitResponse(boolean hit, boolean win);
 }

@@ -19,22 +19,22 @@ public class Globals {
   public static final String PURPLE = "#6207a3";
 
   public static final int GRID_SIZE = 10;
-  
+
   public static final int CARRIER_SIZE = 5;
   public static final int CRUISER_SIZE = 4;
   public static final int DESTROYER_SIZE = 3;
   public static final int SUBMARINE_SIZE = 2;
-  
+
   public static final String CARRIER_COLOR = YELLOW;
   public static final String CRUISER_COLOR = PINK;
   public static final String DESTROYER_COLOR = ORANGE;
   public static final String SUBMARINE_COLOR = PURPLE;
-  
+
   public static final String[][] BOAT_DATA = {
-    {"Carrier", "1"},
-    {"Cruiser", "2"},
-    {"Destroyer", "3"},
-    {"Submarine", "4"}
+    {"Carrier", "1", "5"},
+    /*{"Cruiser", "2", "4"},
+    {"Destroyer", "3", "3"},
+    {"Submarine", "4", "2"}*/
   };
 
   public static final String[][] ATTACK_DATA = {

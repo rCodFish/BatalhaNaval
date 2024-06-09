@@ -89,9 +89,14 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="103.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                <children>
-                        <Button fx:id="btnMLT" mnemonicParsing="false" onAction="#beginGame" prefHeight="44.0" prefWidth="250.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Play" textFill="WHITE">
+                  <Button fx:id="btnMLT1" mnemonicParsing="false" onAction="#beginSPGame" prefHeight="44.0" prefWidth="156.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Singleplayer" textFill="WHITE">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets right="2.0" />
+                     </HBox.margin>
+                  </Button>
+                        <Button fx:id="btnMLT" mnemonicParsing="false" onAction="#beginMPGame" prefHeight="44.0" prefWidth="156.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Multiplayer" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="2.0" right="20.0" />
                      </HBox.margin>
                   </Button>
                </children>

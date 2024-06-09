@@ -12,7 +12,7 @@ public class Submarine extends Boat {
   private static final String COLOR = Globals.SUBMARINE_COLOR;
 
   public Submarine(int xIni, int yIni, int xEnd, int yEnd) throws Exception {
-    super(SIZE, xIni, yIni, xEnd, yEnd);
+    super(SIZE, COLOR, xIni, yIni, xEnd, yEnd);
   }
 
   public static int getSIZE() {

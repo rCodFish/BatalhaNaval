@@ -1,0 +1,10 @@
+/*/////////// Defaults ///////////*/
+.borderPane {
+  -fx-background-color: #22383d;
+}
+
+.gridPane {
+  -fx-background-color: #3d585e;
+}
+
+

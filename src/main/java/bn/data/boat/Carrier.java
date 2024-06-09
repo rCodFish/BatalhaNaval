@@ -12,7 +12,7 @@ public class Carrier extends Boat {
   private static final String COLOR = Globals.CARRIER_COLOR;
 
   public Carrier(int xIni, int yIni, int xEnd, int yEnd) throws Exception {
-    super(SIZE, xIni, yIni, xEnd, yEnd);
+    super(SIZE, COLOR, xIni, yIni, xEnd, yEnd);
   }
 
   public static int getSIZE() {

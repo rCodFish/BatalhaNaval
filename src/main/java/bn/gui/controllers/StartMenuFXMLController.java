@@ -1,6 +1,7 @@
 package bn.gui.controllers;
 
 import bn.app.App;
+import bn.gameInstance.AIGameController;
 import bn.gameInstance.NetworkGameController;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,7 +42,7 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
     winAPI.teste(iVimg);
   }
 
-  @FXML
+  /*@FXML
   public void beginMultiplayer() {
     String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
 
@@ -86,15 +87,29 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
+  }*/
 
   @FXML
-  public void beginGame() {
+  public void beginMPGame() {
     try {
       detailsWindowWrapper = new WindowWrapper(detailsFxml, "details");
       detailsWindowWrapper.getWindowSM().show();
     } catch (Exception e) {
       e.printStackTrace();
+    }
+  }
+  
+  @FXML
+  public void beginSPGame() {
+    try {
+      AIGameController logicController = new AIGameController(App.gameInstance);
+      App.gameInstance.setLogicController(logicController);
+
+      String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
+      winAPI.setRoot(PrepPhaseFXML, stage);
+      winAPI.setFullScreen();
+    } catch (Exception e) {
+      System.err.println("Failed to start server instance: " + e);
     }
   }
 

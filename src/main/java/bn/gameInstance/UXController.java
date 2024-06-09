@@ -30,6 +30,8 @@ abstract public class UXController {
   abstract public void otherPlaying();
     
   abstract public void imPlaying();
+  
+  abstract public boolean didIWin();
 
   abstract public void otherHit(int x, int y);
 
@@ -39,5 +41,5 @@ abstract public class UXController {
   
   abstract public boolean amIFirstPlaying();
   
-  abstract public void otherHitResponse(boolean hit);
+  abstract public void otherHitResponse(boolean hit, boolean win);
 }

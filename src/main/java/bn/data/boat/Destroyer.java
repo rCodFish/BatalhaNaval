@@ -12,7 +12,7 @@ public class Destroyer extends Boat {
   private static final String COLOR = Globals.DESTROYER_COLOR;
 
   public Destroyer(int xIni, int yIni, int xEnd, int yEnd) throws Exception {
-    super(SIZE, xIni, yIni, xEnd, yEnd);
+    super(SIZE, COLOR, xIni, yIni, xEnd, yEnd);
   }
 
   public static int getSIZE() {
