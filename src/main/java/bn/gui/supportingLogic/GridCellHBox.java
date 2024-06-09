@@ -20,7 +20,9 @@ public class GridCellHBox {
     this.y = y;
     cellHBox = new HBox();
   }
-
+  public boolean hasBeenHit(){
+    return hasBeenHit;
+  }
   public HBox getHBox() {
     return cellHBox;
   }

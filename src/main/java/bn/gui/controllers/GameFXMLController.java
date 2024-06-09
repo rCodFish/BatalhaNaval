@@ -199,7 +199,7 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   }
 
   private void enemyCellOnMouseClick() {
-    if (!didIAttack) {
+    if (!didIAttack && !currentGridCell.hasBeenHit()) {
       GridCellHBox gridCell = currentGridCell;
       App.gameInstance.getLogicController().send_hitOther(gridCell.getX(), gridCell.getY());
       lastAttackGridCell = gridCell;
