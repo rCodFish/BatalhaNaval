@@ -241,7 +241,6 @@ public class NetworkGameController extends LogicController implements Runnable {
     });
   }
 
-
   @Override
   public void receive_hitResponse(boolean hit) {
     Platform.runLater(() -> {
