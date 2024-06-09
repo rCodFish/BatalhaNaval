@@ -7,4 +7,26 @@
   -fx-background-color: #3d585e;
 }
 
+.top_hbox {
+  -fx-background-color: #3d585e;
+  -fx-background-radius: 0 0 5 5;
+  -fx-border-color: transparent black black black;
+  -fx-border-width: 1;
+  -fx-border-radius: 0 0 5 5;
+}
+
+.bottom_hbox {
+  -fx-background-color: #3d585e;
+  -fx-background-radius: 5 5 0 0;
+  -fx-border-color: black black transparent black;
+  -fx-border-width: 1;
+  -fx-border-radius: 5 5 0 0;
+}
+
+.middle_hbox {
+  -fx-background-color: #3d585e;
+  -fx-border-color: transparent black transparent black;
+  -fx-border-width: 1;
+}
+
 

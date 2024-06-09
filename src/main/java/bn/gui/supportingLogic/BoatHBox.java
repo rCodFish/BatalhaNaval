@@ -4,8 +4,8 @@ import bn.data.boat.Carrier;
 import bn.data.boat.Cruiser;
 import bn.data.boat.Destroyer;
 import bn.data.boat.Submarine;
-import bn.utils.Globals;
 import java.util.Objects;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -27,6 +27,7 @@ public class BoatHBox {
   private int size;
   private Label label;
   private String color;
+  private final String initialStyleClass;
 
   public BoatHBox(String type, int boatCount) {
     this.type = type;
@@ -41,23 +42,28 @@ public class BoatHBox {
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/carrier.png"))));
         size = Carrier.getSIZE();
         color = Carrier.getCOLOR();
+        initialStyleClass = "bottom_hbox";
         break;
       case "Cruiser":
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/cruiser.png"))));
         size = Cruiser.getSIZE();
         color = Cruiser.getCOLOR();
+        initialStyleClass = "middle_hbox";
         break;
       case "Destroyer":
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/destroyer.png"))));
         size = Destroyer.getSIZE();
         color = Destroyer.getCOLOR();
+        initialStyleClass = "middle_hbox";
         break;
       case "Submarine":
         image = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/bn/img/submarine.png"))));
         size = Submarine.getSIZE();
         color = Submarine.getCOLOR();
+        initialStyleClass = "top_hbox";
         break;
       default:
+        initialStyleClass = "top_hbox";
         break;
     }
     
@@ -65,11 +71,17 @@ public class BoatHBox {
     //image.setFitHeight(boatOption.getHeight());
     //image.setSmooth(true);
     
-    label = new Label(" (x" + boatCount + ")");
-    label.setStyle("-fx-text-fill: white;");
+    label = new Label(" x" + boatCount + "");
+    label.setStyle("-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;");
+    HBox.setMargin(label, new Insets(10));
 
     boatOption.getChildren().addAll(image, label);
     HBox.setHgrow(image, Priority.ALWAYS);
+    boatOption.getStyleClass().add(initialStyleClass);
+  }
+  
+  public void setInitialStyle(){
+    boatOption.setStyle(null);
   }
 
   public String getColor() {
@@ -85,13 +97,13 @@ public class BoatHBox {
   }
 
   public void deselect() {
-    boatOption.setStyle("-fx-background-color: transparent;");
+    setInitialStyle();
     isSelected = false;
   }
 
   public void select() {
     if (counter > 0) {
-      boatOption.setStyle("-fx-background-color: lightblue;");
+      boatOption.getStyleClass().add("-fx-background-color: lightblue;");
       isSelected = true;
     }
   }

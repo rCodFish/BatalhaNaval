@@ -13,10 +13,10 @@ public class Globals {
   public static final String BLUE = "#0d3e8c";
   public static final String GREEN = "#0a3608";
   public static final String GREY = "#383b37";
-  public static final String YELLOW = "#bda404";
-  public static final String PINK = "#9e0fab";
-  public static final String ORANGE = "#c26f0a";
-  public static final String PURPLE = "#6207a3";
+  public static final String YELLOW = "#b5aa2f";
+  public static final String PINK = "#7a297d";
+  public static final String ORANGE = "#a66f1e";
+  public static final String PURPLE = "#531f7d";
 
   public static final int GRID_SIZE = 10;
 
@@ -30,19 +30,17 @@ public class Globals {
   public static final int DESTROYER_COUNT = 3;
   public static final int SUBMARINE_COUNT = 4;
 
-  public static final String[][] BOAT_DATA = {
-    {"Carrier", Integer.toString(CARRIER_COUNT), Integer.toString(CARRIER_SIZE)},
-    {"Cruiser", Integer.toString(CRUISER_COUNT), Integer.toString(CRUISER_SIZE)},
-    {"Destroyer", Integer.toString(DESTROYER_COUNT), Integer.toString(DESTROYER_SIZE)},
-    {"Submarine", Integer.toString(SUBMARINE_COUNT), Integer.toString(SUBMARINE_SIZE)}
-  };
-
-  public static final int MAX_POSITIVE_HITS = maxPositiveHits();
-
   public static final String CARRIER_COLOR = YELLOW;
   public static final String CRUISER_COLOR = PINK;
   public static final String DESTROYER_COLOR = ORANGE;
   public static final String SUBMARINE_COLOR = PURPLE;
+
+  public static final String[][] BOAT_DATA = {
+    {"Carrier", Integer.toString(CARRIER_COUNT), Integer.toString(CARRIER_SIZE)},
+    {"Cruiser", Integer.toString(CRUISER_COUNT), Integer.toString(CRUISER_SIZE)},
+    {"Destroyer", Integer.toString(DESTROYER_COUNT), Integer.toString(DESTROYER_SIZE)},
+    {"Submarine", Integer.toString(SUBMARINE_COUNT), Integer.toString(SUBMARINE_SIZE)} 
+  };
 
   //not implemented
   public static final String[][] ATTACK_DATA = {
@@ -50,6 +48,8 @@ public class Globals {
     {"Line attack", "1"},
     {"Area attack", "1"}
   };
+
+  public static final int MAX_POSITIVE_HITS = maxPositiveHits();
 
   private static int maxPositiveHits() {
     int res = 0;

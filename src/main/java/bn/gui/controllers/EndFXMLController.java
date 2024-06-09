@@ -34,12 +34,7 @@ public class EndFXMLController extends GuiBaseController implements Initializabl
   @Override
   @FXML
   public void transition() {
-    String firstFxml = "/bn/fxml/StartMenu.fxml";
-    try {
-      winSM.setRoot(firstFxml, stage);
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    }
+    exit();
   }
 
   @Override

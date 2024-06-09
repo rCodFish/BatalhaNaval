@@ -43,6 +43,40 @@ brightRed: #ff0000;
 }
 
 /*////////////////////////////////////////////////*/
+.round-button {
+  -fx-background-color: #3d585e;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.50), 5, 0, 2, 2);
+  -fx-background-insets: 0 0 0 0, 0, 0, 0;
+}
+
+.green-round-button {
+  -fx-background-color: #0a3608; 
+}
+
+.red-round-button {
+  -fx-background-color: #360808; 
+}
+
+.yellow-round-button {
+  -fx-background-color: #b5aa2f; 
+}
+
+.round-button:hover,
+.green-round-button:hover,
+.red-round-button:hover,
+.yellow-round-button:hover {
+  -fx-background-color: #6b6b6b;
+}
+
+.round-button:pressed, 
+.green-round-button:pressed, 
+.red-round-button:pressed, 
+.yellow-round-button:pressed {
+  -fx-background-color: #4f4f4f;
+  -fx-background-insets: 3 0 0 0, 3, 0, 0;
+}
+
+/*////////////////////////////////////////////////*/
 .red-button {
   -fx-background-color: transparent;
   -fx-background-insets: 0 0 0 0, 0, 0, 0;

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -282,25 +283,29 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
 
       BoatsVBox.getChildren().add(boatOption.getBoatOption());
       HBox boatBox = boatOption.getBoatOption();
-
+      
+      VBox.setMargin(boatBox, new Insets(10));
+      
       boatBox.setOnMouseClicked(event -> handleBoatOptionClick(boatOption));
       boatBox.prefHeightProperty().bind(BoatsVBox.heightProperty().multiply(0.2));
-
+      
       boatBox.setOnMouseEntered(e -> {
         if (!boatOption.isSelected()) {
+          System.out.println("Entered");
           boatOption.getBoatOption().setStyle("-fx-background-color: lightgray;");
         }
       });
 
       boatBox.setOnMouseExited(e -> {
         if (!boatOption.isSelected()) {
-          boatBox.setStyle("-fx-background-color: transparent;");
+          System.out.println("Left");
+          boatOption.setInitialStyle();
         }
       });
     }
-
+    
     BoatsVBox.setAlignment(Pos.CENTER);
-    BoatsVBox.setSpacing(50);
+    BoatsVBox.setSpacing(20);
   }
 
   private void handleBoatOptionClick(BoatHBox boatOption) {

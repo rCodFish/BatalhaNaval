@@ -108,6 +108,7 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
       String PrepPhaseFXML = "/bn/fxml/PrepPhase.fxml";
       winAPI.setRoot(PrepPhaseFXML, stage);
       winAPI.setFullScreen();
+      //winAPI.setSmall();
     } catch (Exception e) {
       System.err.println("Failed to start server instance: " + e);
     }

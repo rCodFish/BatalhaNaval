@@ -21,7 +21,12 @@ public class WinStateMachine<T extends GuiBaseController> {
   private boolean fullScreen = false; //fullScreen
   private boolean minimized = false;  //same as iconified
   private boolean small = false;  //small form meaning not fullScreen or Maximized but still visible, this is the position to which every set defaults to
-
+  
+  private final int FULLSCREEN = 1;
+  private final int MINIMIZED = 2;
+  private final int MAXIMIZED = 3;
+  private final int SMALL = 4;
+  
   private double xPercentage = 0.45;
   private double yPercentage = 0.45;
 
@@ -112,7 +117,7 @@ public class WinStateMachine<T extends GuiBaseController> {
       stage.setWidth(bounds.getWidth());
       stage.setHeight(bounds.getHeight());
 
-      updateSizeStatus("maximized");
+      updateSizeStatus(MAXIMIZED);
     }
   }
 
@@ -137,14 +142,14 @@ public class WinStateMachine<T extends GuiBaseController> {
       stage.setWidth(bounds.getWidth() * xPercentage);
       stage.setHeight(bounds.getHeight() * yPercentage);
 
-      updateSizeStatus("small");
+      updateSizeStatus(SMALL);
     }
   }
 
   public void setFullScreen() {
     if (!fullScreen) {
       stage.setFullScreen(true);
-      updateSizeStatus("fullScreen");
+      updateSizeStatus(FULLSCREEN);
     }
   }
 
@@ -248,6 +253,8 @@ public class WinStateMachine<T extends GuiBaseController> {
       makeDraggable(true);
       prepareWindowForSceneChange(x * xPercentage, y * yPercentage);
       activeController = fxmlLoader.getController();
+      root.layout();
+      updateSizeStatus(SMALL);
     } catch (IOException e) {
       System.out.println("[Error: Loading FXML failed]" + e.getMessage());
       //e.printStackTrace();
@@ -277,31 +284,31 @@ public class WinStateMachine<T extends GuiBaseController> {
     scene.setOnKeyPressed(event -> {
       if (event.getCode() == KeyCode.ESCAPE && fullScreen) {
         stage.setFullScreen(false);
-        updateSizeStatus("small");
+        updateSizeStatus(SMALL);
       }
     });
   }
 
-  private void updateSizeStatus(String... states) {
+  private void updateSizeStatus(int... states) {
     maximized = false;
     fullScreen = false;
     minimized = false;
     small = false;
 
-    for (String state : states) {
+    for (int state : states) {
       switch (state) {
-        case "maximized":
+        case MAXIMIZED:
           maximized = true;
           makeDraggable(false);
           break;
-        case "fullScreen":
+        case FULLSCREEN:
           fullScreen = true;
           makeDraggable(false);
           break;
-        case "minimized":
+        case MINIMIZED:
           minimized = true;
           break;
-        case "small":
+        case SMALL:
           small = true;
           makeDraggable(true);
           break;

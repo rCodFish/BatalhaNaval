@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" styleClass="borderPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.PrepPhaseFXMLController">
   <stylesheets>
@@ -26,7 +27,10 @@
                   <HBox prefHeight="35.0" prefWidth="30.0" />
                   <VBox alignment="CENTER" prefHeight="35.0" prefWidth="382.0" styleClass="top_hbox" stylesheets="@../css/gamefxml.css" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="statusLabel" text="Place your boats!" textFill="WHITE" />
+                        <Label fx:id="statusLabel" text="Place your boats!" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -84,24 +88,42 @@
                <children>
                   <VBox prefHeight="400.0" prefWidth="500.0" HBox.hgrow="NEVER">
                      <children>
-                        <VBox fx:id="BoatsVBox" prefHeight="292.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="BoatsVBox" prefHeight="307.0" prefWidth="186.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                            <padding>
                               <Insets top="15.0" />
                            </padding></VBox>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="60.0" prefWidth="150.0" VBox.vgrow="ALWAYS">
+                        <VBox alignment="BOTTOM_CENTER" prefHeight="87.0" prefWidth="186.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <Button fx:id="goBackButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBackPlacement" prefHeight="35.0" prefWidth="69.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Redo" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Label alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" maxWidth="1.7976931348623157E308" prefHeight="56.0" prefWidth="186.0" text="Hint: Press &quot;R&quot; to rotate the boat placement!" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="60.0" prefWidth="150.0" VBox.vgrow="NEVER">
+                           <children>
+                              <Button fx:id="goBackButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goBackPlacement" prefHeight="35.0" prefWidth="90.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Redo" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="3.0" left="2.0" right="2.0" />
                                  </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
                               </Button>
-                              <Button fx:id="next" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#myPrepFinished" prefHeight="35.0" prefWidth="73.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Continue" textFill="WHITE" HBox.hgrow="ALWAYS">
+                              <Button fx:id="next" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#myPrepFinished" prefHeight="35.0" prefWidth="90.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Continue" textFill="WHITE" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets bottom="3.0" left="2.0" right="2.0" />
                                  </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
                               </Button>
                            </children>
                            <opaqueInsets>
@@ -113,7 +135,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="400.0" prefWidth="800.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="365.0" prefWidth="729.0" HBox.hgrow="ALWAYS">
                      <children>
                         <GridPane fx:id="PrepGrid" gridLinesVisible="true" maxHeight="1.7976931348623157E308" prefWidth="806.0" styleClass="gridPane" stylesheets="@../css/prepphasefxml.css" VBox.vgrow="ALWAYS">
                            <columnConstraints>
