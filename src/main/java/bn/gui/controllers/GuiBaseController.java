@@ -3,7 +3,7 @@ package bn.gui.controllers;
 /**
  * Abstract base class for controllers.
  * 
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public abstract class GuiBaseController {
   

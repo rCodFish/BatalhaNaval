@@ -7,17 +7,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
-import java.net.ServerSocket;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class StartMenuFXMLController extends GuiBaseController implements Initializable {
 

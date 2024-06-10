@@ -16,7 +16,7 @@ import javafx.scene.layout.Priority;
 /**
  * Class representing a Boat HBox for UI.
  *
- * Author: Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class BoatHBox {
 

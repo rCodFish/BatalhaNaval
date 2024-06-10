@@ -4,7 +4,7 @@ import bn.utils.Globals;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class Cruiser extends Boat {
 

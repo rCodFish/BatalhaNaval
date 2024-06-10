@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class GUIUXController extends UXController {
 

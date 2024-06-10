@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class GameFXMLController extends GuiBaseController implements Initializable {
 

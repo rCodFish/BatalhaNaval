@@ -2,7 +2,7 @@ package bn.data.boat;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class BoatFactory {
 

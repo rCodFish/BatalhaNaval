@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 abstract public class UXController {
 

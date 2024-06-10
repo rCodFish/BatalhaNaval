@@ -4,7 +4,7 @@ import javafx.scene.layout.HBox;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class GridCellHBox {
 

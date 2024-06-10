@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 /**
  * Class representing an attack HBox for UI.
  *
- * Author: Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class AttackHBox {
 

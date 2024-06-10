@@ -2,7 +2,7 @@ package bn.gameInstance;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class GameEngine {
 

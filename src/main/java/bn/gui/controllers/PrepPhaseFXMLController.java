@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class PrepPhaseFXMLController extends GuiBaseController implements Initializable {
 

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class Globals {
 

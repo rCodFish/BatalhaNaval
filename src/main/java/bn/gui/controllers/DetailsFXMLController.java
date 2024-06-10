@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Eduardo Santos
+ * @author Eduardo Santos & Luís Amândio
  */
 public class DetailsFXMLController extends GuiBaseController implements Initializable {
 
