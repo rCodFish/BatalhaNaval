@@ -103,7 +103,7 @@ public class BoatHBox {
 
   public void select() {
     if (counter > 0) {
-      boatOption.getStyleClass().add("-fx-background-color: lightblue;");
+      boatOption.setStyle("-fx-background-color: lightblue;");
       isSelected = true;
     }
   }

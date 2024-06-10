@@ -31,7 +31,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../KS/src/main/resources/ks/images/minus%20(1).png" />
+                              <Image url="@../img/minus%20(1).png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -40,7 +40,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../KS/src/main/resources/ks/images/x.png" />
+                              <Image url="@../img/x.png" />
                            </image>
                            <viewport>
                               <Rectangle2D />
@@ -71,7 +71,7 @@
                <children>
                   <Label fx:id="endLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="495.0" text="End" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font name="System Bold" size="36.0" />
+                        <Font name="System Bold" size="64.0" />
                      </font>
                   </Label>
                </children>

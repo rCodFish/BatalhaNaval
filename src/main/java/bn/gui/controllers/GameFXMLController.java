@@ -238,8 +238,10 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   public void setFullScreen() {
     if (winSM.isFullScreen()) {
       winSM.setSmall();
+      
     } else {
       winSM.setFullScreen();
+      
     }
   }
 

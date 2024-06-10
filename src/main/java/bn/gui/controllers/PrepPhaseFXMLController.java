@@ -291,14 +291,14 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       
       boatBox.setOnMouseEntered(e -> {
         if (!boatOption.isSelected()) {
-          System.out.println("Entered");
+          //System.out.println("Entered");
           boatOption.getBoatOption().setStyle("-fx-background-color: lightgray;");
         }
       });
 
       boatBox.setOnMouseExited(e -> {
         if (!boatOption.isSelected()) {
-          System.out.println("Left");
+          //System.out.println("Left");
           boatOption.setInitialStyle();
         }
       });
