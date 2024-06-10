@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +30,8 @@ public class DetailsFXMLController extends GuiBaseController implements Initiali
   private TextField oppPortField; 
   @FXML
   private TextField oppIpField;
+  @FXML
+  private ImageView minImg; 
 
   private int myPort;
   private int oppPort;
@@ -85,8 +89,19 @@ public class DetailsFXMLController extends GuiBaseController implements Initiali
   public void setFullScreen() {
     if (winSM.isFullScreen()) {
       winSM.setSmall();
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     } else {
       winSM.setFullScreen();
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    }
+  }
+
+  @Override
+  public void caughtEsc() {
+    if (winSM.isFullScreen()) {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    } else {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     }
   }
 }

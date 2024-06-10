@@ -14,9 +14,10 @@ import java.util.ResourceBundle;
 import java.util.function.Consumer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -73,6 +74,8 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   private VBox attacksVBox;
   @FXML
   private VBox statusVBox;
+  @FXML
+  private ImageView minImg;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -238,10 +241,19 @@ public class GameFXMLController extends GuiBaseController implements Initializab
   public void setFullScreen() {
     if (winSM.isFullScreen()) {
       winSM.setSmall();
-      
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     } else {
       winSM.setFullScreen();
-      
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    }
+  }
+
+  @Override
+  public void caughtEsc() {
+    if (winSM.isFullScreen()) {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    } else {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     }
   }
 

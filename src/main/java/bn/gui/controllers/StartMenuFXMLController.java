@@ -10,6 +10,7 @@ import bn.gui.supportingLogic.windows.WindowWrapper;
 import java.net.ServerSocket;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -33,7 +34,7 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
   private int myPort;
   private int oppPort;
   private String oppIp;
-
+  
   @FXML
   private ImageView iVimg;
 
@@ -126,15 +127,6 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
     winAPI.setMinimized();
   }
 
-  @FXML
-  public void setFullScreen() {
-    if (winAPI.isFullScreen()) {
-      winAPI.setSmall();
-    } else {
-      winAPI.setFullScreen();
-    }
-  }
-
   @Override
   public void transition() {
     throw new UnsupportedOperationException("Not supported yet.");
@@ -160,5 +152,10 @@ public class StartMenuFXMLController extends GuiBaseController implements Initia
     } catch (Exception e) {
       System.err.println("Failed to start server instance: " + e);
     }
+  }
+
+  @Override
+  public void caughtEsc() {
+    throw new UnsupportedOperationException("Not supported yet."); 
   }
 }

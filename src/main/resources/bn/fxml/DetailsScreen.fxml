@@ -13,129 +13,132 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="borderPane" stylesheets="@../css/detailsScreenFXML.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bn.gui.controllers.DetailsFXMLController">
-   <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="36.0" prefWidth="600.0">
-               <children>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttons.css">
-                     <children>
-                        <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="trans-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/minus%20(1).png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="exitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="40.0" styleClass="red-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/x.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setFullScreen" prefHeight="20.0" prefWidth="40.0" styleClass="trans-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </HBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="600.0" styleClass="titled-pane" stylesheets="@../css/detailsScreenFXML.css" VBox.vgrow="ALWAYS">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="599.0" text="My connection info" textFill="WHITE" VBox.vgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets left="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="599.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <TextField fx:id="myIpField" editable="false" prefHeight="30.0" prefWidth="267.0" promptText="Your Ip is: ===WIP===" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="10.0" right="2.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="myPortField" prefHeight="30.0" prefWidth="0.0" promptText="Your Port" text="16000" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="2.0" right="10.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <Label maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="599.0" text="Opponent connection info" textFill="WHITE" VBox.vgrow="ALWAYS">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets left="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="599.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <TextField fx:id="oppIpField" editable="false" prefHeight="30.0" prefWidth="360.0" promptText="Opponent Ip (Leave blank for local host)" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="10.0" right="2.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="oppPortField" prefHeight="30.0" prefWidth="109.0" promptText="Opponent Port" text="16000" HBox.hgrow="ALWAYS">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets left="2.0" right="10.0" />
-                                       </HBox.margin>
-                                    </TextField>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#imReady" prefHeight="49.0" prefWidth="560.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Im Ready" textFill="WHITE" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
-               </children>
+  <children>
+    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <HBox alignment="TOP_RIGHT" prefHeight="36.0" prefWidth="600.0">
+          <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="130.0" styleClass="buttonBar" stylesheets="@../css/buttons.css">
+              <children>
+                <Button fx:id="minimizeButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#minimize" prefHeight="20.0" prefWidth="40.0" styleClass="trans-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
+                  <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                        <Image url="@../img/minus%20(1).png" />
+                      </image>
+                    </ImageView>
+                  </graphic>
+                </Button>
+                <Button fx:id="exitButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="40.0" styleClass="red-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                  <graphic>
+                    <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                        <Image url="@../img/x.png" />
+                      </image>
+                      <viewport>
+                        <Rectangle2D />
+                      </viewport>
+                    </ImageView>
+                  </graphic>
+                </Button>
+                <Button fx:id="maximizeRestoreButton" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setFullScreen" prefHeight="20.0" prefWidth="40.0" styleClass="trans-button" stylesheets="@../css/buttons.css" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="2.0">
+                  <graphic>
+                    <ImageView fx:id="minImg" fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                        <Image url="@../img/maximize.png" />
+                      </image>
+                      <viewport>
+                        <Rectangle2D />
+                      </viewport>
+                    </ImageView>
+                  </graphic>
+                </Button>
+              </children>
+            </AnchorPane>
+          </children>
+        </HBox>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+          <children>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="600.0" styleClass="titled-pane" stylesheets="@../css/detailsScreenFXML.css" VBox.vgrow="ALWAYS">
+              <children>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                    <Label maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="599.0" text="My connection info" textFill="WHITE" VBox.vgrow="ALWAYS">
+                      <font>
+                        <Font name="System Bold" size="18.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets left="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="599.0" VBox.vgrow="ALWAYS">
+                      <children>
+                        <TextField fx:id="myIpField" editable="false" prefHeight="30.0" prefWidth="267.0" promptText="Your Ip is: ===WIP===" HBox.hgrow="ALWAYS">
+                          <font>
+                            <Font size="14.0" />
+                          </font>
+                          <HBox.margin>
+                            <Insets left="10.0" right="2.0" />
+                          </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="myPortField" prefHeight="30.0" prefWidth="0.0" promptText="Your Port" text="16000" HBox.hgrow="ALWAYS">
+                          <font>
+                            <Font size="14.0" />
+                          </font>
+                          <HBox.margin>
+                            <Insets left="2.0" right="10.0" />
+                          </HBox.margin>
+                        </TextField>
+                      </children>
+                    </HBox>
+                  </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                    <Label maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="599.0" text="Opponent connection info" textFill="WHITE" VBox.vgrow="ALWAYS">
+                      <font>
+                        <Font name="System Bold" size="18.0" />
+                      </font>
+                      <VBox.margin>
+                        <Insets left="10.0" />
+                      </VBox.margin>
+                    </Label>
+                    <HBox alignment="TOP_CENTER" prefHeight="50.0" prefWidth="599.0" VBox.vgrow="ALWAYS">
+                      <children>
+                        <TextField fx:id="oppIpField" editable="false" prefHeight="30.0" prefWidth="360.0" promptText="Opponent Ip (Leave blank for local host)" HBox.hgrow="ALWAYS">
+                          <font>
+                            <Font size="14.0" />
+                          </font>
+                          <HBox.margin>
+                            <Insets left="10.0" right="2.0" />
+                          </HBox.margin>
+                        </TextField>
+                        <TextField fx:id="oppPortField" prefHeight="30.0" prefWidth="109.0" promptText="Opponent Port" text="16000" HBox.hgrow="ALWAYS">
+                          <font>
+                            <Font size="14.0" />
+                          </font>
+                          <HBox.margin>
+                            <Insets left="2.0" right="10.0" />
+                          </HBox.margin>
+                        </TextField>
+                      </children>
+                    </HBox>
+                  </children>
+                </VBox>
+              </children>
             </VBox>
-         </children>
-      </VBox>
-   </children>
+            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+              <children>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#imReady" prefHeight="49.0" prefWidth="560.0" styleClass="default-button" stylesheets="@../css/buttons.css" text="Im Ready" textFill="WHITE" VBox.vgrow="ALWAYS">
+                  <VBox.margin>
+                    <Insets left="20.0" right="20.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+          </children>
+        </VBox>
+      </children>
+    </VBox>
+  </children>
 </AnchorPane>

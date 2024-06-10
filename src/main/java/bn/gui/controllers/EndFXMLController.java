@@ -3,12 +3,13 @@ package bn.gui.controllers;
 import bn.app.App;
 import bn.gui.supportingLogic.windows.WinStateMachine;
 import bn.gui.supportingLogic.windows.WindowWrapper;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -23,7 +24,9 @@ public class EndFXMLController extends GuiBaseController implements Initializabl
 
   @FXML
   private Label endLabel;
-
+  @FXML
+  private ImageView minImg;
+  
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     boolean didIWin = App.gameInstance.getUXController().didIWin();
@@ -59,8 +62,19 @@ public class EndFXMLController extends GuiBaseController implements Initializabl
   public void setFullScreen() {
     if (winSM.isFullScreen()) {
       winSM.setSmall();
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     } else {
       winSM.setFullScreen();
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    }
+  }
+
+  @Override
+  public void caughtEsc() {
+    if (winSM.isFullScreen()) {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    } else {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     }
   }
 }

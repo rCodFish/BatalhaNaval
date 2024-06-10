@@ -285,6 +285,7 @@ public class WinStateMachine<T extends GuiBaseController> {
       if (event.getCode() == KeyCode.ESCAPE && fullScreen) {
         stage.setFullScreen(false);
         updateSizeStatus(SMALL);
+        activeController.caughtEsc();
       }
     });
   }

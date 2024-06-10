@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -42,11 +44,11 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   private ArrayList<GridCellHBox> highlightedCells = new ArrayList<>();
   private ArrayList<GridCellHBox> boatFilledCells = new ArrayList<>();
   private ArrayList<Boat> placedBoats = new ArrayList<>();
-    
+
   private boolean isBoatSelected = false;
   private boolean isVerticalPlacement = true;
   private boolean isPlacementValid = false;
-    
+
   private BoatHBox boatSelected;
   private GridCellHBox currentGridCell;
 
@@ -58,6 +60,8 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   private GridPane PrepGrid;
   @FXML
   private Label statusLabel;
+  @FXML
+  private ImageView minImg;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
@@ -155,10 +159,10 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       placedBoats.add(boat);
     } catch (Exception e) {
     }
-    
+
     boatSelected.decrementCount();
-    
-    if(boatSelected.getCount() == 0){
+
+    if (boatSelected.getCount() == 0) {
       isBoatSelected = false;
       boatSelected.deselect();
       boatSelected = null;
@@ -192,7 +196,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       } else {
         //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && y + i < gridBoxes[x].length; i++) {
-          gridBoxes[x][y + i].highlight(Globals.RED);     
+          gridBoxes[x][y + i].highlight(Globals.RED);
           isPlacementValid = false;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -207,7 +211,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       if (x + size <= gridBoxes.length && !intersectsAnotherBoat()) {
         //highlight all squares that boat type would fill
         for (int i = 0; i < size; i++) {
-          gridBoxes[x + i][y].highlight(Globals.GREEN);  
+          gridBoxes[x + i][y].highlight(Globals.GREEN);
           isPlacementValid = true;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -219,7 +223,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
       } else {
         //highlight all squares that boat type would fill but in red
         for (int i = 0; i < size && x + i < gridBoxes.length; i++) {
-          gridBoxes[x + i][y].highlight(Globals.RED); 
+          gridBoxes[x + i][y].highlight(Globals.RED);
           isPlacementValid = false;
 
           //add highlighted cells to highlightedCells array if not already there
@@ -283,12 +287,12 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
 
       BoatsVBox.getChildren().add(boatOption.getBoatOption());
       HBox boatBox = boatOption.getBoatOption();
-      
+
       VBox.setMargin(boatBox, new Insets(10));
-      
+
       boatBox.setOnMouseClicked(event -> handleBoatOptionClick(boatOption));
       boatBox.prefHeightProperty().bind(BoatsVBox.heightProperty().multiply(0.2));
-      
+
       boatBox.setOnMouseEntered(e -> {
         if (!boatOption.isSelected()) {
           //System.out.println("Entered");
@@ -303,7 +307,7 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
         }
       });
     }
-    
+
     BoatsVBox.setAlignment(Pos.CENTER);
     BoatsVBox.setSpacing(20);
   }
@@ -401,8 +405,19 @@ public class PrepPhaseFXMLController extends GuiBaseController implements Initia
   public void setFullScreen() {
     if (winAPI.isFullScreen()) {
       winAPI.setSmall();
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     } else {
       winAPI.setFullScreen();
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    }
+  }
+
+  @Override
+  public void caughtEsc() {
+    if (winAPI.isFullScreen()) {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/minimize.png").toExternalForm()));
+    } else {
+      minImg.setImage(new Image(getClass().getResource("/bn/img/maximize.png").toExternalForm()));
     }
   }
 
